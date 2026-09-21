@@ -8,71 +8,37 @@
 <title>Valor Tool</title>
 <style>
 :root{--bg:#0b1020;--card:#141b2f;--muted:#9aa6bf;--text:#f7f8fb;--accent:#65d6a6;--danger:#ff7373;--line:#27314a}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-main{max-width:720px;margin:auto;padding:18px 14px 42px}
-h1{font-size:26px;margin:6px 0 4px}
-.sub{color:var(--muted);margin:0 0 18px}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+main{max-width:720px;margin:auto;padding:18px 14px 42px}h1{font-size:26px;margin:6px 0 4px}.sub{color:var(--muted);margin:0 0 18px}
 .tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
 button,.btn{border:0;border-radius:12px;padding:13px 14px;font-weight:700;font-size:15px;background:#202a43;color:var(--text);touch-action:manipulation}
-button:active{transform:scale(.98)}
-button.active{background:var(--accent);color:#08130e}
+button:active{transform:scale(.98)}button.active{background:var(--accent);color:#08130e}
 .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px;margin:12px 0}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.field{margin:9px 0}
-.field.full{grid-column:1/-1}
-.field label{display:block;color:var(--muted);font-size:12px;margin-bottom:5px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{margin:9px 0}.field.full{grid-column:1/-1}.field label{display:block;color:var(--muted);font-size:12px;margin-bottom:5px}
 input,select{width:100%;padding:12px;-webkit-user-select:text;user-select:text;border-radius:10px;border:1px solid var(--line);background:#0f1629;color:var(--text);font-size:16px}
-.result{text-align:center;padding:18px}
-.result .big{font-size:32px;font-weight:800;color:var(--accent);letter-spacing:.5px}
-.small{font-size:12px;color:var(--muted)}
-.landingselect{margin-top:8px}
-.row{display:flex;gap:8px;align-items:center;justify-content:space-between}
-.attack{border-top:1px solid var(--line);padding:12px 0}
-.launch{font-size:20px;font-weight:800;color:var(--accent)}
-.danger{color:var(--danger)}
-.actions{display:flex;gap:8px;flex-wrap:wrap}
-.hidden{display:none!important}
-.unitrow{display:grid;grid-template-columns:1.2fr 1fr 1fr auto;gap:7px;align-items:end}
-@media(max-width:520px){
-.unitrow{grid-template-columns:1fr 1fr}
-.unitrow .remove{grid-column:2}
-.grid{grid-template-columns:1fr 1fr}
-}
-.nextwave{border:2px solid var(--accent);box-shadow:0 0 0 2px #65d6a622}
-.nextbadge{display:inline-block;background:var(--accent);color:#08130e;border-radius:999px;padding:4px 8px;font-size:11px;font-weight:800}
-.countbig{font-size:38px;font-weight:900;color:var(--accent);text-align:center}
-.launched{opacity:.42;order:99}
-.cityselect{margin-top:8px}
-@media(max-width:520px){.countbig{font-size:32px}}
+.result{text-align:center;padding:18px}.result .big{font-size:32px;font-weight:800;color:var(--accent);letter-spacing:.5px}
+.small{font-size:12px;color:var(--muted)}.landingselect{margin-top:8px}.row{display:flex;gap:8px;align-items:center;justify-content:space-between}.attack{border-top:1px solid var(--line);padding:12px 0}
+.launch{font-size:20px;font-weight:800;color:var(--accent)}.danger{color:var(--danger)}.actions{display:flex;gap:8px;flex-wrap:wrap}
+.hidden{display:none!important}.unitrow{display:grid;grid-template-columns:1.2fr 1fr 1fr auto;gap:7px;align-items:end}
+@media(max-width:520px){.unitrow{grid-template-columns:1fr 1fr}.unitrow .remove{grid-column:2}.grid{grid-template-columns:1fr 1fr}}
+.nextwave{border:2px solid var(--accent);box-shadow:0 0 0 2px #65d6a622}.nextbadge{display:inline-block;background:var(--accent);color:#08130e;border-radius:999px;padding:4px 8px;font-size:11px;font-weight:800}
+.countbig{font-size:38px;font-weight:900;color:var(--accent);text-align:center}.launched{opacity:.42;order:99}
+.cityselect{margin-top:8px}@media(max-width:520px){.countbig{font-size:32px}}
 .modal{position:fixed;inset:0;background:#000b;display:flex;align-items:flex-end;justify-content:center;z-index:20;padding:12px}
 .modalbox{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:15px;width:min(720px,100%);max-height:90vh;overflow:auto}
-.managerrow{border:1px solid var(--line);border-radius:12px;padding:11px;margin:8px 0}
-.managerrow .actions{margin-top:8px}
-.alertnow{animation:pulse .7s infinite alternate}
-.timefield{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:stretch}
-.timefield input{min-width:0;width:100%}
-.timepick{min-width:120px}
-@keyframes pulse{from{transform:scale(1)}to{transform:scale(1.03)}}
+.managerrow{border:1px solid var(--line);border-radius:12px;padding:11px;margin:8px 0}.managerrow .actions{margin-top:8px}
+.alertnow{animation:pulse .7s infinite alternate}.timefield{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:stretch}.timefield input{min-width:0;width:100%}.timepick{min-width:120px}@keyframes pulse{from{transform:scale(1)}to{transform:scale(1.03)}}
 </style>
 </head>
-
 <body>
 <main>
-
 <h1>⚔️ Valor Tool</h1>
 <p class="sub">Launch-time calculator • World Speed 3 / Unit Speed 2</p>
 
 <div class="card" style="padding:10px 12px">
 <div class="row">
-<span>
-<strong>🕐 Server Time</strong><br>
-<span id="serverClock" class="small">—</span>
-</span>
-<span style="text-align:right">
-<strong>📱 Your Time</strong><br>
-<span id="localClock" class="small">—</span>
-</span>
+<span><strong>🕐 Server Time</strong><br><span id="serverClock" class="small">—</span></span>
+<span style="text-align:right"><strong>📱 Your Time</strong><br><span id="localClock" class="small">—</span></span>
 </div>
 </div>
 
@@ -83,61 +49,34 @@ input,select{width:100%;padding:12px;-webkit-user-select:text;user-select:text;b
 
 <div class="card" style="padding:11px">
 <div class="row">
-<span>
-<strong>Saved cities</strong><br>
-<span class="small">Store your common launch cities on this device.</span>
-</span>
+<span><strong>Saved cities</strong><br><span class="small">Store your common launch cities on this device.</span></span>
 <button id="cityManageBtn" type="button">Manage</button>
 </div>
 </div>
 
 <div id="cityModal" class="modal hidden">
 <div class="modalbox">
-
-<div class="row">
-<h2 style="margin:0">Saved Cities</h2>
-<button id="cityCloseBtn" type="button">✕</button>
-</div>
-
+<div class="row"><h2 style="margin:0">Saved Cities</h2><button id="cityCloseBtn" type="button">✕</button></div>
 <div id="cityList"></div>
-
 <div class="card" style="margin:12px 0 0">
-<div class="field">
-<label>City name</label>
-<input id="newCityName" placeholder="Main City">
-</div>
-
+<div class="field"><label>City name</label><input id="newCityName" placeholder="Main City"></div>
 <div class="grid">
-<div class="field">
-<label>X</label>
-<input id="newCityX" type="text" inputmode="numeric" placeholder="240">
+<div class="field"><label>X</label><input id="newCityX" type="text" inputmode="numeric" placeholder="240"></div>
+<div class="field"><label>Y</label><input id="newCityY" type="text" inputmode="numeric" placeholder="261"></div>
 </div>
-
-<div class="field">
-<label>Y</label>
-<input id="newCityY" type="text" inputmode="numeric" placeholder="261">
-</div>
-</div>
-
 <button id="saveCityBtn" type="button" style="width:100%">+ Save city</button>
 </div>
-
 </div>
 </div>
 
 <div class="card" id="planTools">
 <div class="row">
-<span>
-<strong>Battle Plans</strong><br>
-<span class="small">Save a target, arrival time and wave setup for reuse.</span>
-</span>
-
+<span><strong>Battle Plans</strong><br><span class="small">Save a target, arrival time and wave setup for reuse.</span></span>
 <div class="actions">
 <button id="savePlanBtn" type="button">Save plan</button>
 <button id="planManageBtn" type="button">Manage</button>
 </div>
 </div>
-
 <select id="planSelect" class="cityselect">
 <option value="">Load a saved plan…</option>
 </select>
@@ -145,43 +84,18 @@ input,select{width:100%;padding:12px;-webkit-user-select:text;user-select:text;b
 
 <div id="planModal" class="modal hidden">
 <div class="modalbox">
-
-<div class="row">
-<h2 style="margin:0">Battle Plans</h2>
-<button id="planCloseBtn" type="button">✕</button>
-</div>
-
+<div class="row"><h2 style="margin:0">Battle Plans</h2><button id="planCloseBtn" type="button">✕</button></div>
 <div id="planList"></div>
-
 </div>
 </div>
 
 <section id="single">
-
 <div class="card">
-
 <div class="grid">
-
-<div class="field">
-<label>From X</label>
-<input id="sx" type="text" inputmode="numeric" value="240">
-</div>
-
-<div class="field">
-<label>From Y</label>
-<input id="sy" type="text" inputmode="numeric" value="261">
-</div>
-
-<div class="field">
-<label>Target X</label>
-<input id="tx" type="text" inputmode="numeric" value="252">
-</div>
-
-<div class="field">
-<label>Target Y</label>
-<input id="ty" type="text" inputmode="numeric" value="262">
-</div>
-
+<div class="field"><label>From X</label><input id="sx" type="text" inputmode="numeric" value="240"></div>
+<div class="field"><label>From Y</label><input id="sy" type="text" inputmode="numeric" value="261"></div>
+<div class="field"><label>Target X</label><input id="tx" type="text" inputmode="numeric" value="252"></div>
+<div class="field"><label>Target Y</label><input id="ty" type="text" inputmode="numeric" value="262"></div>
 </div>
 
 <div class="field">
@@ -191,21 +105,16 @@ input,select{width:100%;padding:12px;-webkit-user-select:text;user-select:text;b
 
 <div class="field">
 <label>Desired arrival (Server Time)</label>
-
 <div class="timefield">
 <input id="arrival" type="text" readonly placeholder="YYYY-MM-DD HH:mm:ss">
 <button id="arrivalPickBtn" class="timepick" type="button">🕐 Pick time</button>
 </div>
-
 </div>
 </div>
 
 <div class="card result">
-
 <div class="small">LAUNCH AT • SERVER TIME</div>
-
 <div id="singleResult" class="big">—</div>
-
 <div id="singleLocal" class="small"></div>
 <div id="singleTravel" class="small"></div>
 
@@ -215,15 +124,12 @@ input,select{width:100%;padding:12px;-webkit-user-select:text;user-select:text;b
 </div>
 
 <div id="singleCountdown" class="small" style="margin-top:10px"></div>
-
 </div>
-
 </section>
 
 <section id="sync" class="hidden">
 
 <div class="card">
-
 <div class="grid">
 
 <div class="field">
@@ -236,14 +142,12 @@ input,select{width:100%;padding:12px;-webkit-user-select:text;user-select:text;b
 <input id="sty" type="text" inputmode="numeric" value="400">
 </div>
 
-<div class="field">
+<div class="field full">
 <label>Arrival (Server Time)</label>
-
 <div class="timefield">
 <input id="sarrival" type="text" readonly placeholder="YYYY-MM-DD HH:mm:ss">
 <button id="sarrivalPickBtn" class="timepick" type="button">🕐 Pick time</button>
 </div>
-
 </div>
 
 <div class="field">
@@ -255,104 +159,56 @@ input,select{width:100%;padding:12px;-webkit-user-select:text;user-select:text;b
 </div>
 
 <div class="card" id="syncDashboard">
-
 <div class="small">NEXT ATTACK TO SEND</div>
-
 <div id="nextAttack" class="countbig">—</div>
-
 <div id="nextDetails" class="small" style="text-align:center">
 Calculate your waves to begin.
 </div>
 
 <div class="actions" style="justify-content:center;margin-top:10px">
-
-<button id="sendNextBtn" type="button">
-✓ Mark next launched
-</button>
-
-<button id="wakeBtn" type="button">
-☀️ Keep awake
-</button>
-
-<button id="sortBtn" type="button">
-↕ Sort by launch
-</button>
-
+<button id="sendNextBtn" type="button">✓ Mark next launched</button>
+<button id="wakeBtn" type="button">☀️ Keep awake</button>
+<button id="sortBtn" type="button">↕ Sort by launch</button>
 </div>
-
 </div>
 
 <div id="attacks"></div>
 
 <div class="actions">
-
-<button id="addAttackBtn" type="button">
-+ Add attack
-</button>
-
-<button id="calculateSyncBtn" type="button">
-Calculate all
-</button>
-
-<button id="startSyncBtn" type="button">
-Start countdowns
-</button>
-
-<button id="battleStartBtn" type="button">
-🔥 Battle Start
-</button>
-
+<button id="addAttackBtn" type="button">+ Add attack</button>
+<button id="calculateSyncBtn" type="button">Calculate all</button>
+<button id="startSyncBtn" type="button">Start countdowns</button>
+<button id="battleStartBtn" type="button">🔥 Battle Start</button>
 </div>
 
 <div class="card" style="margin-top:12px">
-
 <div class="row">
-
 <span>
 <strong>Launch alerts</strong><br>
-<span class="small">
-Alerts work while this page/app is open. Keep the screen awake for best reliability.
+<span class="small">Alerts work while this page/app is open. Keep the screen awake for best reliability.</span>
 </span>
-</span>
-
 <button id="alertBtn" type="button">Enable</button>
-
 </div>
 
 <div class="actions" style="margin-top:9px">
-
-<button id="soundBtn" type="button">
-🔊 Sound: On
-</button>
-
-<button id="vibrateBtn" type="button">
-📳 Vibration: On
-</button>
-
+<button id="soundBtn" type="button">🔊 Sound: On</button>
+<button id="vibrateBtn" type="button">📳 Vibration: On</button>
 </div>
 
 <div id="alertStatus" class="small" style="margin-top:8px"></div>
-
 </div>
 
 <div id="syncStatus" class="small" style="margin-top:10px"></div>
-
 </section>
 
 <div class="card small">
-
 <strong>Movement data</strong><br>
-
 Scouts 0:40/tile • Knights 1:00 • Guardians 1:10 • Berserkers 1:50 • Lancers 2:00 • Sentries 2:10 • Rams 3:20 • Ballistas 3:20 • Scholars 4:10
-
 <br><br>
-
 Distance uses straight-line coordinates: √(ΔX² + ΔY²). Times are based on measurements supplied in-game.
-
 </div>
 
 <div id="timePickerModal" class="modal hidden" style="align-items:center">
-
 <div class="modalbox">
 
 <div class="row">
@@ -370,7 +226,6 @@ Select the date and server time for the arrival.
 </div>
 
 <div class="grid">
-
 <div class="field">
 <label>Hour</label>
 <select id="pickerHour"></select>
@@ -385,46 +240,26 @@ Select the date and server time for the arrival.
 <label>Second</label>
 <select id="pickerSecond"></select>
 </div>
-
 </div>
 
 <div class="actions" style="justify-content:flex-end;margin-top:10px">
-
-<button id="timePickerCancel" type="button">
-Cancel
-</button>
-
-<button id="timePickerSet" type="button" class="active">
-✓ Set arrival
-</button>
-
+<button id="timePickerCancel" type="button">Cancel</button>
+<button id="timePickerSet" type="button" class="active">✓ Set arrival</button>
 </div>
 
 </div>
 </div>
 
 <div id="battleOverlay" class="modal hidden" style="align-items:center">
-
 <div class="modalbox" style="text-align:center">
-
 <div class="small">BATTLE CONTROL</div>
-
 <h2 style="margin:6px 0">Next wave</h2>
-
 <div id="battleCountdown" class="countbig">—</div>
-
 <div id="battleDetails" style="font-size:18px;font-weight:700;margin:6px 0"></div>
 
 <div class="actions" style="justify-content:center;margin-top:14px">
-
-<button id="battleLaunchBtn" type="button">
-✓ LAUNCHED
-</button>
-
-<button id="battleExitBtn" type="button">
-Exit
-</button>
-
+<button id="battleLaunchBtn" type="button">✓ LAUNCHED</button>
+<button id="battleExitBtn" type="button">Exit</button>
 </div>
 
 </div>
@@ -449,1948 +284,1536 @@ Scholars:250
 };
 
 const $=id=>document.getElementById(id);
-
 const q=(s,r=document)=>r.querySelector(s);
-
 const qa=(s,r=document)=>[...r.querySelectorAll(s)];
 
 document.addEventListener('click',function(e){
+  const button=e.target.closest('#arrivalPickBtn,#sarrivalPickBtn');
+  if(!button)return;
 
-const button=e.target.closest('#arrivalPickBtn,#sarrivalPickBtn');
+  if(button.id==='arrivalPickBtn'){
+    openTimePicker('arrival');
+  }
 
-if(!button)return;
-
-if(button.id==='arrivalPickBtn'){
-openTimePicker('arrival');
-}
-
-if(button.id==='sarrivalPickBtn'){
-openTimePicker('sarrival');
-}
-
+  if(button.id==='sarrivalPickBtn'){
+    openTimePicker('sarrival');
+  }
 });
 
-let lastSingleDate=null;
-let singleTimer=null;
-let syncTimer=null;
-let battleTimer=null;
-let wakeLock=null;
-let soundOn=true;
-let vibrationOn=true;
-let lastAlertKey=null;
-let audioCtx=null;
+let lastSingleDate=null,
+singleTimer=null,
+syncTimer=null,
+battleTimer=null,
+wakeLock=null,
+soundOn=true,
+vibrationOn=true,
+lastAlertKey=null,
+audioCtx=null;
 
 function showMode(m){
-
-$('single').classList.toggle(
-'hidden',
-m!=='single'
-);
-
-$('sync').classList.toggle(
-'hidden',
-m!=='sync'
-);
-
-$('singleTab').classList.toggle(
-'active',
-m==='single'
-);
-
-$('syncTab').classList.toggle(
-'active',
-m==='sync'
-);
-
+  $('single').classList.toggle('hidden',m!=='single');
+  $('sync').classList.toggle('hidden',m!=='sync');
+  $('singleTab').classList.toggle('active',m==='single');
+  $('syncTab').classList.toggle('active',m==='sync');
 }
 
 function fmt(sec){
+  sec=Math.max(0,Math.round(sec));
+  let h=Math.floor(sec/3600),
+      m=Math.floor(sec%3600/60),
+      s=sec%60;
 
-sec=Math.max(0,Math.round(sec));
-
-let h=Math.floor(sec/3600);
-let m=Math.floor(sec%3600/60);
-let s=sec%60;
-
-return[h,m,s]
-.map(x=>String(x).padStart(2,'0'))
-.join(':');
-
+  return [h,m,s]
+    .map(x=>String(x).padStart(2,'0'))
+    .join(':');
 }
 
 function dist(x1,y1,x2,y2){
-
-return Math.hypot(
-x2-x1,
-y2-y1
-);
-
+  return Math.hypot(x2-x1,y2-y1);
 }
 
 function dtValue(d){
-
-return new Intl.DateTimeFormat([],{
-year:'numeric',
-month:'2-digit',
-day:'2-digit',
-hour:'2-digit',
-minute:'2-digit',
-second:'2-digit'
-}).format(d);
-
+  return new Intl.DateTimeFormat([],{
+    year:'numeric',
+    month:'2-digit',
+    day:'2-digit',
+    hour:'2-digit',
+    minute:'2-digit',
+    second:'2-digit'
+  }).format(d);
 }
 
 function serverValue(d){
-
-return new Intl.DateTimeFormat('en-GB',{
-timeZone:'UTC',
-year:'numeric',
-month:'2-digit',
-day:'2-digit',
-hour:'2-digit',
-minute:'2-digit',
-second:'2-digit',
-hour12:false
-}).format(d);
-
+  return new Intl.DateTimeFormat('en-GB',{
+    timeZone:'UTC',
+    year:'numeric',
+    month:'2-digit',
+    day:'2-digit',
+    hour:'2-digit',
+    minute:'2-digit',
+    second:'2-digit',
+    hour12:false
+  }).format(d);
 }
 
 function localInputNow(el,mins=60){
+  let d=new Date(Date.now()+mins*60000);
+  d.setMilliseconds(0);
 
-let d=new Date(
-Date.now()+mins*60000
-);
+  let pad=n=>String(n).padStart(2,'0');
 
-d.setMilliseconds(0);
-
-let pad=n=>String(n).padStart(2,'0');
-
-el.value=
-`${d.getUTCFullYear()}-${pad(d.getUTCMonth()+1)}-${pad(d.getUTCDate())} ${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}:${pad(d.getUTCSeconds())}`;
-
+  el.value=
+    `${d.getUTCFullYear()}-${pad(d.getUTCMonth()+1)}-${pad(d.getUTCDate())} ${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}:${pad(d.getUTCSeconds())}`;
 }
 
 function parseServerInput(v){
+  if(!v)return new Date(NaN);
 
-if(!v)return new Date(NaN);
+  let m=v.match(
+    /^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})(?::(\d{2}))?/
+  );
 
-let m=v.match(
-/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})(?::(\d{2}))?/
-);
-
-return m
-?new Date(Date.UTC(
-+m[1],
-+m[2]-1,
-+m[3],
-+m[4],
-+m[5],
-m[6]===undefined?0:+m[6]
-))
-:new Date(NaN);
-
+  return m
+    ? new Date(Date.UTC(
+        +m[1],
+        +m[2]-1,
+        +m[3],
+        +m[4],
+        +m[5],
+        m[6]===undefined?0:+m[6]
+      ))
+    : new Date(NaN);
 }
 
 function updateClocks(){
+  let d=new Date();
 
-let d=new Date();
+  $('serverClock').textContent=
+    serverValue(d)+' UTC';
 
-$('serverClock').textContent=
-serverValue(d)+' UTC';
-
-$('localClock').textContent=
-dtValue(d);
-
+  $('localClock').textContent=
+    dtValue(d);
 }
 
 function populate(sel){
-
-sel.innerHTML=
-Object.keys(units)
-.map(u=>`<option>${u}</option>`)
-.join('');
-
+  sel.innerHTML=
+    Object.keys(units)
+      .map(u=>`<option>${u}</option>`)
+      .join('');
 }
 
 function calcSingle(){
+  let d=dist(
+    +$('sx').value,
+    +$('sy').value,
+    +$('tx').value,
+    +$('ty').value
+  );
 
-let d=dist(
-+$('sx').value,
-+$('sy').value,
-+$('tx').value,
-+$('ty').value
-);
+  let sec=d*units[$('su').value];
+  let a=parseServerInput($('arrival').value);
 
-let sec=d*units[$('su').value];
+  if(isNaN(a))return;
 
-let a=parseServerInput(
-$('arrival').value
-);
+  lastSingleDate=new Date(
+    Math.ceil(
+      (a.getTime()-sec*1000)/1000
+    )*1000
+  );
 
-if(isNaN(a))return;
+  $('singleResult').textContent=
+    serverValue(lastSingleDate);
 
-lastSingleDate=
-new Date(
-Math.ceil(
-(a.getTime()-sec*1000)/1000
-)*1000
-);
+  $('singleLocal').textContent=
+    `Your local launch time: ${dtValue(lastSingleDate)}`;
 
-$('singleResult').textContent=
-serverValue(lastSingleDate);
+  $('singleTravel').textContent=
+    `Distance ${d.toFixed(3)} tiles • Travel ${fmt(sec)}`;
 
-$('singleLocal').textContent=
-`Your local launch time: ${dtValue(lastSingleDate)}`;
-
-$('singleTravel').textContent=
-`Distance ${d.toFixed(3)} tiles • Travel ${fmt(sec)}`;
-
-updateSingleCountdown();
-
+  updateSingleCountdown();
 }
 
 function updateSingleCountdown(){
+  if(!lastSingleDate){
+    $('singleCountdown').textContent='';
+    return;
+  }
 
-if(!lastSingleDate){
+  let s=Math.ceil(
+    (lastSingleDate-Date.now())/1000
+  );
 
-$('singleCountdown').textContent='';
-
-return;
-
-}
-
-let s=Math.ceil(
-(lastSingleDate-Date.now())/1000
-);
-
-$('singleCountdown').textContent=
-s>0
-?`Countdown: ${fmt(s)}`
-:'Launch time reached.';
-
+  $('singleCountdown').textContent=
+    s>0
+      ?`Countdown: ${fmt(s)}`
+      :'Launch time reached.';
 }
 
 function startSingleCountdown(){
+  if(singleTimer)clearInterval(singleTimer);
 
-if(singleTimer)
-clearInterval(singleTimer);
+  updateSingleCountdown();
 
-updateSingleCountdown();
+  singleTimer=setInterval(()=>{
+    updateSingleCountdown();
 
-singleTimer=setInterval(()=>{
-
-updateSingleCountdown();
-
-if(
-lastSingleDate&&
-Date.now()>=lastSingleDate
-){
-clearInterval(singleTimer);
-}
-
-},250);
-
+    if(
+      lastSingleDate &&
+      Date.now()>=lastSingleDate
+    ){
+      clearInterval(singleTimer);
+    }
+  },250);
 }
 
 async function copySingle(){
+  if(lastSingleDate){
+    try{
+      await navigator.clipboard.writeText(
+        serverValue(lastSingleDate)
+      );
 
-if(!lastSingleDate)return;
-
-try{
-
-await navigator.clipboard.writeText(
-serverValue(lastSingleDate)
-);
-
-$('singleCountdown').textContent=
-'Launch time copied.';
-
-}catch(e){}
-
+      $('singleCountdown').textContent=
+        'Launch time copied.';
+    }catch(e){}
+  }
 }
 
 function getCities(){
-
-try{
-
-return JSON.parse(
-localStorage.getItem('valorCities')||'[]'
-);
-
-}catch(e){
-
-return[];
-
-}
-
+  try{
+    return JSON.parse(
+      localStorage.getItem('valorCities')||'[]'
+    );
+  }catch(e){
+    return[];
+  }
 }
 
 function saveCities(a){
-
-localStorage.setItem(
-'valorCities',
-JSON.stringify(a)
-);
-
+  localStorage.setItem(
+    'valorCities',
+    JSON.stringify(a)
+  );
 }
 
 function esc(s){
-
-return String(s).replace(
-/[&<>"]/g,
-m=>({
-'&':'&amp;',
-'<':'&lt;',
-'>':'&gt;',
-'"':'&quot;'
-}[m])
-);
-
+  return String(s).replace(
+    /[&<>"]/g,
+    m=>({
+      '&':'&amp;',
+      '<':'&lt;',
+      '>':'&gt;',
+      '"':'&quot;'
+    }[m])
+  );
 }
 
 function cityOptions(){
-
-return `<option value="">Choose saved city…</option>`+
-getCities()
-.map((c,i)=>
-`<option value="${i}">
-${esc(c.name)} (${c.x},${c.y})
-</option>`
-)
-.join('');
-
+  return `<option value="">Choose saved city…</option>`+
+    getCities()
+      .map((c,i)=>
+        `<option value="${i}">${esc(c.name)} (${c.x},${c.y})</option>`
+      )
+      .join('');
 }
 
 function applyCity(sel){
+  let card=sel.closest('.attack'),
+      c=getCities()[+sel.value];
 
-let card=sel.closest('.attack');
+  if(!c)return;
 
-let c=getCities()[+sel.value];
-
-if(!c)return;
-
-card.querySelector('.ax').value=c.x;
-
-card.querySelector('.ay').value=c.y;
-
+  card.querySelector('.ax').value=c.x;
+  card.querySelector('.ay').value=c.y;
 }
 
 function refreshCitySelectors(){
+  qa('.attack .cityselect').forEach(sel=>{
+    let old=sel.value;
 
-qa('.attack .cityselect')
-.forEach(sel=>{
+    sel.innerHTML=cityOptions();
 
-let old=sel.value;
-
-sel.innerHTML=
-cityOptions();
-
-if(
-[...sel.options]
-.some(o=>o.value===old)
-){
-
-sel.value=old;
-
-}
-
-});
-
+    if(
+      [...sel.options].some(
+        o=>o.value===old
+      )
+    ){
+      sel.value=old;
+    }
+  });
 }
 
 function openCityManager(){
-
-renderCityManager();
-
-$('cityModal')
-.classList.remove('hidden');
-
+  renderCityManager();
+  $('cityModal').classList.remove('hidden');
 }
 
 function closeCityManager(){
-
-$('cityModal')
-.classList.add('hidden');
-
+  $('cityModal').classList.add('hidden');
 }
 
 function renderCityManager(){
+  let box=$('cityList'),
+      cities=getCities();
 
-let box=$('cityList');
-
-let cities=getCities();
-
-box.innerHTML=
-cities.length
-?cities.map((c,i)=>
-`<div class="managerrow">
-<div class="row">
-<span>
-<strong>${esc(c.name)}</strong><br>
-<span class="small">${c.x}, ${c.y}</span>
-</span>
-
-<span class="actions">
-<button type="button" data-city-edit="${i}">
-Edit
-</button>
-
-<button type="button" data-city-delete="${i}">
-Delete
-</button>
-</span>
-
-</div>
-</div>`
-).join('')
-:'<div class="small" style="padding:10px 0">No saved cities yet.</div>';
-
+  box.innerHTML=cities.length
+    ?cities.map((c,i)=>
+      `<div class="managerrow">
+        <div class="row">
+          <span>
+            <strong>${esc(c.name)}</strong><br>
+            <span class="small">${c.x}, ${c.y}</span>
+          </span>
+          <span class="actions">
+            <button type="button" data-city-edit="${i}">Edit</button>
+            <button type="button" data-city-delete="${i}">Delete</button>
+          </span>
+        </div>
+      </div>`
+    ).join('')
+    :'<div class="small" style="padding:10px 0">No saved cities yet.</div>';
 }
 
 function addSavedCity(){
+  let name=$('newCityName').value.trim(),
+      x=+$('newCityX').value,
+      y=+$('newCityY').value;
 
-let name=$('newCityName').value.trim();
+  if(
+    !name ||
+    isNaN(x) ||
+    isNaN(y)
+  ){
+    alert('Enter a name and both coordinates.');
+    return;
+  }
 
-let x=+$('newCityX').value;
+  let a=getCities();
 
-let y=+$('newCityY').value;
+  a.push({
+    name,
+    x,
+    y
+  });
 
-if(
-!name||
-isNaN(x)||
-isNaN(y)
-){
+  saveCities(a);
 
-alert(
-'Enter a name and both coordinates.'
-);
+  $('newCityName').value='';
+  $('newCityX').value='';
+  $('newCityY').value='';
 
-return;
-
-}
-
-let a=getCities();
-
-a.push({
-name,
-x,
-y
-});
-
-saveCities(a);
-
-$('newCityName').value='';
-$('newCityX').value='';
-$('newCityY').value='';
-
-renderCityManager();
-
-refreshCitySelectors();
-
+  renderCityManager();
+  refreshCitySelectors();
 }
 
 function editSavedCity(i){
+  let a=getCities(),
+      c=a[i];
 
-let a=getCities();
+  if(!c)return;
 
-let c=a[i];
+  let name=prompt('City name',c.name);
+  if(name===null)return;
 
-if(!c)return;
+  let x=prompt('X coordinate',c.x);
+  if(x===null)return;
 
-let name=prompt(
-'City name',
-c.name
-);
+  let y=prompt('Y coordinate',c.y);
+  if(y===null)return;
 
-if(name===null)return;
+  if(
+    !name.trim() ||
+    isNaN(+x) ||
+    isNaN(+y)
+  ){
+    return alert('Invalid city.');
+  }
 
-let x=prompt(
-'X coordinate',
-c.x
-);
+  a[i]={
+    name:name.trim(),
+    x:+x,
+    y:+y
+  };
 
-if(x===null)return;
-
-let y=prompt(
-'Y coordinate',
-c.y
-);
-
-if(y===null)return;
-
-if(
-!name.trim()||
-isNaN(+x)||
-isNaN(+y)
-){
-
-return alert(
-'Invalid city.'
-);
-
-}
-
-a[i]={
-name:name.trim(),
-x:+x,
-y:+y
-};
-
-saveCities(a);
-
-renderCityManager();
-
-refreshCitySelectors();
-
+  saveCities(a);
+  renderCityManager();
+  refreshCitySelectors();
 }
 
 function deleteSavedCity(i){
+  let a=getCities();
 
-let a=getCities();
+  if(!a[i])return;
 
-if(!a[i])return;
-
-if(confirm(`Delete ${a[i].name}?`)){
-
-a.splice(i,1);
-
-saveCities(a);
-
-renderCityManager();
-
-refreshCitySelectors();
-
-}
-
+  if(confirm(`Delete ${a[i].name}?`)){
+    a.splice(i,1);
+    saveCities(a);
+    renderCityManager();
+    refreshCitySelectors();
+  }
 }
 
 function addAttack(city){
+  const wrap=document.createElement('div');
 
-const wrap=
-document.createElement('div');
+  wrap.className='card attack';
 
-wrap.className='card attack';
+  const c=city||{
+    x:240,
+    y:261
+  };
 
-const c=city||{
-x:240,
-y:261
-};
+  wrap.innerHTML=`
+    <div class="row">
+      <strong>Attack wave</strong>
+      <span class="nextbadge">PENDING</span>
+    </div>
 
-wrap.innerHTML=
-`<div class="row">
-<strong>Attack wave</strong>
-<span class="nextbadge">PENDING</span>
-</div>
+    <select class="cityselect">
+      <option value="">Choose saved city…</option>
+    </select>
 
-<select class="cityselect">
-<option value="">Choose saved city…</option>
-</select>
+    <div class="field landingselect">
+      <label>Landing time</label>
+      <select class="landing">
+        <option value="0">Landing 1 — base time</option>
+        <option value="1">Landing 2 — 1 second later</option>
+      </select>
+    </div>
 
-<div class="field landingselect">
-<label>Landing time</label>
+    <div class="unitrow">
 
-<select class="landing">
-<option value="0">
-Landing 1 — base time
-</option>
+      <div class="field">
+        <label>From X</label>
+        <input class="ax" type="text" inputmode="numeric" value="${c.x}">
+      </div>
 
-<option value="1">
-Landing 2 — 1 second later
-</option>
-</select>
+      <div class="field">
+        <label>From Y</label>
+        <input class="ay" type="text" inputmode="numeric" value="${c.y}">
+      </div>
 
-</div>
+      <div class="field">
+        <label>Unit</label>
+        <select class="au">
+          ${Object.keys(units).map(u=>`<option>${u}</option>`).join('')}
+        </select>
+      </div>
 
-<div class="unitrow">
+      <button class="remove" type="button">Remove</button>
 
-<div class="field">
-<label>From X</label>
-<input class="ax" type="text" inputmode="numeric" value="${c.x}">
-</div>
+    </div>
 
-<div class="field">
-<label>From Y</label>
-<input class="ay" type="text" inputmode="numeric" value="${c.y}">
-</div>
+    <div class="small">
+      Launch time will appear after calculation.
+    </div>
 
-<div class="field">
-<label>Unit</label>
+    <div class="launch"></div>
 
-<select class="au">
-${Object.keys(units)
-.map(u=>`<option>${u}</option>`)
-.join('')}
-</select>
+    <div class="small localLaunch"></div>
 
-</div>
+    <div class="actions" style="margin-top:8px">
+      <button class="markBtn" type="button">
+        ✓ Mark launched
+      </button>
+    </div>
+  `;
 
-<button class="remove" type="button">
-Remove
-</button>
+  const sel=q('.cityselect',wrap),
+        remove=q('.remove',wrap),
+        mark=q('.markBtn',wrap),
+        landing=q('.landing',wrap);
 
-</div>
+  sel.addEventListener(
+    'change',
+    ()=>applyCity(sel)
+  );
 
-<div class="small">
-Launch time will appear after calculation.
-</div>
+  landing.addEventListener(
+    'change',
+    calculateSync
+  );
 
-<div class="launch"></div>
+  remove.addEventListener(
+    'click',
+    ()=>{
+      wrap.remove();
+      refreshDashboard();
+    }
+  );
 
-<div class="small localLaunch"></div>
+  mark.addEventListener(
+    'click',
+    ()=>markLaunched(mark)
+  );
 
-<div class="actions" style="margin-top:8px">
+  $('attacks').appendChild(wrap);
 
-<button class="markBtn" type="button">
-✓ Mark launched
-</button>
-
-</div>`;
-
-const sel=q(
-'.cityselect',
-wrap
-);
-
-const remove=q(
-'.remove',
-wrap
-);
-
-const mark=q(
-'.markBtn',
-wrap
-);
-
-const landing=q(
-'.landing',
-wrap
-);
-
-sel.addEventListener(
-'change',
-()=>{
-applyCity(sel);
-}
-);
-
-landing.addEventListener(
-'change',
-calculateSync
-);
-
-remove.addEventListener(
-'click',
-()=>{
-wrap.remove();
-refreshDashboard();
-}
-);
-
-mark.addEventListener(
-'click',
-()=>{
-markLaunched(mark);
-}
-);
-
-$('attacks').appendChild(wrap);
-
-refreshCitySelectors();
-
+  refreshCitySelectors();
 }
 
 function markLaunched(btn){
+  let card=btn.closest('.attack');
 
-let card=btn.closest('.attack');
+  if(!card)return;
 
-if(!card)return;
+  card.dataset.launched='1';
+  card.classList.add('launched');
 
-card.dataset.launched='1';
+  let badge=q('.nextbadge',card);
 
-card.classList.add('launched');
+  if(badge){
+    badge.textContent='LAUNCHED';
+  }
 
-let badge=q(
-'.nextbadge',
-card
-);
+  refreshDashboard();
 
-if(badge)
-badge.textContent='LAUNCHED';
-
-refreshDashboard();
-
-if(battleTimer)
-updateBattle();
-
+  if(battleTimer){
+    updateBattle();
+  }
 }
 
 function getPlans(){
-
-try{
-
-return JSON.parse(
-localStorage.getItem('valorPlans')||'[]'
-);
-
-}catch(e){
-
-return[];
-
-}
-
+  try{
+    return JSON.parse(
+      localStorage.getItem('valorPlans')||'[]'
+    );
+  }catch(e){
+    return[];
+  }
 }
 
 function savePlans(a){
-
-localStorage.setItem(
-'valorPlans',
-JSON.stringify(a)
-);
-
+  localStorage.setItem(
+    'valorPlans',
+    JSON.stringify(a)
+  );
 }
 
 function refreshPlans(){
+  let sel=$('planSelect');
 
-let sel=$('planSelect');
-
-sel.innerHTML=
-'<option value="">Load a saved plan…</option>'+
-getPlans()
-.map((p,i)=>
-`<option value="${i}">
-${esc(p.name)}
-</option>`
-)
-.join('');
-
+  sel.innerHTML=
+    '<option value="">Load a saved plan…</option>'+
+    getPlans()
+      .map((p,i)=>
+        `<option value="${i}">${esc(p.name)}</option>`
+      )
+      .join('');
 }
 
 function saveCurrentPlan(){
+  let name=prompt('Plan name:');
 
-let name=prompt(
-'Plan name:'
-);
+  if(!name)return;
 
-if(!name)return;
+  calculateSync();
 
-calculateSync();
+  let attacks=qa('.attack').map(c=>({
+    x:+q('.ax',c).value,
+    y:+q('.ay',c).value,
+    unit:q('.au',c).value,
+    landing:+(
+      q('.landing',c)?.value||0
+    )
+  }));
 
-let attacks=
-qa('.attack')
-.map(c=>({
+  let p={
+    name,
+    targetX:+$('stx').value,
+    targetY:+$('sty').value,
+    arrival:$('sarrival').value,
+    offset:+($('offset').value||0),
+    attacks
+  };
 
-x:+q('.ax',c).value,
+  let plans=getPlans();
 
-y:+q('.ay',c).value,
+  plans.push(p);
 
-unit:q('.au',c).value,
+  savePlans(plans);
+  refreshPlans();
+  renderPlanManager();
 
-landing:+(
-q('.landing',c)?.value||0
-)
-
-}));
-
-let p={
-name,
-targetX:+$('stx').value,
-targetY:+$('sty').value,
-arrival:$('sarrival').value,
-offset:+($('offset').value||0),
-attacks
-};
-
-let plans=getPlans();
-
-plans.push(p);
-
-savePlans(plans);
-
-refreshPlans();
-
-renderPlanManager();
-
-alert('Plan saved.');
-
+  alert('Plan saved.');
 }
 
 function openPlanManager(){
-
-renderPlanManager();
-
-$('planModal')
-.classList.remove('hidden');
-
+  renderPlanManager();
+  $('planModal').classList.remove('hidden');
 }
 
 function closePlanManager(){
-
-$('planModal')
-.classList.add('hidden');
-
+  $('planModal').classList.add('hidden');
 }
 
 function renderPlanManager(){
+  let box=$('planList'),
+      plans=getPlans();
 
-let box=$('planList');
+  box.innerHTML=plans.length
+    ?plans.map((p,i)=>
+      `<div class="managerrow">
+        <div>
+          <strong>${esc(p.name)}</strong><br>
+          <span class="small">
+            Target ${p.targetX},${p.targetY} •
+            ${p.attacks.length}
+            wave${p.attacks.length===1?'':'s'}
+          </span>
+        </div>
 
-let plans=getPlans();
-
-box.innerHTML=
-plans.length
-?plans.map((p,i)=>
-`<div class="managerrow">
-
-<div>
-<strong>${esc(p.name)}</strong><br>
-
-<span class="small">
-Target ${p.targetX},${p.targetY} •
-${p.attacks.length}
-wave${p.attacks.length===1?'':'s'}
-</span>
-
-</div>
-
-<div class="actions">
-
-<button type="button"
-data-plan-load="${i}">
-Load
-</button>
-
-<button type="button"
-data-plan-rename="${i}">
-Rename
-</button>
-
-<button type="button"
-data-plan-delete="${i}">
-Delete
-</button>
-
-</div>
-
-</div>`
-).join('')
-:'<div class="small" style="padding:10px 0">No saved plans yet.</div>';
-
+        <div class="actions">
+          <button type="button" data-plan-load="${i}">Load</button>
+          <button type="button" data-plan-rename="${i}">Rename</button>
+          <button type="button" data-plan-delete="${i}">Delete</button>
+        </div>
+      </div>`
+    ).join('')
+    :'<div class="small" style="padding:10px 0">No saved plans yet.</div>';
 }
 
 function renamePlan(i){
+  let a=getPlans();
 
-let a=getPlans();
+  if(!a[i])return;
 
-if(!a[i])return;
+  let n=prompt(
+    'Plan name',
+    a[i].name
+  );
 
-let n=prompt(
-'Plan name',
-a[i].name
-);
+  if(n&&n.trim()){
+    a[i].name=n.trim();
 
-if(n&&n.trim()){
-
-a[i].name=n.trim();
-
-savePlans(a);
-
-refreshPlans();
-
-renderPlanManager();
-
-}
-
+    savePlans(a);
+    refreshPlans();
+    renderPlanManager();
+  }
 }
 
 function deletePlan(i){
+  let a=getPlans();
 
-let a=getPlans();
+  if(!a[i])return;
 
-if(!a[i])return;
+  if(confirm(`Delete ${a[i].name}?`)){
+    a.splice(i,1);
 
-if(confirm(`Delete ${a[i].name}?`)){
-
-a.splice(i,1);
-
-savePlans(a);
-
-refreshPlans();
-
-renderPlanManager();
-
-}
-
+    savePlans(a);
+    refreshPlans();
+    renderPlanManager();
+  }
 }
 
 function loadPlan(v){
+  let p=getPlans()[+v];
 
-let p=getPlans()[+v];
+  if(!p)return;
 
-if(!p)return;
+  $('stx').value=p.targetX;
+  $('sty').value=p.targetY;
+  $('sarrival').value=p.arrival;
+  $('offset').value=p.offset||0;
 
-$('stx').value=p.targetX;
+  $('attacks').innerHTML='';
 
-$('sty').value=p.targetY;
+  p.attacks.forEach(a=>addAttack(a));
 
-$('sarrival').value=p.arrival;
+  qa('.attack').forEach((c,i)=>{
+    if(
+      p.attacks[i] &&
+      p.attacks[i].landing!==undefined
+    ){
+      q('.landing',c).value=
+        p.attacks[i].landing;
+    }
+  });
 
-$('offset').value=p.offset||0;
-
-$('attacks').innerHTML='';
-
-p.attacks.forEach(a=>
-addAttack(a)
-);
-
-qa('.attack').forEach(
-(c,i)=>{
-
-if(
-p.attacks[i]&&
-p.attacks[i].landing!==undefined
-){
-
-q('.landing',c).value=
-p.attacks[i].landing;
-
-}
-
-}
-);
-
-calculateSync();
-
-refreshCitySelectors();
-
+  calculateSync();
+  refreshCitySelectors();
 }
 
 function calculateSync(){
+  let a=parseServerInput(
+    $('sarrival').value
+  );
 
-let a=parseServerInput(
-$('sarrival').value
-);
+  if(isNaN(a))return;
 
-if(isNaN(a))return;
+  let targetX=+$('stx').value,
+      targetY=+$('sty').value,
+      offsetSec=+($('offset').value||0);
 
-let targetX=+$('stx').value;
+  qa('.attack').forEach(card=>{
+    let x=+q('.ax',card).value,
+        y=+q('.ay',card).value,
+        u=q('.au',card).value,
+        landing=+(
+          q('.landing',card)?.value||0
+        ),
 
-let targetY=+$('sty').value;
+        landingTime=
+          new Date(
+            a.getTime()+landing*1000
+          ),
 
-let offsetSec=
-+($('offset').value||0);
+        d=dist(
+          x,
+          y,
+          targetX,
+          targetY
+        ),
 
-qa('.attack').forEach(card=>{
+        travel=d*units[u],
 
-let x=+q('.ax',card).value;
+        launch=
+          new Date(
+            Math.ceil(
+              (
+                landingTime.getTime()-
+                (travel+offsetSec)*1000
+              )/1000
+            )*1000
+          );
 
-let y=+q('.ay',card).value;
+    card.dataset.launch=
+      launch.toISOString();
 
-let u=q('.au',card).value;
+    card.dataset.travel=
+      travel;
 
-let landing=
-+(q('.landing',card)?.value||0);
+    card.dataset.landing=
+      landing;
 
-/*
-Landing 1 = selected arrival.
-Landing 2 = selected arrival + 1 second.
-*/
+    card.dataset.arrival=
+      landingTime.toISOString();
 
-let landingTime=
-new Date(
-a.getTime()+landing*1000
-);
+    q('.small',card).textContent=
+      `${u} • Landing ${landing+1} • Distance ${d.toFixed(3)} tiles • Travel ${fmt(travel)}`;
 
-let d=dist(
-x,
-y,
-targetX,
-targetY
-);
+    q('.launch',card).textContent=
+      `SEND ${serverValue(launch)} SERVER • LAND ${serverValue(landingTime)}`;
 
-let travel=
-d*units[u];
+    q('.localLaunch',card).textContent=
+      `Your local launch: ${dtValue(launch)} • Local landing: ${dtValue(landingTime)}`;
+  });
 
-let launch=
-new Date(
-Math.ceil(
-(
-landingTime.getTime()-
-(travel+offsetSec)*1000
-)/1000
-)*1000
-);
-
-card.dataset.launch=
-launch.toISOString();
-
-card.dataset.travel=
-travel;
-
-card.dataset.landing=
-landing;
-
-card.dataset.arrival=
-landingTime.toISOString();
-
-q('.small',card).textContent=
-`${u} • Landing ${landing+1} • Distance ${d.toFixed(3)} tiles • Travel ${fmt(travel)}`;
-
-q('.launch',card).textContent=
-`SEND ${serverValue(launch)} SERVER • LAND ${serverValue(landingTime)}`;
-
-q('.localLaunch',card).textContent=
-`Your local launch: ${dtValue(launch)} • Local landing: ${dtValue(landingTime)}`;
-
-});
-
-sortAttacks();
-
+  sortAttacks();
 }
 
 function sortAttacks(){
+  let box=$('attacks');
 
-let box=$('attacks');
+  qa('.attack',box)
+    .sort((a,b)=>{
+      let la=new Date(
+        a.dataset.launch||'9999'
+      );
 
-qa('.attack',box)
-.sort((a,b)=>{
+      let lb=new Date(
+        b.dataset.launch||'9999'
+      );
 
-let la=
-new Date(
-a.dataset.launch||'9999'
-);
+      if(
+        (a.dataset.launched==='1') !==
+        (b.dataset.launched==='1')
+      ){
+        return a.dataset.launched==='1'
+          ?1
+          :-1;
+      }
 
-let lb=
-new Date(
-b.dataset.launch||'9999'
-);
+      return la-lb;
+    })
+    .forEach(c=>box.appendChild(c));
 
-if(
-(a.dataset.launched==='1')!==
-(b.dataset.launched==='1')
-){
-
-return a.dataset.launched==='1'
-?1
-:-1;
-
-}
-
-return la-lb;
-
-})
-.forEach(c=>
-box.appendChild(c)
-);
-
-refreshDashboard();
-
+  refreshDashboard();
 }
 
 function refreshDashboard(){
+  let cards=qa('.attack')
+    .filter(c=>
+      c.dataset.launched!=='1' &&
+      c.dataset.launch
+    );
 
-let cards=
-qa('.attack')
-.filter(c=>
-c.dataset.launched!=='1'&&
-c.dataset.launch
-);
+  qa('.attack').forEach(c=>
+    c.classList.remove('nextwave')
+  );
 
-qa('.attack')
-.forEach(c=>
-c.classList.remove('nextwave')
-);
+  if(!cards.length){
+    $('nextAttack').textContent='—';
 
-if(!cards.length){
+    $('nextDetails').textContent=
+      'No pending calculated attacks. Save this setup as a battle plan if you will use it again.';
 
-$('nextAttack').textContent='—';
+    return;
+  }
 
-$('nextDetails').textContent=
-'No pending calculated attacks. Save this setup as a battle plan if you will use it again.';
+  cards.sort(
+    (a,b)=>
+      new Date(a.dataset.launch)-
+      new Date(b.dataset.launch)
+  );
 
-return;
+  let c=cards[0],
+      d=new Date(c.dataset.launch),
+      s=Math.ceil(
+        (d-Date.now())/1000
+      );
 
-}
+  c.classList.add('nextwave');
 
-cards.sort(
-(a,b)=>
-new Date(a.dataset.launch)-
-new Date(b.dataset.launch)
-);
+  $('nextAttack').textContent=
+    s>0
+      ?fmt(s)
+      :'SEND NOW';
 
-let c=cards[0];
-
-let d=
-new Date(
-c.dataset.launch
-);
-
-let s=
-Math.ceil(
-(d-Date.now())/1000
-);
-
-c.classList.add('nextwave');
-
-$('nextAttack').textContent=
-s>0
-?fmt(s)
-:'SEND NOW';
-
-$('nextDetails').textContent=
-`${q('.au',c).value} • Landing ${(+q('.landing',c)?.value||0)+1} • ${serverValue(d)} server launch time • ${dtValue(d)} local`;
-
+  $('nextDetails').textContent=
+    `${q('.au',c).value} • Landing ${(+q('.landing',c)?.value||0)+1} • ${serverValue(d)} server launch time • ${dtValue(d)} local`;
 }
 
 function startSyncCountdown(){
+  calculateSync();
 
-calculateSync();
+  if(syncTimer){
+    clearInterval(syncTimer);
+  }
 
-if(syncTimer)
-clearInterval(syncTimer);
+  syncTimer=setInterval(()=>{
+    refreshDashboard();
+    alertPending();
 
-syncTimer=
-setInterval(()=>{
+    let cards=qa('.attack')
+      .filter(c=>
+        c.dataset.launched!=='1' &&
+        c.dataset.launch
+      );
 
-refreshDashboard();
+    cards.forEach(c=>{
+      let d=new Date(
+        c.dataset.launch
+      );
 
-alertPending();
+      let s=Math.ceil(
+        (d-Date.now())/1000
+      );
 
-let cards=
-qa('.attack')
-.filter(c=>
-c.dataset.launched!=='1'&&
-c.dataset.launch
-);
+      q('.launch',c).textContent=
+        s>0
+          ?`SEND ${serverValue(d)} SERVER • in ${fmt(s)}`
+          :'SEND NOW';
+    });
 
-cards.forEach(c=>{
-
-let d=
-new Date(
-c.dataset.launch
-);
-
-let s=
-Math.ceil(
-(d-Date.now())/1000
-);
-
-q('.launch',c).textContent=
-s>0
-?`SEND ${serverValue(d)} SERVER • in ${fmt(s)}`
-:'SEND NOW';
-
-});
-
-$('syncStatus').textContent=
-cards.length
-?`${cards.length} pending attack${cards.length===1?'':'s'}.`
-:'All waves launched.';
-
-},250);
-
+    $('syncStatus').textContent=
+      cards.length
+        ?`${cards.length} pending attack${cards.length===1?'':'s'}.`
+        :'All waves launched.';
+  },250);
 }
 
 function sendNext(){
+  let cards=qa('.attack')
+    .filter(c=>
+      c.dataset.launched!=='1' &&
+      c.dataset.launch
+    )
+    .sort(
+      (a,b)=>
+        new Date(a.dataset.launch)-
+        new Date(b.dataset.launch)
+    );
 
-let cards=
-qa('.attack')
-.filter(c=>
-c.dataset.launched!=='1'&&
-c.dataset.launch
-)
-.sort(
-(a,b)=>
-new Date(a.dataset.launch)-
-new Date(b.dataset.launch)
-);
-
-if(cards.length){
-
-markLaunched(
-q('.markBtn',cards[0])
-);
-
-}
-
+  if(cards.length){
+    markLaunched(
+      q('.markBtn',cards[0])
+    );
+  }
 }
 
 function battleStart(){
+  calculateSync();
 
-calculateSync();
+  $('battleOverlay').classList.remove('hidden');
 
-$('battleOverlay')
-.classList.remove('hidden');
+  updateBattle();
 
-updateBattle();
+  if(battleTimer){
+    clearInterval(battleTimer);
+  }
 
-if(battleTimer)
-clearInterval(battleTimer);
-
-battleTimer=
-setInterval(
-updateBattle,
-250
-);
-
+  battleTimer=setInterval(
+    updateBattle,
+    250
+  );
 }
 
 function closeBattleStart(){
+  $('battleOverlay').classList.add('hidden');
 
-$('battleOverlay')
-.classList.add('hidden');
-
-if(battleTimer)
-clearInterval(battleTimer);
-
+  if(battleTimer){
+    clearInterval(battleTimer);
+  }
 }
 
 function updateBattle(){
+  let cards=qa('.attack')
+    .filter(c=>
+      c.dataset.launched!=='1' &&
+      c.dataset.launch
+    )
+    .sort(
+      (a,b)=>
+        new Date(a.dataset.launch)-
+        new Date(b.dataset.launch)
+    );
 
-let cards=
-qa('.attack')
-.filter(c=>
-c.dataset.launched!=='1'&&
-c.dataset.launch
-)
-.sort(
-(a,b)=>
-new Date(a.dataset.launch)-
-new Date(b.dataset.launch)
-);
+  if(!cards.length){
+    $('battleCountdown').textContent='DONE';
 
-if(!cards.length){
+    $('battleDetails').textContent=
+      'All waves launched.';
 
-$('battleCountdown').textContent=
-'DONE';
+    return;
+  }
 
-$('battleDetails').textContent=
-'All waves launched.';
+  let c=cards[0],
+      d=new Date(c.dataset.launch),
+      s=Math.ceil(
+        (d-Date.now())/1000
+      );
 
-return;
+  $('battleCountdown').textContent=
+    s>0
+      ?fmt(s)
+      :'SEND NOW';
 
-}
-
-let c=cards[0];
-
-let d=
-new Date(
-c.dataset.launch
-);
-
-let s=
-Math.ceil(
-(d-Date.now())/1000
-);
-
-$('battleCountdown').textContent=
-s>0
-?fmt(s)
-:'SEND NOW';
-
-$('battleDetails').textContent=
-`${q('.au',c).value} • ${serverValue(d)} server • ${dtValue(d)} local`;
-
+  $('battleDetails').textContent=
+    `${q('.au',c).value} • ${serverValue(d)} server • ${dtValue(d)} local`;
 }
 
 function beep(
-pattern=[0,160,0,160,0,320]
+  pattern=[0,160,0,160,0,320]
 ){
+  if(!soundOn)return;
 
-if(!soundOn)return;
+  try{
+    audioCtx=
+      audioCtx||
+      new(window.AudioContext||
+          window.webkitAudioContext)();
 
-try{
+    let t=audioCtx.currentTime;
 
-audioCtx=
-audioCtx||
-new(
-window.AudioContext||
-window.webkitAudioContext
-)();
+    for(
+      let i=0;
+      i<pattern.length;
+      i+=2
+    ){
+      t+=pattern[i]/1000;
 
-let t=
-audioCtx.currentTime;
+      let dur=pattern[i+1]/1000,
+          o=audioCtx.createOscillator(),
+          g=audioCtx.createGain();
 
-for(
-let i=0;
-i<pattern.length;
-i+=2
-){
+      o.frequency.value=880;
 
-t+=pattern[i]/1000;
+      g.gain.setValueAtTime(
+        .0001,
+        t
+      );
 
-let dur=
-pattern[i+1]/1000;
+      g.gain.exponentialRampToValueAtTime(
+        .25,
+        t+.01
+      );
 
-let o=
-audioCtx.createOscillator();
+      g.gain.exponentialRampToValueAtTime(
+        .0001,
+        t+dur
+      );
 
-let g=
-audioCtx.createGain();
+      o.connect(g);
+      g.connect(audioCtx.destination);
 
-o.frequency.value=880;
-
-g.gain.setValueAtTime(
-.0001,
-t
-);
-
-g.gain.exponentialRampToValueAtTime(
-.25,
-t+.01
-);
-
-g.gain.exponentialRampToValueAtTime(
-.0001,
-t+dur
-);
-
-o.connect(g);
-
-g.connect(
-audioCtx.destination
-);
-
-o.start(t);
-
-o.stop(
-t+dur
-);
-
-}
-
-}catch(e){}
-
+      o.start(t);
+      o.stop(t+dur);
+    }
+  }catch(e){}
 }
 
 function buzz(
-ms=[180,120,180,120,450]
+  ms=[180,120,180,120,450]
 ){
-
-if(
-vibrationOn&&
-navigator.vibrate
-){
-
-navigator.vibrate(ms);
-
-}
-
+  if(
+    vibrationOn &&
+    navigator.vibrate
+  ){
+    navigator.vibrate(ms);
+  }
 }
 
 async function enableAlerts(){
+  if('Notification' in window){
+    try{
+      let p=
+        await Notification.requestPermission();
 
-if('Notification'in window){
-
-try{
-
-let p=
-await Notification.requestPermission();
-
-$('alertStatus').textContent=
-p==='granted'
-?'Notifications enabled.'
-:'Browser notification permission was not granted.';
-
-}catch(e){
-
-$('alertStatus').textContent=
-'Notifications are unavailable in this browser.';
-
-}
-
-}else{
-
-$('alertStatus').textContent=
-'Browser notifications are unavailable.';
-
-}
-
+      $('alertStatus').textContent=
+        p==='granted'
+          ?'Notifications enabled.'
+          :'Browser notification permission was not granted.';
+    }catch(e){
+      $('alertStatus').textContent=
+        'Notifications are unavailable in this browser.';
+    }
+  }else{
+    $('alertStatus').textContent=
+      'Browser notifications are unavailable.';
+  }
 }
 
 function notifyLaunch(card){
+  let unit=q('.au',card).value;
 
-let unit=
-q('.au',card).value;
+  beep();
+  buzz();
 
-beep();
-
-buzz();
-
-if(
-'Notification'in window&&
-Notification.permission==='granted'
-){
-
-new Notification(
-'Valor Tool — SEND NOW',
-{
-body:
-`${unit} wave is ready to launch.`
-}
-);
-
-}
-
+  if(
+    'Notification'in window &&
+    Notification.permission==='granted'
+  ){
+    new Notification(
+      'Valor Tool — SEND NOW',
+      {
+        body:
+          `${unit} wave is ready to launch.`
+      }
+    );
+  }
 }
 
 function toggleSound(){
+  soundOn=!soundOn;
 
-soundOn=!soundOn;
+  localStorage.setItem(
+    'valorSound',
+    soundOn?'on':'off'
+  );
 
-localStorage.setItem(
-'valorSound',
-soundOn?'on':'off'
-);
+  $('soundBtn').textContent=
+    `🔊 Sound: ${soundOn?'On':'Off'}`;
 
-$('soundBtn').textContent=
-`🔊 Sound: ${soundOn?'On':'Off'}`;
-
-if(soundOn)
-beep([0,100]);
-
+  if(soundOn){
+    beep([0,100]);
+  }
 }
 
 function toggleVibration(){
+  vibrationOn=!vibrationOn;
 
-vibrationOn=!vibrationOn;
+  localStorage.setItem(
+    'valorVibrate',
+    vibrationOn?'on':'off'
+  );
 
-localStorage.setItem(
-'valorVibrate',
-vibrationOn?'on':'off'
-);
+  $('vibrateBtn').textContent=
+    `📳 Vibration: ${vibrationOn?'On':'Off'}`;
 
-$('vibrateBtn').textContent=
-`📳 Vibration: ${vibrationOn?'On':'Off'}`;
-
-if(vibrationOn)
-buzz([100]);
-
+  if(vibrationOn){
+    buzz([100]);
+  }
 }
 
 async function toggleWakeLock(){
+  try{
+    if(wakeLock){
+      await wakeLock.release();
 
-try{
+      wakeLock=null;
 
-if(wakeLock){
+      $('wakeBtn').textContent=
+        '☀️ Keep awake';
 
-await wakeLock.release();
+      return;
+    }
 
-wakeLock=null;
+    if('wakeLock'in navigator){
+      wakeLock=
+        await navigator.wakeLock.request(
+          'screen'
+        );
 
-$('wakeBtn').textContent=
-'☀️ Keep awake';
-
-return;
-
-}
-
-if('wakeLock'in navigator){
-
-wakeLock=
-await navigator.wakeLock.request(
-'screen'
-);
-
-$('wakeBtn').textContent=
-'☀️ Awake: On';
-
-}else{
-
-alert(
-'Screen Wake Lock is not supported by this browser.'
-);
-
-}
-
-}catch(e){
-
-alert(
-'Could not keep the screen awake.'
-);
-
-}
-
+      $('wakeBtn').textContent=
+        '☀️ Awake: On';
+    }else{
+      alert(
+        'Screen Wake Lock is not supported by this browser.'
+      );
+    }
+  }catch(e){
+    alert(
+      'Could not keep the screen awake.'
+    );
+  }
 }
 
 function alertPending(){
+  let cards=qa('.attack')
+    .filter(c=>
+      c.dataset.launched!=='1' &&
+      c.dataset.launch
+    )
+    .sort(
+      (a,b)=>
+        new Date(a.dataset.launch)-
+        new Date(b.dataset.launch)
+    );
 
-let cards=
-qa('.attack')
-.filter(c=>
-c.dataset.launched!=='1'&&
-c.dataset.launch
-)
-.sort(
-(a,b)=>
-new Date(a.dataset.launch)-
-new Date(b.dataset.launch)
-);
+  if(!cards.length)return;
 
-if(!cards.length)return;
+  let c=cards[0],
+      d=new Date(c.dataset.launch),
+      s=Math.ceil(
+        (d-Date.now())/1000
+      );
 
-let c=cards[0];
+  if(
+    s<=0 &&
+    lastAlertKey!==c.dataset.launch
+  ){
+    lastAlertKey=c.dataset.launch;
 
-let d=
-new Date(
-c.dataset.launch
-);
+    notifyLaunch(c);
 
-let s=
-Math.ceil(
-(d-Date.now())/1000
-);
+    c.classList.add('alertnow');
 
-if(
-s<=0&&
-lastAlertKey!==c.dataset.launch
-){
-
-lastAlertKey=
-c.dataset.launch;
-
-notifyLaunch(c);
-
-c.classList.add(
-'alertnow'
-);
-
-setTimeout(
-()=>c.classList.remove('alertnow'),
-5000
-);
-
-}
-
+    setTimeout(
+      ()=>c.classList.remove('alertnow'),
+      5000
+    );
+  }
 }
 
 let pickerTarget=null;
 
 function openTimePicker(targetId){
+  pickerTarget=targetId;
 
-pickerTarget=
-targetId;
+  let v=$(targetId).value,
+      m=parseServerInput(v),
+      d=isNaN(m)
+        ?new Date(Date.now()+3600000)
+        :m,
+      pad=n=>String(n).padStart(2,'0');
 
-let v=
-$(targetId).value;
+  $('pickerDate').value=
+    `${d.getUTCFullYear()}-${pad(d.getUTCMonth()+1)}-${pad(d.getUTCDate())}`;
 
-let m=
-parseServerInput(v);
+  $('pickerHour').innerHTML=
+    Array.from(
+      {length:24},
+      (_,i)=>
+        `<option value="${i}">${pad(i)}</option>`
+    ).join('');
 
-let d=
-isNaN(m)
-?new Date(Date.now()+3600000)
-:m;
+  $('pickerMinute').innerHTML=
+    Array.from(
+      {length:60},
+      (_,i)=>
+        `<option value="${i}">${pad(i)}</option>`
+    ).join('');
 
-let pad=
-n=>String(n).padStart(2,'0');
+  $('pickerSecond').innerHTML=
+    Array.from(
+      {length:60},
+      (_,i)=>
+        `<option value="${i}">${pad(i)}</option>`
+    ).join('');
 
-$('pickerDate').value=
-`${d.getUTCFullYear()}-${pad(d.getUTCMonth()+1)}-${pad(d.getUTCDate())}`;
+  $('pickerHour').value=
+    d.getUTCHours();
 
-$('pickerHour').innerHTML=
-Array.from(
-{length:24},
-(_,i)=>
-`<option value="${i}">${pad(i)}</option>`
-).join('');
+  $('pickerMinute').value=
+    d.getUTCMinutes();
 
-$('pickerMinute').innerHTML=
-Array.from(
-{length:60},
-(_,i)=>
-`<option value="${i}">${pad(i)}</option>`
-).join('');
+  $('pickerSecond').value=
+    d.getUTCSeconds();
 
-$('pickerSecond').innerHTML=
-Array.from(
-{length:60},
-(_,i)=>
-`<option value="${i}">${pad(i)}</option>`
-).join('');
-
-$('pickerHour').value=
-d.getUTCHours();
-
-$('pickerMinute').value=
-d.getUTCMinutes();
-
-$('pickerSecond').value=
-d.getUTCSeconds();
-
-$('timePickerModal')
-.classList.remove('hidden');
-
+  $('timePickerModal')
+    .classList
+    .remove('hidden');
 }
 
 function closeTimePicker(){
+  $('timePickerModal')
+    .classList
+    .add('hidden');
 
-$('timePickerModal')
-.classList.add('hidden');
-
-pickerTarget=null;
-
+  pickerTarget=null;
 }
 
 function setPickedTime(){
+  if(
+    !pickerTarget ||
+    !$('pickerDate').value
+  ){
+    return;
+  }
 
-if(
-!pickerTarget||
-!$('pickerDate').value
-)return;
+  /*
+    Preserve every wave's selected
+    saved city and troop when changing
+    the landing time.
+  */
+  const savedWaveSelections=
+    new Map();
 
-/*
-Preserve the selected city and unit
-when changing the arrival time.
-*/
+  qa('.attack').forEach(card=>{
+    savedWaveSelections.set(
+      card,
+      {
+        city:
+          q('.cityselect',card)?.value||'',
+        unit:
+          q('.au',card)?.value||''
+      }
+    );
+  });
 
-const savedWaveSelections=
-new Map();
+  let [y,mo,da]=
+      $('pickerDate')
+        .value
+        .split('-')
+        .map(Number),
 
-qa('.attack').forEach(card=>{
+      h=+$('pickerHour').value,
 
-savedWaveSelections.set(
-card,
-{
-city:
-q('.cityselect',card)?.value||'',
+      min=+$('pickerMinute').value,
 
-unit:
-q('.au',card)?.value||''
-}
-);
+      sec=+$('pickerSecond').value,
 
-});
+      pad=n=>String(n).padStart(2,'0');
 
-let [y,mo,da]=
-$('pickerDate')
-.value
-.split('-')
-.map(Number);
+  $(pickerTarget).value=
+    `${y}-${pad(mo)}-${pad(da)} ${pad(h)}:${pad(min)}:${pad(sec)}`;
 
-let h=
-+$('pickerHour').value;
+  $(pickerTarget).dispatchEvent(
+    new Event(
+      'input',
+      {bubbles:true}
+    )
+  );
 
-let min=
-+$('pickerMinute').value;
+  savedWaveSelections.forEach(
+    (saved,card)=>{
+      const city=
+        q('.cityselect',card);
 
-let sec=
-+$('pickerSecond').value;
+      const unit=
+        q('.au',card);
 
-let pad=
-n=>String(n).padStart(2,'0');
+      if(
+        city &&
+        [...city.options].some(
+          o=>o.value===saved.city
+        )
+      ){
+        city.value=saved.city;
+      }
 
-$(pickerTarget).value=
-`${y}-${pad(mo)}-${pad(da)} ${pad(h)}:${pad(min)}:${pad(sec)}`;
+      if(
+        unit &&
+        [...unit.options].some(
+          o=>o.value===saved.unit
+        )
+      ){
+        unit.value=saved.unit;
+      }
+    }
+  );
 
-$(pickerTarget).dispatchEvent(
-new Event(
-'input',
-{bubbles:true}
-)
-);
-
-savedWaveSelections.forEach(
-(saved,card)=>{
-
-const city=
-q('.cityselect',card);
-
-const unit=
-q('.au',card);
-
-if(
-city&&
-[...city.options]
-.some(
-o=>o.value===saved.city
-)
-){
-
-city.value=
-saved.city;
-
-}
-
-if(
-unit&&
-[...unit.options]
-.some(
-o=>o.value===saved.unit
-)
-){
-
-unit.value=
-saved.unit;
-
-}
-
-}
-);
-
-closeTimePicker();
-
+  closeTimePicker();
 }
 
 function wire(){
 
-$('singleTab').addEventListener(
-'click',
-()=>showMode('single')
-);
+  $('singleTab')
+    .addEventListener(
+      'click',
+      ()=>showMode('single')
+    );
 
-$('arrivalPickBtn').addEventListener(
-'click',
-()=>openTimePicker('arrival')
-);
+  $('arrivalPickBtn')
+    .addEventListener(
+      'click',
+      ()=>openTimePicker('arrival')
+    );
 
-$('sarrivalPickBtn').addEventListener(
-'click',
-()=>openTimePicker('sarrival')
-);
+  $('sarrivalPickBtn')
+    .addEventListener(
+      'click',
+      ()=>openTimePicker('sarrival')
+    );
 
-$('arrival').addEventListener(
-'click',
-()=>openTimePicker('arrival')
-);
+  $('arrival')
+    .addEventListener(
+      'click',
+      ()=>openTimePicker('arrival')
+    );
 
-$('sarrival').addEventListener(
-'click',
-()=>openTimePicker('sarrival')
-);
+  $('sarrival')
+    .addEventListener(
+      'click',
+      ()=>openTimePicker('sarrival')
+    );
 
-$('timePickerClose').addEventListener(
-'click',
-closeTimePicker
-);
+  $('timePickerClose')
+    .addEventListener(
+      'click',
+      closeTimePicker
+    );
 
-$('timePickerCancel').addEventListener(
-'click',
-closeTimePicker
-);
+  $('timePickerCancel')
+    .addEventListener(
+      'click',
+      closeTimePicker
+    );
 
-$('timePickerSet').addEventListener(
-'click',
-setPickedTime
-);
+  $('timePickerSet')
+    .addEventListener(
+      'click',
+      setPickedTime
+    );
 
-$('syncTab').addEventListener(
-'click',
-()=>showMode('sync')
-);
+  $('syncTab')
+    .addEventListener(
+      'click',
+      ()=>showMode('sync')
+    );
 
-$('cityManageBtn').addEventListener(
-'click',
-openCityManager
-);
+  $('cityManageBtn')
+    .addEventListener(
+      'click',
+      openCityManager
+    );
 
-$('cityCloseBtn').addEventListener(
-'click',
-closeCityManager
-);
+  $('cityCloseBtn')
+    .addEventListener(
+      'click',
+      closeCityManager
+    );
 
-$('saveCityBtn').addEventListener(
-'click',
-addSavedCity
-);
+  $('saveCityBtn')
+    .addEventListener(
+      'click',
+      addSavedCity
+    );
 
-$('cityList').addEventListener(
-'click',
-e=>{
+  $('cityList')
+    .addEventListener(
+      'click',
+      e=>{
+        let t=e.target;
 
-let t=e.target;
+        if(
+          t.dataset.cityEdit!==undefined
+        ){
+          editSavedCity(
+            +t.dataset.cityEdit
+          );
+        }
 
-if(
-t.dataset.cityEdit!==undefined
-){
+        if(
+          t.dataset.cityDelete!==undefined
+        ){
+          deleteSavedCity(
+            +t.dataset.cityDelete
+          );
+        }
+      }
+    );
 
-editSavedCity(
-+t.dataset.cityEdit
-);
+  $('savePlanBtn')
+    .addEventListener(
+      'click',
+      saveCurrentPlan
+    );
 
+  $('planManageBtn')
+    .addEventListener(
+      'click',
+      openPlanManager
+    );
+
+  $('planCloseBtn')
+    .addEventListener(
+      'click',
+      closePlanManager
+    );
+
+  $('planSelect')
+    .addEventListener(
+      'change',
+      e=>loadPlan(e.target.value)
+    );
+
+  $('planList')
+    .addEventListener(
+      'click',
+      e=>{
+        let t=e.target;
+
+        if(
+          t.dataset.planLoad!==undefined
+        ){
+          loadPlan(
+            t.dataset.planLoad
+          );
+
+          closePlanManager();
+        }
+
+        if(
+          t.dataset.planRename!==undefined
+        ){
+          renamePlan(
+            +t.dataset.planRename
+          );
+        }
+
+        if(
+          t.dataset.planDelete!==undefined
+        ){
+          deletePlan(
+            +t.dataset.planDelete
+          );
+        }
+      }
+    );
+
+  $('copySingleBtn')
+    .addEventListener(
+      'click',
+      copySingle
+    );
+
+  $('singleCountdownBtn')
+    .addEventListener(
+      'click',
+      startSingleCountdown
+    );
+
+  $('sendNextBtn')
+    .addEventListener(
+      'click',
+      sendNext
+    );
+
+  $('wakeBtn')
+    .addEventListener(
+      'click',
+      toggleWakeLock
+    );
+
+  $('sortBtn')
+    .addEventListener(
+      'click',
+      sortAttacks
+    );
+
+  $('addAttackBtn')
+    .addEventListener(
+      'click',
+      ()=>addAttack()
+    );
+
+  $('calculateSyncBtn')
+    .addEventListener(
+      'click',
+      calculateSync
+    );
+
+  $('startSyncBtn')
+    .addEventListener(
+      'click',
+      startSyncCountdown
+    );
+
+  $('battleStartBtn')
+    .addEventListener(
+      'click',
+      battleStart
+    );
+
+  $('alertBtn')
+    .addEventListener(
+      'click',
+      enableAlerts
+    );
+
+  $('soundBtn')
+    .addEventListener(
+      'click',
+      toggleSound
+    );
+
+  $('vibrateBtn')
+    .addEventListener(
+      'click',
+      toggleVibration
+    );
+
+  $('battleLaunchBtn')
+    .addEventListener(
+      'click',
+      sendNext
+    );
+
+  $('battleExitBtn')
+    .addEventListener(
+      'click',
+      closeBattleStart
+    );
+
+  [
+    'stx',
+    'sty',
+    'sarrival',
+    'offset'
+  ].forEach(id=>
+    $(id).addEventListener(
+      'input',
+      calculateSync
+    )
+  );
+
+  [
+    'sx',
+    'sy',
+    'tx',
+    'ty',
+    'su',
+    'arrival'
+  ].forEach(id=>
+    $(id).addEventListener(
+      'input',
+      calcSingle
+    )
+  );
 }
 
-if(
-t.dataset.cityDelete!==undefined
-){
+populate($('su'));
 
-deleteSavedCity(
-+t.dataset.cityDelete
-);
-
-}
-
-});
-
-$('savePlanBtn').addEventListener(
-'click',
-saveCurrentPlan
-);
-
-$('planManageBtn').addEventListener(
-'click',
-openPlanManager
-);
-
-$('planCloseBtn').addEventListener(
-'click',
-closePlanManager
-);
-
-$('planSelect').addEventListener(
-'change',
-e=>loadPlan(e.target.value)
-);
-
-$('planList').addEventListener(
-'click',
-e=>{
-
-let t=e.target;
-
-if(
-t.dataset.planLoad!==undefined
-){
-
-loadPlan(
-t.dataset.planLoad
-);
-
-closePlanManager();
-
-}
-
-if(
-t.dataset.planRename!==undefined
-){
-
-renamePlan(
-+t.dataset.planRename
-);
-
-}
-
-if(
-t.dataset.planDelete!==undefined
-){
-
-deletePlan(
-+t.dataset.planDelete
-);
-
-}
-
-});
-
-$('copySingleBtn').addEventListener(
-'click',
-copySingle
-);
-
-$('singleCountdownBtn').addEventListener(
-'click',
-startSingleCountdown
-);
-
-$('sendNextBtn').addEventListener(
-'click',
-sendNext
-);
-
-$('wakeBtn').addEventListener(
-'click',
-toggleWakeLock
-);
-
-$('sortBtn').addEventListener(
-'click',
-sortAttacks
-);
-
-$('addAttackBtn').addEventListener(
-'click',
-()=>addAttack()
-);
-
-$('calculateSyncBtn').addEventListener(
-'click',
-calculateSync
-);
-
-$('startSyncBtn').addEventListener(
-'click',
-startSyncCountdown
-);
-
-$('battleStartBtn').addEventListener(
-'click',
-battleStart
-);
-
-$('alertBtn').addEventListener(
-'click',
-enableAlerts
-);
-
-$('soundBtn').addEventListener(
-'click',
-toggleSound
-);
-
-$('vibrateBtn').addEventListener(
-'click',
-toggleVibration
-);
-
-$('battleLaunchBtn').addEventListener(
-'click',
-sendNext
-);
-
-$('battleExitBtn').addEventListener(
-'click',
-closeBattleStart
-);
-
-[
-'stx',
-'sty',
-'sarrival',
-'offset'
-].forEach(id=>
-$(id).addEventListener(
-'input',
-calculateSync
-)
-);
-
-[
-'sx',
-'sy',
-'tx',
-'ty',
-'su',
-'arrival'
-].forEach(id=>
-$(id).addEventListener(
-'input',
-calcSingle
-)
-);
-
-}
-
-populate(
-$('su')
+localInputNow(
+  $('arrival'),
+  60
 );
 
 localInputNow(
-$('arrival'),
-60
-);
-
-localInputNow(
-$('sarrival'),
-60
+  $('sarrival'),
+  60
 );
 
 refreshPlans();
@@ -2404,43 +1827,33 @@ wire();
 calcSingle();
 
 soundOn=
-localStorage.getItem(
-'valorSound'
-)!=='off';
+  localStorage.getItem('valorSound')!=='off';
 
 vibrationOn=
-localStorage.getItem(
-'valorVibrate'
-)!=='off';
+  localStorage.getItem('valorVibrate')!=='off';
 
 $('soundBtn').textContent=
-`🔊 Sound: ${soundOn?'On':'Off'}`;
+  `🔊 Sound: ${soundOn?'On':'Off'}`;
 
 $('vibrateBtn').textContent=
-`📳 Vibration: ${vibrationOn?'On':'Off'}`;
+  `📳 Vibration: ${vibrationOn?'On':'Off'}`;
 
 updateClocks();
 
 setInterval(()=>{
+  updateClocks();
 
-updateClocks();
-
-if(
-!$('sync').classList.contains(
-'hidden'
-)
-){
-
-refreshDashboard();
-
-alertPending();
-
-}
-
+  if(
+    !$('sync')
+      .classList
+      .contains('hidden')
+  ){
+    refreshDashboard();
+    alertPending();
+  }
 },250);
 
 })();
 </script>
-
 </body>
 </html>
