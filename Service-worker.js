@@ -1,4 +1,4 @@
-const CACHE = 'valor-tool-v7.9';
+const CACHE = 'valor-tool-v7.10';
 
 const ASSETS = [
   './',
@@ -12,6 +12,7 @@ self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE).then(cache => cache.addAll(ASSETS))
   );
+
   self.skipWaiting();
 });
 
@@ -25,6 +26,7 @@ self.addEventListener('activate', event => {
       )
     )
   );
+
   self.clients.claim();
 });
 
