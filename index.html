@@ -8,285 +8,120 @@
 <title>Valor Tool</title>
 <style>
 :root{--bg:#0b1020;--card:#141b2f;--muted:#9aa6bf;--text:#f7f8fb;--accent:#65d6a6;--danger:#ff7373;--line:#27314a}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-main{max-width:720px;margin:auto;padding:18px 14px 42px}
-h1{font-size:26px;margin:6px 0 4px}
-.sub{color:var(--muted);margin:0 0 18px}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+main{max-width:720px;margin:auto;padding:18px 14px 42px}h1{font-size:26px;margin:6px 0 4px}.sub{color:var(--muted);margin:0 0 18px}
 .tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
 button,.btn{border:0;border-radius:12px;padding:13px 14px;font-weight:700;font-size:15px;background:#202a43;color:var(--text);touch-action:manipulation}
-button:active{transform:scale(.98)}
-button.active{background:var(--accent);color:#08130e}
+button:active{transform:scale(.98)}button.active{background:var(--accent);color:#08130e}
 .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px;margin:12px 0}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.field{margin:9px 0}
-.field label{display:block;color:var(--muted);font-size:12px;margin-bottom:5px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{margin:9px 0}.field label{display:block;color:var(--muted);font-size:12px;margin-bottom:5px}
 input,select{width:100%;padding:12px;-webkit-user-select:text;user-select:text;border-radius:10px;border:1px solid var(--line);background:#0f1629;color:var(--text);font-size:16px}
-.result{text-align:center;padding:18px}
-.result .big{font-size:32px;font-weight:800;color:var(--accent);letter-spacing:.5px}
-.small{font-size:12px;color:var(--muted)}
-.row{display:flex;gap:8px;align-items:center;justify-content:space-between}
-.attack{border-top:1px solid var(--line);padding:12px 0}
-.launch{font-size:20px;font-weight:800;color:var(--accent)}
-.danger{color:var(--danger)}
-.actions{display:flex;gap:8px;flex-wrap:wrap}
-.hidden{display:none!important}
-.unitrow{display:grid;grid-template-columns:1.2fr 1fr 1fr auto;gap:7px;align-items:end}
-@media(max-width:520px){
-  .unitrow{grid-template-columns:1fr 1fr}
-  .unitrow .remove{grid-column:2}
-  .grid{grid-template-columns:1fr 1fr}
-}
-.nextwave{border:2px solid var(--accent);box-shadow:0 0 0 2px #65d6a622}
-.nextbadge{display:inline-block;background:var(--accent);color:#08130e;border-radius:999px;padding:4px 8px;font-size:11px;font-weight:800}
-.countbig{font-size:38px;font-weight:900;color:var(--accent);text-align:center}
-.launched{opacity:.42;order:99}
-.cityselect{margin-top:8px}
-@media(max-width:520px){.countbig{font-size:32px}}
+.result{text-align:center;padding:18px}.result .big{font-size:32px;font-weight:800;color:var(--accent);letter-spacing:.5px}
+.small{font-size:12px;color:var(--muted)}.row{display:flex;gap:8px;align-items:center;justify-content:space-between}.attack{border-top:1px solid var(--line);padding:12px 0}
+.launch{font-size:20px;font-weight:800;color:var(--accent)}.danger{color:var(--danger)}.actions{display:flex;gap:8px;flex-wrap:wrap}
+.hidden{display:none!important}.unitrow{display:grid;grid-template-columns:1.2fr 1fr 1fr auto;gap:7px;align-items:end}
+@media(max-width:520px){.unitrow{grid-template-columns:1fr 1fr}.unitrow .remove{grid-column:2}.grid{grid-template-columns:1fr 1fr}}
+.nextwave{border:2px solid var(--accent);box-shadow:0 0 0 2px #65d6a622}.nextbadge{display:inline-block;background:var(--accent);color:#08130e;border-radius:999px;padding:4px 8px;font-size:11px;font-weight:800}
+.countbig{font-size:38px;font-weight:900;color:var(--accent);text-align:center}.launched{opacity:.42;order:99}
+.cityselect{margin-top:8px}@media(max-width:520px){.countbig{font-size:32px}}
 .modal{position:fixed;inset:0;background:#000b;display:flex;align-items:flex-end;justify-content:center;z-index:20;padding:12px}
 .modalbox{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:15px;width:min(720px,100%);max-height:90vh;overflow:auto}
-.managerrow{border:1px solid var(--line);border-radius:12px;padding:11px;margin:8px 0}
-.managerrow .actions{margin-top:8px}
-.alertnow{animation:pulse .7s infinite alternate}
-.timefield{display:flex;gap:8px}
-.timefield input{flex:1}
-.timepick{min-width:92px}
-@keyframes pulse{from{transform:scale(1)}to{transform:scale(1.03)}}
+.managerrow{border:1px solid var(--line);border-radius:12px;padding:11px;margin:8px 0}.managerrow .actions{margin-top:8px}
+.alertnow{animation:pulse .7s infinite alternate}.timefield{display:flex;gap:8px}.timefield input{flex:1}.timepick{min-width:92px}@keyframes pulse{from{transform:scale(1)}to{transform:scale(1.03)}}
 </style>
 </head>
-
 <body>
-
 <main>
-
 <h1>⚔️ Valor Tool</h1>
 <p class="sub">Launch-time calculator • World Speed 3 / Unit Speed 2</p>
 
 <div class="card" style="padding:10px 12px">
 <div class="row">
-<span>
-<strong>🕐 Server Time</strong><br>
-<span id="serverClock" class="small">—</span>
-</span>
-
-<span style="text-align:right">
-<strong>📱 Your Time</strong><br>
-<span id="localClock" class="small">—</span>
-</span>
+<span><strong>🕐 Server Time</strong><br><span id="serverClock" class="small">—</span></span>
+<span style="text-align:right"><strong>📱 Your Time</strong><br><span id="localClock" class="small">—</span></span>
 </div>
 </div>
-
 
 <div class="tabs">
 <button id="singleTab" class="active" type="button">Single Attack</button>
 <button id="syncTab" type="button">Synchronised</button>
 </div>
 
-
 <div class="card" style="padding:11px">
-
 <div class="row">
-
-<span>
-<strong>Saved cities</strong><br>
-<span class="small">
-Store your common launch cities on this device.
-</span>
-</span>
-
-<button id="cityManageBtn" type="button">
-Manage
-</button>
-
+<span><strong>Saved cities</strong><br><span class="small">Store your common launch cities on this device.</span></span>
+<button id="cityManageBtn" type="button">Manage</button>
 </div>
-
 </div>
-
 
 <div id="cityModal" class="modal hidden">
-
 <div class="modalbox">
-
-<div class="row">
-<h2 style="margin:0">Saved Cities</h2>
-<button id="cityCloseBtn" type="button">✕</button>
-</div>
-
+<div class="row"><h2 style="margin:0">Saved Cities</h2><button id="cityCloseBtn" type="button">✕</button></div>
 <div id="cityList"></div>
-
 <div class="card" style="margin:12px 0 0">
-
-<div class="field">
-<label>City name</label>
-<input id="newCityName" placeholder="Main City">
-</div>
-
+<div class="field"><label>City name</label><input id="newCityName" placeholder="Main City"></div>
 <div class="grid">
-
-<div class="field">
-<label>X</label>
-<input id="newCityX" type="text" inputmode="numeric" placeholder="240">
+<div class="field"><label>X</label><input id="newCityX" type="text" inputmode="numeric" placeholder="240"></div>
+<div class="field"><label>Y</label><input id="newCityY" type="text" inputmode="numeric" placeholder="261"></div>
 </div>
-
-<div class="field">
-<label>Y</label>
-<input id="newCityY" type="text" inputmode="numeric" placeholder="261">
+<button id="saveCityBtn" type="button" style="width:100%">+ Save city</button>
 </div>
-
 </div>
-
-<button id="saveCityBtn" type="button" style="width:100%">
-+ Save city
-</button>
-
 </div>
-
-</div>
-
-</div>
-
 
 <div class="card" id="planTools">
-
 <div class="row">
-
-<span>
-<strong>Battle Plans</strong><br>
-<span class="small">
-Save a target, arrival time and wave setup for reuse.
-</span>
-</span>
-
-<div class="actions">
-<button id="savePlanBtn" type="button">Save plan</button>
-<button id="planManageBtn" type="button">Manage</button>
+<span><strong>Battle Plans</strong><br><span class="small">Save a target, arrival time and wave setup for reuse.</span></span>
+<div class="actions"><button id="savePlanBtn" type="button">Save plan</button><button id="planManageBtn" type="button">Manage</button></div>
 </div>
-
+<select id="planSelect" class="cityselect"><option value="">Load a saved plan…</option></select>
 </div>
-
-<select id="planSelect" class="cityselect">
-<option value="">Load a saved plan…</option>
-</select>
-
-</div>
-
 
 <div id="planModal" class="modal hidden">
-
 <div class="modalbox">
-
-<div class="row">
-<h2 style="margin:0">Battle Plans</h2>
-<button id="planCloseBtn" type="button">✕</button>
-</div>
-
+<div class="row"><h2 style="margin:0">Battle Plans</h2><button id="planCloseBtn" type="button">✕</button></div>
 <div id="planList"></div>
-
 </div>
-
 </div>
-
 
 <section id="single">
-
 <div class="card">
-
 <div class="grid">
-
-<div class="field">
-<label>From X</label>
-<input id="sx" type="text" inputmode="numeric" value="240">
+<div class="field"><label>From X</label><input id="sx" type="text" inputmode="numeric" value="240"></div>
+<div class="field"><label>From Y</label><input id="sy" type="text" inputmode="numeric" value="261"></div>
+<div class="field"><label>Target X</label><input id="tx" type="text" inputmode="numeric" value="252"></div>
+<div class="field"><label>Target Y</label><input id="ty" type="text" inputmode="numeric" value="262"></div>
 </div>
 
-<div class="field">
-<label>From Y</label>
-<input id="sy" type="text" inputmode="numeric" value="261">
-</div>
+<div class="field"><label>Troop</label><select id="su"></select></div>
 
 <div class="field">
-<label>Target X</label>
-<input id="tx" type="text" inputmode="numeric" value="252">
-</div>
-
-<div class="field">
-<label>Target Y</label>
-<input id="ty" type="text" inputmode="numeric" value="262">
-</div>
-
-</div>
-
-<div class="field">
-<label>Troop</label>
-<select id="su"></select>
-</div>
-
-<div class="field">
-
 <label>Desired arrival (Server Time)</label>
-
 <div class="timefield">
-
-<input
-id="arrival"
-type="text"
-readonly
-placeholder="YYYY-MM-DD HH:mm:ss">
-
-<button
-id="arrivalPickBtn"
-class="timepick"
-type="button">
-🕐 Pick time
-</button>
-
+<input id="arrival" type="text" readonly placeholder="YYYY-MM-DD HH:mm:ss">
+<button id="arrivalPickBtn" class="timepick" type="button">🕐 Pick time</button>
 </div>
-
 </div>
-
 </div>
-
 
 <div class="card result">
-
-<div class="small">
-LAUNCH AT • SERVER TIME
-</div>
-
+<div class="small">LAUNCH AT • SERVER TIME</div>
 <div id="singleResult" class="big">—</div>
-
 <div id="singleLocal" class="small"></div>
-
 <div id="singleTravel" class="small"></div>
 
-<div
-class="actions"
-style="justify-content:center;margin-top:12px">
-
-<button id="copySingleBtn" type="button">
-Copy launch time
-</button>
-
-<button id="singleCountdownBtn" type="button">
-Start countdown
-</button>
-
+<div class="actions" style="justify-content:center;margin-top:12px">
+<button id="copySingleBtn" type="button">Copy launch time</button>
+<button id="singleCountdownBtn" type="button">Start countdown</button>
 </div>
 
-<div
-id="singleCountdown"
-class="small"
-style="margin-top:10px">
+<div id="singleCountdown" class="small" style="margin-top:10px"></div>
 </div>
-
-</div>
-
 </section>
-
 
 <section id="sync" class="hidden">
 
 <div class="card">
-
 <div class="grid">
 
 <div class="field">
@@ -300,26 +135,11 @@ style="margin-top:10px">
 </div>
 
 <div class="field">
-
 <label>Arrival (Server Time)</label>
-
 <div class="timefield">
-
-<input
-id="sarrival"
-type="text"
-readonly
-placeholder="YYYY-MM-DD HH:mm:ss">
-
-<button
-id="sarrivalPickBtn"
-class="timepick"
-type="button">
-🕐 Pick time
-</button>
-
+<input id="sarrival" type="text" readonly placeholder="YYYY-MM-DD HH:mm:ss">
+<button id="sarrivalPickBtn" class="timepick" type="button">🕐 Pick time</button>
 </div>
-
 </div>
 
 <div class="field">
@@ -328,342 +148,155 @@ type="button">
 </div>
 
 </div>
-
 </div>
-
 
 <div class="card" id="syncDashboard">
-
-<div class="small">
-NEXT ATTACK TO SEND
-</div>
-
+<div class="small">NEXT ATTACK TO SEND</div>
 <div id="nextAttack" class="countbig">—</div>
+<div id="nextDetails" class="small" style="text-align:center">Calculate your waves to begin.</div>
 
-<div
-id="nextDetails"
-class="small"
-style="text-align:center">
-Calculate your waves to begin.
+<div class="actions" style="justify-content:center;margin-top:10px">
+<button id="sendNextBtn" type="button">✓ Mark next launched</button>
+<button id="wakeBtn" type="button">☀️ Keep awake</button>
+<button id="sortBtn" type="button">↕ Sort by launch</button>
 </div>
-
-<div
-class="actions"
-style="justify-content:center;margin-top:10px">
-
-<button id="sendNextBtn" type="button">
-✓ Mark next launched
-</button>
-
-<button id="wakeBtn" type="button">
-☀️ Keep awake
-</button>
-
-<button id="sortBtn" type="button">
-↕ Sort by launch
-</button>
-
 </div>
-
-</div>
-
 
 <div id="attacks"></div>
 
-
 <div class="actions">
-
-<button id="addAttackBtn" type="button">
-+ Add attack
-</button>
-
-<button id="calculateSyncBtn" type="button">
-Calculate all
-</button>
-
-<button id="startSyncBtn" type="button">
-Start countdowns
-</button>
-
-<button id="battleStartBtn" type="button">
-🔥 Battle Start
-</button>
-
+<button id="addAttackBtn" type="button">+ Add attack</button>
+<button id="calculateSyncBtn" type="button">Calculate all</button>
+<button id="startSyncBtn" type="button">Start countdowns</button>
+<button id="battleStartBtn" type="button">🔥 Battle Start</button>
 </div>
 
-
-<div
-class="card"
-style="margin-top:12px">
-
+<div class="card" style="margin-top:12px">
 <div class="row">
-
 <span>
 <strong>Launch alerts</strong><br>
-<span class="small">
-Alerts work while this page/app is open.
-Keep the screen awake for best reliability.
+<span class="small">Alerts work while this page/app is open. Keep the screen awake for best reliability.</span>
 </span>
-</span>
-
-<button id="alertBtn" type="button">
-Enable
-</button>
-
+<button id="alertBtn" type="button">Enable</button>
 </div>
 
-<div
-class="actions"
-style="margin-top:9px">
-
-<button id="soundBtn" type="button">
-🔊 Sound: On
-</button>
-
-<button id="vibrateBtn" type="button">
-📳 Vibration: On
-</button>
-
+<div class="actions" style="margin-top:9px">
+<button id="soundBtn" type="button">🔊 Sound: On</button>
+<button id="vibrateBtn" type="button">📳 Vibration: On</button>
 </div>
 
-<div
-id="alertStatus"
-class="small"
-style="margin-top:8px">
+<div id="alertStatus" class="small" style="margin-top:8px"></div>
 </div>
 
-</div>
-
-<div
-id="syncStatus"
-class="small"
-style="margin-top:10px">
-</div>
+<div id="syncStatus" class="small" style="margin-top:10px"></div>
 
 </section>
 
-
 <div class="card small">
-
 <strong>Movement data</strong><br>
-
-Scouts 0:40/tile •
-Knights 1:00 •
-Guardians 1:10 •
-Berserkers 1:50 •
-Lancers 2:00 •
-Sentries 2:10 •
-Rams 3:20 •
-Ballistas 3:20 •
-Scholars 4:10
-
+Scouts 0:40/tile • Knights 1:00 • Guardians 1:10 • Berserkers 1:50 • Lancers 2:00 • Sentries 2:10 • Rams 3:20 • Ballistas 3:20 • Scholars 4:10
 <br><br>
-
-Distance uses straight-line coordinates:
-√(ΔX² + ΔY²).
-
+Distance uses straight-line coordinates: √(ΔX² + ΔY²).
 Times are based on measurements supplied in-game.
-
 </div>
 
-
-<div
-id="timePickerModal"
-class="modal hidden"
-style="align-items:center">
-
+<div id="timePickerModal" class="modal hidden" style="align-items:center">
 <div class="modalbox">
-
 <div class="row">
-
-<h2 style="margin:0">
-Choose Arrival Time
-</h2>
-
-<button id="timePickerClose" type="button">
-✕
-</button>
-
+<h2 style="margin:0">Choose Arrival Time</h2>
+<button id="timePickerClose" type="button">✕</button>
 </div>
 
-<p
-class="small"
-style="margin:8px 0 12px">
+<p class="small" style="margin:8px 0 12px">
 Select the date and server time for the arrival.
 </p>
 
 <div class="field">
-
 <label>Date (Server Time)</label>
-
-<input
-id="pickerDate"
-type="date">
-
+<input id="pickerDate" type="date">
 </div>
 
 <div class="grid">
-
-<div class="field">
-<label>Hour</label>
-<select id="pickerHour"></select>
+<div class="field"><label>Hour</label><select id="pickerHour"></select></div>
+<div class="field"><label>Minute</label><select id="pickerMinute"></select></div>
+<div class="field"><label>Second</label><select id="pickerSecond"></select></div>
 </div>
 
-<div class="field">
-<label>Minute</label>
-<select id="pickerMinute"></select>
+<div class="actions" style="justify-content:flex-end;margin-top:10px">
+<button id="timePickerCancel" type="button">Cancel</button>
+<button id="timePickerSet" type="button" class="active">✓ Set arrival</button>
+</div>
+</div>
 </div>
 
-<div class="field">
-<label>Second</label>
-<select id="pickerSecond"></select>
+<div id="battleOverlay" class="modal hidden" style="align-items:center">
+<div class="modalbox" style="text-align:center">
+<div class="small">BATTLE CONTROL</div>
+<h2 style="margin:6px 0">Next wave</h2>
+<div id="battleCountdown" class="countbig">—</div>
+<div id="battleDetails" style="font-size:18px;font-weight:700;margin:6px 0"></div>
+
+<div class="actions" style="justify-content:center;margin-top:14px">
+<button id="battleLaunchBtn" type="button">✓ LAUNCHED</button>
+<button id="battleExitBtn" type="button">Exit</button>
 </div>
-
 </div>
-
-<div
-class="actions"
-style="justify-content:flex-end;margin-top:10px">
-
-<button id="timePickerCancel" type="button">
-Cancel
-</button>
-
-<button
-id="timePickerSet"
-type="button"
-class="active">
-✓ Set arrival
-</button>
-
 </div>
-
-</div>
-
-</div>
-
-
-<div
-id="battleOverlay"
-class="modal hidden"
-style="align-items:center">
-
-<div
-class="modalbox"
-style="text-align:center">
-
-<div class="small">
-BATTLE CONTROL
-</div>
-
-<h2 style="margin:6px 0">
-Next wave
-</h2>
-
-<div id="battleCountdown" class="countbig">
-—
-</div>
-
-<div
-id="battleDetails"
-style="font-size:18px;font-weight:700;margin:6px 0">
-</div>
-
-<div
-class="actions"
-style="justify-content:center;margin-top:14px">
-
-<button id="battleLaunchBtn" type="button">
-✓ LAUNCHED
-</button>
-
-<button id="battleExitBtn" type="button">
-Exit
-</button>
-
-</div>
-
-</div>
-
-</div>
-
 
 </main>
 
-
 <script>
-
 (function(){
 
 'use strict';
 
-
 const units={
-  Scouts:40,
-  Knights:60,
-  Guardians:70,
-  Berserkers:110,
-  Lancers:120,
-  Sentries:130,
-  Rams:200,
-  Ballistas:200,
-  Scholars:250
+Scouts:40,
+Knights:60,
+Guardians:70,
+Berserkers:110,
+Lancers:120,
+Sentries:130,
+Rams:200,
+Ballistas:200,
+Scholars:250
 };
-
 
 const $=id=>document.getElementById(id);
 
-const q=(s,r=document)=>r.querySelector(s);
-
-const qa=(s,r=document)=>[...r.querySelectorAll(s)];
+const q=(s,r=document)=>r.querySelector(s),
+qa=(s,r=document)=>[...r.querySelectorAll(s)];
 
 
 /* Samsung Pick Time fix */
 
-document.addEventListener(
-  'click',
-  function(e){
+document.addEventListener('click',function(e){
 
-    const button =
-      e.target.closest(
-        '#arrivalPickBtn,#sarrivalPickBtn'
-      );
+  const button=
+    e.target.closest(
+      '#arrivalPickBtn,#sarrivalPickBtn'
+    );
 
-    if(!button)return;
+  if(!button)return;
 
-    if(
-      button.id==='arrivalPickBtn'
-    ){
-      openTimePicker('arrival');
-    }
+  if(button.id==='arrivalPickBtn')
+    openTimePicker('arrival');
 
-    if(
-      button.id==='sarrivalPickBtn'
-    ){
-      openTimePicker('sarrival');
-    }
+  if(button.id==='sarrivalPickBtn')
+    openTimePicker('sarrival');
 
-  }
-);
+});
 
 
-let lastSingleDate=null;
-
-let singleTimer=null;
-
-let syncTimer=null;
-
-let battleTimer=null;
-
-let wakeLock=null;
-
-let soundOn=true;
-
-let vibrationOn=true;
-
-let lastAlertKey=null;
-
-let audioCtx=null;
+let lastSingleDate=null,
+singleTimer=null,
+syncTimer=null,
+battleTimer=null,
+wakeLock=null,
+soundOn=true,
+vibrationOn=true,
+lastAlertKey=null,
+audioCtx=null;
 
 
 function showMode(m){
@@ -719,10 +352,8 @@ function fmt(sec){
   let s=
     sec%60;
 
-  return [
-    h,
-    m,
-    s
+  return[
+    h,m,s
   ]
   .map(
     x=>String(x).padStart(2,'0')
@@ -733,10 +364,7 @@ function fmt(sec){
 
 
 function dist(
-  x1,
-  y1,
-  x2,
-  y2
+  x1,y1,x2,y2
 ){
 
   return Math.hypot(
@@ -824,19 +452,19 @@ function parseServerInput(v){
     );
 
   return m
-    ? new Date(
-        Date.UTC(
-          +m[1],
-          +m[2]-1,
-          +m[3],
-          +m[4],
-          +m[5],
-          m[6]===undefined
-            ? 0
-            : +m[6]
-        )
+    ?new Date(
+      Date.UTC(
+        +m[1],
+        +m[2]-1,
+        +m[3],
+        +m[4],
+        +m[5],
+        m[6]===undefined
+          ?0
+          :+m[6]
       )
-    : new Date(NaN);
+    )
+    :new Date(NaN);
 
 }
 
@@ -846,8 +474,7 @@ function updateClocks(){
   let d=new Date();
 
   $('serverClock').textContent=
-    serverValue(d)+
-    ' UTC';
+    serverValue(d)+' UTC';
 
   $('localClock').textContent=
     dtValue(d);
@@ -898,17 +525,11 @@ function calcSingle(){
 
 
   /*
-    IMPORTANT:
+    Travel time can contain a fraction
+    of a second.
 
-    Travel time can contain a fraction of a second.
-
-    Example:
-    3.16227766 tiles × 200 sec
-    = 632.4555 seconds
-
-    The game works on whole server seconds,
-    so we round the calculated launch time
-    UP to the next whole second.
+    Round the calculated launch UP
+    to the next whole server second.
   */
 
   lastSingleDate=
@@ -927,12 +548,10 @@ function calcSingle(){
       lastSingleDate
     );
 
-
   $('singleLocal').textContent=
     `Your local launch time: ${
       dtValue(lastSingleDate)
     }`;
-
 
   $('singleTravel').textContent=
     `Distance ${
@@ -940,7 +559,6 @@ function calcSingle(){
     } tiles • Travel ${
       fmt(sec)
     }`;
-
 
   updateSingleCountdown();
 
@@ -987,15 +605,18 @@ function startSingleCountdown(){
   singleTimer=
     setInterval(
       ()=>{
+
         updateSingleCountdown();
 
         if(
           lastSingleDate &&
           Date.now()>=lastSingleDate
         ){
+
           clearInterval(
             singleTimer
           );
+
         }
 
       },
@@ -1142,7 +763,9 @@ function refreshCitySelectors(){
             o=>o.value===old
           )
       ){
+
         sel.value=old;
+
       }
 
     }
@@ -1197,7 +820,6 @@ function renderCityManager(){
                 <span class="small">
                   ${c.x}, ${c.y}
                 </span>
-
               </span>
 
               <span class="actions">
@@ -1407,21 +1029,17 @@ function addAttack(city){
 
     </div>
 
-
     <select class="cityselect">
       <option value="">
         Choose saved city…
       </option>
     </select>
 
-
     <div class="unitrow">
 
       <div class="field">
 
-        <label>
-          From X
-        </label>
+        <label>From X</label>
 
         <input
           class="ax"
@@ -1431,12 +1049,9 @@ function addAttack(city){
 
       </div>
 
-
       <div class="field">
 
-        <label>
-          From Y
-        </label>
+        <label>From Y</label>
 
         <input
           class="ay"
@@ -1446,12 +1061,9 @@ function addAttack(city){
 
       </div>
 
-
       <div class="field">
 
-        <label>
-          Unit
-        </label>
+        <label>Unit</label>
 
         <select class="au">
 
@@ -1466,7 +1078,6 @@ function addAttack(city){
 
       </div>
 
-
       <button
         class="remove"
         type="button">
@@ -1475,17 +1086,13 @@ function addAttack(city){
 
     </div>
 
-
     <div class="small">
       Launch time will appear after calculation.
     </div>
 
-
     <div class="launch"></div>
 
-
     <div class="small localLaunch"></div>
-
 
     <div
       class="actions"
@@ -1503,22 +1110,13 @@ function addAttack(city){
 
 
   const sel=
-    q(
-      '.cityselect',
-      wrap
-    );
+    q('.cityselect',wrap);
 
   const remove=
-    q(
-      '.remove',
-      wrap
-    );
+    q('.remove',wrap);
 
   const mark=
-    q(
-      '.markBtn',
-      wrap
-    );
+    q('.markBtn',wrap);
 
 
   sel.addEventListener(
@@ -1547,9 +1145,7 @@ function addAttack(city){
 
 
   $('attacks')
-    .appendChild(
-      wrap
-    );
+    .appendChild(wrap);
 
   refreshCitySelectors();
 
@@ -1876,7 +1472,6 @@ function loadPlan(v){
   if(!p)
     return;
 
-
   $('stx').value=
     p.targetX;
 
@@ -1889,17 +1484,14 @@ function loadPlan(v){
   $('offset').value=
     p.offset||0;
 
-
   $('attacks')
     .innerHTML='';
-
 
   p.attacks.forEach(
     a=>{
       addAttack(a);
     }
   );
-
 
   calculateSync();
 
@@ -1910,6 +1502,7 @@ function loadPlan(v){
 
 /* =====================================================
    SYNCHRONISED CALCULATION
+   THIS IS THE TIMING FIX
 ===================================================== */
 
 function calculateSync(){
@@ -1921,7 +1514,6 @@ function calculateSync(){
 
   if(isNaN(a))
     return;
-
 
   let targetX=
     +$('stx').value;
@@ -1971,10 +1563,18 @@ function calculateSync(){
 
 
         /*
-          IMPORTANT TIMING FIX:
+          IMPORTANT:
 
-          Round the launch moment UP
-          to the next whole server second.
+          Travel can contain a fraction
+          of a second.
+
+          Example:
+          3.16227766 × 200
+          = 632.4555 seconds.
+
+          Round the calculated launch
+          UP to the next whole server
+          second.
         */
 
         let launch=
@@ -2035,15 +1635,10 @@ function calculateSync(){
 }
 
 
-/* =====================================================
-   SORT / DASHBOARD
-===================================================== */
-
 function sortAttacks(){
 
   let box=
     $('attacks');
-
 
   qa(
     '.attack',
@@ -2090,7 +1685,6 @@ function sortAttacks(){
       box.appendChild(c);
     }
   );
-
 
   refreshDashboard();
 
@@ -2182,10 +1776,6 @@ function refreshDashboard(){
 
 }
 
-
-/* =====================================================
-   COUNTDOWNS
-===================================================== */
 
 function startSyncCountdown(){
 
@@ -2415,7 +2005,6 @@ function beep(
   if(!soundOn)
     return;
 
-
   try{
 
     audioCtx=
@@ -2466,13 +2055,11 @@ function beep(
       );
 
       o.connect(g);
-
       g.connect(
         audioCtx.destination
       );
 
       o.start(t);
-
       o.stop(
         t+dur
       );
@@ -2539,13 +2126,9 @@ async function enableAlerts(){
 function notifyLaunch(card){
 
   let unit=
-    q(
-      '.au',
-      card
-    ).value;
+    q('.au',card).value;
 
   beep();
-
   buzz();
 
 
@@ -2585,11 +2168,8 @@ function toggleSound(){
         soundOn?'On':'Off'
       }`;
 
-
   if(soundOn)
-    beep(
-      [0,100]
-    );
+    beep([0,100]);
 
 }
 
@@ -2612,11 +2192,8 @@ function toggleVibration(){
         vibrationOn?'On':'Off'
       }`;
 
-
   if(vibrationOn)
-    buzz(
-      [100]
-    );
+    buzz([100]);
 
 }
 
@@ -2753,7 +2330,6 @@ function openTimePicker(
   pickerTarget=
     targetId;
 
-
   let v=
     $(targetId).value;
 
@@ -2767,13 +2343,11 @@ function openTimePicker(
       )
       :m;
 
-
   let pad=
-    n=>
-      String(n).padStart(
-        2,
-        '0'
-      );
+    n=>String(n).padStart(
+      2,
+      '0'
+    );
 
 
   $('pickerDate').value=
@@ -2857,7 +2431,7 @@ function setPickedTime(){
     return;
 
 
-  let [
+  let[
     y,
     mo,
     da
@@ -2877,13 +2451,11 @@ function setPickedTime(){
   let sec=
     +$('pickerSecond').value;
 
-
   let pad=
-    n=>
-      String(n).padStart(
-        2,
-        '0'
-      );
+    n=>String(n).padStart(
+      2,
+      '0'
+    );
 
 
   $(pickerTarget).value=
@@ -3315,7 +2887,6 @@ $('soundBtn')
       soundOn?'On':'Off'
     }`;
 
-
 $('vibrateBtn')
   .textContent=
     `📳 Vibration: ${
@@ -3346,10 +2917,7 @@ setInterval(
   250
 );
 
-
 })();
-
 </script>
-
 </body>
 </html>
