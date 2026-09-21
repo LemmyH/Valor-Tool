@@ -9,248 +9,228 @@
 
 <style>
 :root{
-  --bg:#0b1020;
-  --card:#141b2f;
-  --muted:#9aa6bf;
-  --text:#f7f8fb;
-  --accent:#65d6a6;
-  --danger:#ff7373;
-  --line:#27314a
+--bg:#0b1020;
+--card:#141b2f;
+--muted:#9aa6bf;
+--text:#f7f8fb;
+--accent:#65d6a6;
+--danger:#ff7373;
+--line:#27314a
 }
 
 *{box-sizing:border-box}
 
 body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif
+margin:0;
+background:var(--bg);
+color:var(--text);
+font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif
 }
 
 main{
-  max-width:720px;
-  margin:auto;
-  padding:18px 14px 42px
+max-width:720px;
+margin:auto;
+padding:18px 14px 42px
 }
 
 h1{font-size:26px;margin:6px 0 4px}
 
 .sub{
-  color:var(--muted);
-  margin:0 0 18px
+color:var(--muted);
+margin:0 0 18px
 }
 
 .tabs{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-  margin-bottom:14px
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+margin-bottom:14px
 }
 
 button,.btn{
-  border:0;
-  border-radius:12px;
-  padding:13px 14px;
-  font-weight:700;
-  font-size:15px;
-  background:#202a43;
-  color:var(--text);
-  touch-action:manipulation;
-  cursor:pointer
+border:0;
+border-radius:12px;
+padding:13px 14px;
+font-weight:700;
+font-size:15px;
+background:#202a43;
+color:var(--text);
+touch-action:manipulation;
+cursor:pointer
 }
 
 button:active{transform:scale(.98)}
 
 button.active{
-  background:var(--accent);
-  color:#08130e
+background:var(--accent);
+color:#08130e
 }
 
 .card{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:16px;
-  padding:15px;
-  margin:12px 0
+background:var(--card);
+border:1px solid var(--line);
+border-radius:16px;
+padding:15px;
+margin:12px 0
 }
 
 .grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px
 }
 
 .field{margin:9px 0}
 
 .field label{
-  display:block;
-  color:var(--muted);
-  font-size:12px;
-  margin-bottom:5px
+display:block;
+color:var(--muted);
+font-size:12px;
+margin-bottom:5px
 }
 
 input,select{
-  width:100%;
-  padding:12px;
-  border-radius:10px;
-  border:1px solid var(--line);
-  background:#0f1629;
-  color:var(--text);
-  font-size:16px
+width:100%;
+padding:12px;
+border-radius:10px;
+border:1px solid var(--line);
+background:#0f1629;
+color:var(--text);
+font-size:16px
 }
 
-input[readonly]{
-  cursor:pointer
-}
+input[readonly]{cursor:pointer}
 
 .result{
-  text-align:center;
-  padding:18px
+text-align:center;
+padding:18px
 }
 
 .result .big{
-  font-size:32px;
-  font-weight:800;
-  color:var(--accent);
-  letter-spacing:.5px
+font-size:32px;
+font-weight:800;
+color:var(--accent);
+letter-spacing:.5px
 }
 
 .small{
-  font-size:12px;
-  color:var(--muted)
+font-size:12px;
+color:var(--muted)
 }
 
 .row{
-  display:flex;
-  gap:8px;
-  align-items:center;
-  justify-content:space-between
+display:flex;
+gap:8px;
+align-items:center;
+justify-content:space-between
 }
 
 .attack{
-  border-top:1px solid var(--line);
-  padding:12px 0
+border-top:1px solid var(--line);
+padding:12px 0
 }
 
 .launch{
-  font-size:20px;
-  font-weight:800;
-  color:var(--accent)
+font-size:20px;
+font-weight:800;
+color:var(--accent)
 }
 
 .danger{color:var(--danger)}
 
 .actions{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap
+display:flex;
+gap:8px;
+flex-wrap:wrap
 }
 
 .hidden{display:none!important}
 
 .unitrow{
-  display:grid;
-  grid-template-columns:1.2fr 1fr 1fr auto;
-  gap:7px;
-  align-items:end
+display:grid;
+grid-template-columns:1.2fr 1fr 1fr auto;
+gap:7px;
+align-items:end
 }
 
 @media(max-width:520px){
-  .unitrow{
-    grid-template-columns:1fr 1fr
-  }
-
-  .unitrow .remove{
-    grid-column:2
-  }
-
-  .grid{
-    grid-template-columns:1fr 1fr
-  }
+.unitrow{grid-template-columns:1fr 1fr}
+.unitrow .remove{grid-column:2}
+.grid{grid-template-columns:1fr 1fr}
 }
 
 .nextwave{
-  border:2px solid var(--accent);
-  box-shadow:0 0 0 2px #65d6a622
-}
-
-.nextbadge{
-  display:inline-block;
-  background:var(--accent);
-  color:#08130e;
-  border-radius:999px;
-  padding:4px 8px;
-  font-size:11px;
-  font-weight:800
+border:2px solid var(--accent);
+box-shadow:0 0 0 2px #65d6a622
 }
 
 .countbig{
-  font-size:38px;
-  font-weight:900;
-  color:var(--accent);
-  text-align:center
+font-size:38px;
+font-weight:900;
+color:var(--accent);
+text-align:center
 }
 
 .launched{
-  opacity:.42;
-  order:99
+opacity:.42;
+order:99
 }
 
 .cityselect{margin-top:8px}
 
 @media(max-width:520px){
-  .countbig{font-size:32px}
+.countbig{font-size:32px}
 }
 
 .modal{
-  position:fixed;
-  inset:0;
-  background:#000b;
-  display:flex;
-  align-items:flex-end;
-  justify-content:center;
-  z-index:20;
-  padding:12px
+position:fixed;
+inset:0;
+background:#000b;
+display:flex;
+align-items:flex-end;
+justify-content:center;
+z-index:20;
+padding:12px
 }
 
 .modalbox{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:15px;
-  width:min(720px,100%);
-  max-height:90vh;
-  overflow:auto
+background:var(--card);
+border:1px solid var(--line);
+border-radius:18px;
+padding:15px;
+width:min(720px,100%);
+max-height:90vh;
+overflow:auto
 }
 
 .managerrow{
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:11px;
-  margin:8px 0
+border:1px solid var(--line);
+border-radius:12px;
+padding:11px;
+margin:8px 0
 }
 
 .managerrow .actions{margin-top:8px}
 
 .alertnow{
-  animation:pulse .7s infinite alternate
+animation:pulse .7s infinite alternate
 }
 
 .timefield{
-  display:flex;
-  gap:8px
+display:flex;
+gap:8px
 }
 
 .timefield input{flex:1}
 
 .timepick{
-  min-width:110px;
-  touch-action:manipulation
+min-width:110px;
+touch-action:manipulation
 }
 
 @keyframes pulse{
-  from{transform:scale(1)}
-  to{transform:scale(1.03)}
+from{transform:scale(1)}
+to{transform:scale(1.03)}
 }
 </style>
 </head>
@@ -263,522 +243,564 @@ input[readonly]{
 <p class="sub">Launch-time calculator • World Speed 3 / Unit Speed 2</p>
 
 <div class="card" style="padding:10px 12px">
-  <div class="row">
-    <span>
-      <strong>🕐 Server Time</strong><br>
-      <span id="serverClock" class="small">—</span>
-    </span>
+<div class="row">
 
-    <span style="text-align:right">
-      <strong>📱 Your Time</strong><br>
-      <span id="localClock" class="small">—</span>
-    </span>
-  </div>
+<span>
+<strong>🕐 Server Time</strong><br>
+<span id="serverClock" class="small">—</span>
+</span>
+
+<span style="text-align:right">
+<strong>📱 Your Time</strong><br>
+<span id="localClock" class="small">—</span>
+</span>
+
+</div>
 </div>
 
 <div class="tabs">
-  <button id="singleTab" class="active" type="button">Single Attack</button>
-  <button id="syncTab" type="button">Synchronised</button>
+
+<button id="singleTab" class="active" type="button">
+Single Attack
+</button>
+
+<button id="syncTab" type="button">
+Synchronised
+</button>
+
 </div>
 
 <div class="card" style="padding:11px">
-  <div class="row">
-    <span>
-      <strong>Saved cities</strong><br>
-      <span class="small">Store your common launch cities on this device.</span>
-    </span>
 
-    <button id="cityManageBtn" type="button">Manage</button>
-  </div>
+<div class="row">
+
+<span>
+<strong>Saved cities</strong><br>
+<span class="small">
+Store your common launch cities on this device.
+</span>
+</span>
+
+<button id="cityManageBtn" type="button">
+Manage
+</button>
+
+</div>
 </div>
 
 <div id="cityModal" class="modal hidden">
-  <div class="modalbox">
 
-    <div class="row">
-      <h2 style="margin:0">Saved Cities</h2>
-      <button id="cityCloseBtn" type="button">✕</button>
-    </div>
+<div class="modalbox">
 
-    <div id="cityList"></div>
+<div class="row">
+<h2 style="margin:0">Saved Cities</h2>
+<button id="cityCloseBtn" type="button">✕</button>
+</div>
 
-    <div class="card" style="margin:12px 0 0">
+<div id="cityList"></div>
 
-      <div class="field">
-        <label>City name</label>
-        <input id="newCityName" placeholder="Main City">
-      </div>
+<div class="card" style="margin:12px 0 0">
 
-      <div class="grid">
+<div class="field">
+<label>City name</label>
+<input id="newCityName" placeholder="Main City">
+</div>
 
-        <div class="field">
-          <label>X</label>
-          <input id="newCityX" type="number" placeholder="240">
-        </div>
+<div class="grid">
 
-        <div class="field">
-          <label>Y</label>
-          <input id="newCityY" type="number" placeholder="261">
-        </div>
+<div class="field">
+<label>X</label>
+<input id="newCityX" type="text" inputmode="numeric" placeholder="240">
+</div>
 
-      </div>
+<div class="field">
+<label>Y</label>
+<input id="newCityY" type="text" inputmode="numeric" placeholder="261">
+</div>
 
-      <button id="saveCityBtn" type="button" style="width:100%">
-        + Save city
-      </button>
+</div>
 
-    </div>
+<button id="saveCityBtn" type="button" style="width:100%">
++ Save city
+</button>
 
-  </div>
+</div>
+
+</div>
 </div>
 
 <div class="card" id="planTools">
 
-  <div class="row">
+<div class="row">
 
-    <span>
-      <strong>Battle Plans</strong><br>
-      <span class="small">
-        Save a target, arrival time and wave setup for reuse.
-      </span>
-    </span>
+<span>
+<strong>Battle Plans</strong><br>
+<span class="small">
+Save a target, arrival time and wave setup for reuse.
+</span>
+</span>
 
-    <div class="actions">
-      <button id="savePlanBtn" type="button">Save plan</button>
-      <button id="planManageBtn" type="button">Manage</button>
-    </div>
+<div class="actions">
+<button id="savePlanBtn" type="button">Save plan</button>
+<button id="planManageBtn" type="button">Manage</button>
+</div>
 
-  </div>
+</div>
 
-  <select id="planSelect" class="cityselect">
-    <option value="">Load a saved plan…</option>
-  </select>
+<select id="planSelect" class="cityselect">
+<option value="">Load a saved plan…</option>
+</select>
 
 </div>
 
 <div id="planModal" class="modal hidden">
 
-  <div class="modalbox">
+<div class="modalbox">
 
-    <div class="row">
-      <h2 style="margin:0">Battle Plans</h2>
-      <button id="planCloseBtn" type="button">✕</button>
-    </div>
+<div class="row">
+<h2 style="margin:0">Battle Plans</h2>
+<button id="planCloseBtn" type="button">✕</button>
+</div>
 
-    <div id="planList"></div>
-
-  </div>
+<div id="planList"></div>
 
 </div>
+</div>
+
+
+<!-- SINGLE ATTACK -->
 
 <section id="single">
 
-  <div class="card">
+<div class="card">
 
-    <div class="grid">
+<div class="grid">
 
-      <div class="field">
-        <label>From X</label>
-        <input id="sx" type="number" value="240">
-      </div>
+<div class="field">
+<label>From X</label>
+<input id="sx" type="text" inputmode="numeric" value="240">
+</div>
 
-      <div class="field">
-        <label>From Y</label>
-        <input id="sy" type="number" value="261">
-      </div>
+<div class="field">
+<label>From Y</label>
+<input id="sy" type="text" inputmode="numeric" value="261">
+</div>
 
-      <div class="field">
-        <label>Target X</label>
-        <input id="tx" type="number" value="252">
-      </div>
+<div class="field">
+<label>Target X</label>
+<input id="tx" type="text" inputmode="numeric" value="252">
+</div>
 
-      <div class="field">
-        <label>Target Y</label>
-        <input id="ty" type="number" value="262">
-      </div>
+<div class="field">
+<label>Target Y</label>
+<input id="ty" type="text" inputmode="numeric" value="262">
+</div>
 
-    </div>
+</div>
 
-    <div class="field">
-      <label>Troop</label>
-      <select id="su"></select>
-    </div>
+<div class="field">
+<label>Troop</label>
+<select id="su"></select>
+</div>
 
-    <div class="field">
+<div class="field">
 
-      <label>Desired arrival (Server Time)</label>
+<label>Desired arrival (Server Time)</label>
 
-      <div class="timefield">
+<div class="timefield">
 
-        <input
-          id="arrival"
-          type="text"
-          readonly
-          placeholder="YYYY-MM-DD HH:mm:ss"
-        >
+<input
+id="arrival"
+type="text"
+readonly
+placeholder="YYYY-MM-DD HH:mm:ss"
+>
 
-        <button
-          id="arrivalPickBtn"
-          class="timepick"
-          type="button"
-        >
-          🕐 Pick time
-        </button>
+<button
+id="arrivalPickBtn"
+class="timepick"
+type="button"
+>
+🕐 Pick time
+</button>
 
-      </div>
+</div>
+</div>
 
-    </div>
+</div>
 
-  </div>
 
-  <div class="card result">
+<div class="card result">
 
-    <div class="small">LAUNCH AT • SERVER TIME</div>
+<div class="small">
+LAUNCH AT • SERVER TIME
+</div>
 
-    <div id="singleResult" class="big">—</div>
+<div id="singleResult" class="big">—</div>
 
-    <div id="singleLocal" class="small"></div>
+<div id="singleLocal" class="small"></div>
 
-    <div id="singleTravel" class="small"></div>
+<div id="singleTravel" class="small"></div>
 
-    <div class="actions" style="justify-content:center;margin-top:12px">
+<div class="actions" style="justify-content:center;margin-top:12px">
 
-      <button id="copySingleBtn" type="button">
-        Copy launch time
-      </button>
+<button id="copySingleBtn" type="button">
+Copy launch time
+</button>
 
-      <button id="singleCountdownBtn" type="button">
-        Start countdown
-      </button>
+<button id="singleCountdownBtn" type="button">
+Start countdown
+</button>
 
-    </div>
+</div>
 
-    <div
-      id="singleCountdown"
-      class="small"
-      style="margin-top:10px"
-    ></div>
+<div
+id="singleCountdown"
+class="small"
+style="margin-top:10px"
+></div>
 
-  </div>
+</div>
 
 </section>
+
+
+<!-- SYNCHRONISED -->
 
 <section id="sync" class="hidden">
 
-  <div class="card">
+<div class="card">
 
-    <div class="grid">
+<div class="grid">
 
-      <div class="field">
-        <label>Target X</label>
-        <input id="stx" type="number" value="300">
-      </div>
+<div class="field">
+<label>Target X</label>
+<input id="stx" type="text" inputmode="numeric" value="300">
+</div>
 
-      <div class="field">
-        <label>Target Y</label>
-        <input id="sty" type="number" value="400">
-      </div>
+<div class="field">
+<label>Target Y</label>
+<input id="sty" type="text" inputmode="numeric" value="400">
+</div>
 
-      <div class="field">
+<div class="field">
 
-        <label>Arrival (Server Time)</label>
+<label>Arrival (Server Time)</label>
 
-        <div class="timefield">
+<div class="timefield">
 
-          <input
-            id="sarrival"
-            type="text"
-            readonly
-            placeholder="YYYY-MM-DD HH:mm:ss"
-          >
+<input
+id="sarrival"
+type="text"
+readonly
+placeholder="YYYY-MM-DD HH:mm:ss"
+>
 
-          <button
-            id="sarrivalPickBtn"
-            class="timepick"
-            type="button"
-          >
-            🕐 Pick time
-          </button>
+<button
+id="sarrivalPickBtn"
+class="timepick"
+type="button"
+>
+🕐 Pick time
+</button>
 
-        </div>
+</div>
+</div>
 
-      </div>
+<div class="field">
 
-      <div class="field">
-        <label>Safety offset (seconds)</label>
-        <input id="offset" type="number" value="0">
-      </div>
+<label>Safety offset (seconds)</label>
 
-    </div>
+<input
+id="offset"
+type="text"
+inputmode="numeric"
+value="0"
+>
 
-  </div>
+</div>
 
-  <div class="card" id="syncDashboard">
+</div>
+</div>
 
-    <div class="small">NEXT ATTACK TO SEND</div>
 
-    <div id="nextAttack" class="countbig">—</div>
+<div class="card" id="syncDashboard">
 
-    <div
-      id="nextDetails"
-      class="small"
-      style="text-align:center"
-    >
-      Calculate your waves to begin.
-    </div>
+<div class="small">
+NEXT ATTACK TO SEND
+</div>
 
-    <div
-      class="actions"
-      style="justify-content:center;margin-top:10px"
-    >
+<div id="nextAttack" class="countbig">
+—
+</div>
 
-      <button id="sendNextBtn" type="button">
-        ✓ Mark next launched
-      </button>
+<div
+id="nextDetails"
+class="small"
+style="text-align:center"
+>
+Calculate your waves to begin.
+</div>
 
-      <button id="wakeBtn" type="button">
-        ☀️ Keep awake
-      </button>
+<div
+class="actions"
+style="justify-content:center;margin-top:10px"
+>
 
-      <button id="sortBtn" type="button">
-        ↕ Sort by launch
-      </button>
+<button id="sendNextBtn" type="button">
+✓ Mark next launched
+</button>
 
-    </div>
+<button id="wakeBtn" type="button">
+☀️ Keep awake
+</button>
 
-  </div>
+<button id="sortBtn" type="button">
+↕ Sort by launch
+</button>
 
-  <div id="attacks"></div>
+</div>
 
-  <div class="actions">
+</div>
 
-    <button id="addAttackBtn" type="button">
-      + Add attack
-    </button>
+<div id="attacks"></div>
 
-    <button id="calculateSyncBtn" type="button">
-      Calculate all
-    </button>
+<div class="actions">
 
-    <button id="startSyncBtn" type="button">
-      Start countdowns
-    </button>
+<button id="addAttackBtn" type="button">
++ Add attack
+</button>
 
-    <button id="battleStartBtn" type="button">
-      🔥 Battle Start
-    </button>
+<button id="calculateSyncBtn" type="button">
+Calculate all
+</button>
 
-  </div>
+<button id="startSyncBtn" type="button">
+Start countdowns
+</button>
 
-  <div class="card" style="margin-top:12px">
+<button id="battleStartBtn" type="button">
+🔥 Battle Start
+</button>
 
-    <div class="row">
+</div>
 
-      <span>
-        <strong>Launch alerts</strong><br>
-        <span class="small">
-          Alerts work while this page/app is open.
-          Keep the screen awake for best reliability.
-        </span>
-      </span>
 
-      <button id="alertBtn" type="button">
-        Enable
-      </button>
+<div class="card" style="margin-top:12px">
 
-    </div>
+<div class="row">
 
-    <div class="actions" style="margin-top:9px">
+<span>
+<strong>Launch alerts</strong><br>
 
-      <button id="soundBtn" type="button">
-        🔊 Sound: On
-      </button>
+<span class="small">
+Alerts work while this page/app is open.
+Keep the screen awake for best reliability.
+</span>
 
-      <button id="vibrateBtn" type="button">
-        📳 Vibration: On
-      </button>
+</span>
 
-    </div>
+<button id="alertBtn" type="button">
+Enable
+</button>
 
-    <div
-      id="alertStatus"
-      class="small"
-      style="margin-top:8px"
-    ></div>
+</div>
 
-  </div>
+<div class="actions" style="margin-top:9px">
 
-  <div
-    id="syncStatus"
-    class="small"
-    style="margin-top:10px"
-  ></div>
+<button id="soundBtn" type="button">
+🔊 Sound: On
+</button>
+
+<button id="vibrateBtn" type="button">
+📳 Vibration: On
+</button>
+
+</div>
+
+<div
+id="alertStatus"
+class="small"
+style="margin-top:8px"
+></div>
+
+</div>
+
+<div
+id="syncStatus"
+class="small"
+style="margin-top:10px"
+></div>
 
 </section>
 
+
 <div class="card small">
 
-  <strong>Movement data</strong><br>
+<strong>Movement data</strong><br>
 
-  Scouts 0:40/tile • Knights 1:00 • Guardians 1:10 •
-  Berserkers 1:50 • Lancers 2:00 • Sentries 2:10 •
-  Rams 3:20 • Ballistas 3:20 • Scholars 4:10
+Scouts 0:40/tile • Knights 1:00 • Guardians 1:10 •
+Berserkers 1:50 • Lancers 2:00 • Sentries 2:10 •
+Rams 3:20 • Ballistas 3:20 • Scholars 4:10
 
-  <br><br>
+<br><br>
 
-  Distance uses straight-line coordinates:
-  √(ΔX² + ΔY²).
+Distance uses straight-line coordinates:
+√(ΔX² + ΔY²).
 
-  Times are based on measurements supplied in-game.
+Times are based on measurements supplied in-game.
 
 </div>
+
 
 <!-- TIME PICKER -->
 
 <div
-  id="timePickerModal"
-  class="modal hidden"
-  style="align-items:center"
+id="timePickerModal"
+class="modal hidden"
+style="align-items:center"
 >
 
-  <div class="modalbox">
+<div class="modalbox">
 
-    <div class="row">
+<div class="row">
 
-      <h2 style="margin:0">
-        Choose Arrival Time
-      </h2>
+<h2 style="margin:0">
+Choose Arrival Time
+</h2>
 
-      <button
-        id="timePickerClose"
-        type="button"
-      >
-        ✕
-      </button>
-
-    </div>
-
-    <p
-      class="small"
-      style="margin:8px 0 12px"
-    >
-      Select the date and server time for the arrival.
-    </p>
-
-    <div class="field">
-
-      <label>Date (Server Time)</label>
-
-      <input
-        id="pickerDate"
-        type="date"
-      >
-
-    </div>
-
-    <div class="grid">
-
-      <div class="field">
-        <label>Hour</label>
-        <select id="pickerHour"></select>
-      </div>
-
-      <div class="field">
-        <label>Minute</label>
-        <select id="pickerMinute"></select>
-      </div>
-
-      <div class="field">
-        <label>Second</label>
-        <select id="pickerSecond"></select>
-      </div>
-
-    </div>
-
-    <div
-      class="actions"
-      style="justify-content:flex-end;margin-top:10px"
-    >
-
-      <button
-        id="timePickerCancel"
-        type="button"
-      >
-        Cancel
-      </button>
-
-      <button
-        id="timePickerSet"
-        type="button"
-        class="active"
-      >
-        ✓ Set arrival
-      </button>
-
-    </div>
-
-  </div>
+<button
+id="timePickerClose"
+type="button"
+>
+✕
+</button>
 
 </div>
+
+<p
+class="small"
+style="margin:8px 0 12px"
+>
+Select the date and server time for the arrival.
+</p>
+
+<div class="field">
+
+<label>Date (Server Time)</label>
+
+<input
+id="pickerDate"
+type="date"
+>
+
+</div>
+
+<div class="grid">
+
+<div class="field">
+<label>Hour</label>
+<select id="pickerHour"></select>
+</div>
+
+<div class="field">
+<label>Minute</label>
+<select id="pickerMinute"></select>
+</div>
+
+<div class="field">
+<label>Second</label>
+<select id="pickerSecond"></select>
+</div>
+
+</div>
+
+<div
+class="actions"
+style="justify-content:flex-end;margin-top:10px"
+>
+
+<button
+id="timePickerCancel"
+type="button"
+>
+Cancel
+</button>
+
+<button
+id="timePickerSet"
+type="button"
+class="active"
+>
+✓ Set arrival
+</button>
+
+</div>
+
+</div>
+</div>
+
 
 <!-- BATTLE OVERLAY -->
 
 <div
-  id="battleOverlay"
-  class="modal hidden"
-  style="align-items:center"
+id="battleOverlay"
+class="modal hidden"
+style="align-items:center"
 >
 
-  <div
-    class="modalbox"
-    style="text-align:center"
-  >
+<div
+class="modalbox"
+style="text-align:center"
+>
 
-    <div class="small">BATTLE CONTROL</div>
+<div class="small">
+BATTLE CONTROL
+</div>
 
-    <h2 style="margin:6px 0">
-      Next wave
-    </h2>
+<h2 style="margin:6px 0">
+Next wave
+</h2>
 
-    <div
-      id="battleCountdown"
-      class="countbig"
-    >
-      —
-    </div>
+<div
+id="battleCountdown"
+class="countbig"
+>
+—
+</div>
 
-    <div
-      id="battleDetails"
-      style="font-size:15px;margin:8px 0 14px"
-    >
-      —
-    </div>
+<div
+id="battleDetails"
+style="font-size:15px;margin:8px 0 14px"
+>
+—
+</div>
 
-    <div
-      class="actions"
-      style="justify-content:center"
-    >
+<div
+class="actions"
+style="justify-content:center"
+>
 
-      <button
-        id="battleLaunchBtn"
-        type="button"
-        class="active"
-      >
-        ✓ Mark launched
-      </button>
+<button
+id="battleLaunchBtn"
+type="button"
+class="active"
+>
+✓ Mark launched
+</button>
 
-      <button
-        id="battleExitBtn"
-        type="button"
-      >
-        Close
-      </button>
-
-    </div>
-
-  </div>
+<button
+id="battleExitBtn"
+type="button"
+>
+Close
+</button>
 
 </div>
+
+</div>
+</div>
+
 
 <script>
 
@@ -786,277 +808,313 @@ input[readonly]{
 
 const $ = id => document.getElementById(id);
 
+
 /*
 ====================================================
-SAMSUNG / ANDROID PICK-TIME TAP FIX
-====================================================
-This is deliberately attached immediately so the
-Pick time buttons do not depend only on the normal
-wire-up routine.
+SAMSUNG PICK-TIME TAP FIX
 ====================================================
 */
 
-document.addEventListener('click', function(e){
+document.addEventListener('click',function(e){
 
-  const button = e.target.closest(
-    '#arrivalPickBtn, #sarrivalPickBtn'
-  );
+const button=e.target.closest(
+'#arrivalPickBtn,#sarrivalPickBtn'
+);
 
-  if(!button) return;
+if(!button)return;
 
-  if(button.id === 'arrivalPickBtn'){
-    openTimePicker('arrival');
-  }
+if(button.id==='arrivalPickBtn'){
+openTimePicker('arrival');
+}
 
-  if(button.id === 'sarrivalPickBtn'){
-    openTimePicker('sarrival');
-  }
+if(button.id==='sarrivalPickBtn'){
+openTimePicker('sarrival');
+}
 
 });
 
 
-const units = {
-  Scouts:40,
-  Knights:60,
-  Guardians:70,
-  Berserkers:110,
-  Lancers:120,
-  Sentries:130,
-  Rams:200,
-  Ballistas:200,
-  Scholars:250
+const units={
+Scouts:40,
+Knights:60,
+Guardians:70,
+Berserkers:110,
+Lancers:120,
+Sentries:130,
+Rams:200,
+Ballistas:200,
+Scholars:250
 };
 
-let singleTimer = null;
-let syncTimer = null;
-let battleTimer = null;
-let wakeLock = null;
+let singleTimer=null;
+let syncTimer=null;
+let battleTimer=null;
+let wakeLock=null;
+let soundOn=true;
+let vibrationOn=true;
+let audioCtx=null;
+let lastAlertKey=null;
 
-let soundOn = true;
-let vibrationOn = true;
-let audioCtx = null;
-let lastAlertKey = null;
 
 function pad(n){
-  return String(n).padStart(2,'0');
+return String(n).padStart(2,'0');
 }
+
 
 function fmt(sec){
 
-  sec = Math.max(0,Math.ceil(sec));
+sec=Math.max(0,Math.ceil(sec));
 
-  let h = Math.floor(sec/3600);
-  let m = Math.floor((sec%3600)/60);
-  let s = sec%60;
+let h=Math.floor(sec/3600);
+let m=Math.floor((sec%3600)/60);
+let s=sec%60;
 
-  return `${pad(h)}:${pad(m)}:${pad(s)}`;
+return `${pad(h)}:${pad(m)}:${pad(s)}`;
 }
+
 
 function dist(x1,y1,x2,y2){
 
-  return Math.sqrt(
-    (x2-x1)**2 +
-    (y2-y1)**2
-  );
+return Math.sqrt(
+(x2-x1)**2+
+(y2-y1)**2
+);
+
 }
+
 
 function serverValue(d){
 
-  return new Intl.DateTimeFormat('en-GB',{
-    timeZone:'UTC',
-    year:'2-digit',
-    month:'2-digit',
-    day:'2-digit',
-    hour:'2-digit',
-    minute:'2-digit',
-    second:'2-digit',
-    hour12:false
-  }).format(d);
+return new Intl.DateTimeFormat('en-GB',{
+timeZone:'UTC',
+year:'2-digit',
+month:'2-digit',
+day:'2-digit',
+hour:'2-digit',
+minute:'2-digit',
+second:'2-digit',
+hour12:false
+}).format(d);
+
 }
+
 
 function dtValue(d){
 
-  return new Intl.DateTimeFormat(undefined,{
-    year:'numeric',
-    month:'2-digit',
-    day:'2-digit',
-    hour:'2-digit',
-    minute:'2-digit',
-    second:'2-digit',
-    hour12:false
-  }).format(d);
+return new Intl.DateTimeFormat(undefined,{
+year:'numeric',
+month:'2-digit',
+day:'2-digit',
+hour:'2-digit',
+minute:'2-digit',
+second:'2-digit',
+hour12:false
+}).format(d);
+
 }
+
 
 function parseServerInput(v){
 
-  if(!v) return NaN;
+if(!v)return NaN;
 
-  let m = v.match(
-    /^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})(?::(\d{2}))?/
-  );
+let m=v.match(
+/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})(?::(\d{2}))?/
+);
 
-  if(!m) return NaN;
+if(!m)return NaN;
 
-  return Date.UTC(
-    +m[1],
-    +m[2]-1,
-    +m[3],
-    +m[4],
-    +m[5],
-    +(m[6] || 0)
-  );
+return Date.UTC(
++m[1],
++m[2]-1,
++m[3],
++m[4],
++m[5],
++(m[6]||0)
+);
+
 }
+
 
 function localInputNow(el,mins=60){
 
-  let d = new Date(
-    Date.now() + mins*60000
-  );
+let d=new Date(
+Date.now()+mins*60000
+);
 
-  d.setSeconds(0,0);
+d.setSeconds(0,0);
 
-  el.value =
-    `${d.getUTCFullYear()}-`+
-    `${pad(d.getUTCMonth()+1)}-`+
-    `${pad(d.getUTCDate())} `+
-    `${pad(d.getUTCHours())}:`+
-    `${pad(d.getUTCMinutes())}:00`;
+el.value=
+`${d.getUTCFullYear()}-`+
+`${pad(d.getUTCMonth()+1)}-`+
+`${pad(d.getUTCDate())} `+
+`${pad(d.getUTCHours())}:`+
+`${pad(d.getUTCMinutes())}:00`;
+
 }
+
 
 function populate(sel){
 
-  sel.innerHTML =
-    Object.keys(units)
-      .map(u =>
-        `<option value="${u}">${u}</option>`
-      )
-      .join('');
+sel.innerHTML=
+Object.keys(units)
+.map(u=>
+`<option value="${u}">${u}</option>`
+)
+.join('');
+
 }
+
 
 function showMode(mode){
 
-  document
-    .getElementById('single')
-    .classList
-    .toggle('hidden',mode!=='single');
+document.getElementById('single')
+.classList
+.toggle('hidden',mode!=='single');
 
-  document
-    .getElementById('sync')
-    .classList
-    .toggle('hidden',mode!=='sync');
+document.getElementById('sync')
+.classList
+.toggle('hidden',mode!=='sync');
 
-  document
-    .getElementById('singleTab')
-    .classList
-    .toggle('active',mode==='single');
+document.getElementById('singleTab')
+.classList
+.toggle('active',mode==='single');
 
-  document
-    .getElementById('syncTab')
-    .classList
-    .toggle('active',mode==='sync');
+document.getElementById('syncTab')
+.classList
+.toggle('active',mode==='sync');
+
 }
+
+
+/* SINGLE ATTACK */
 
 function calcSingle(){
 
-  let x1 = +document.getElementById('sx').value;
-  let y1 = +document.getElementById('sy').value;
+let x1=+document.getElementById('sx').value;
+let y1=+document.getElementById('sy').value;
+let x2=+document.getElementById('tx').value;
+let y2=+document.getElementById('ty').value;
 
-  let x2 = +document.getElementById('tx').value;
-  let y2 = +document.getElementById('ty').value;
+let u=document.getElementById('su').value;
 
-  let u = document.getElementById('su').value;
+let a=parseServerInput(
+document.getElementById('arrival').value
+);
 
-  let a = parseServerInput(
-    document.getElementById('arrival').value
-  );
+if(isNaN(a)){
 
-  if(isNaN(a)){
+document.getElementById(
+'singleResult'
+).textContent='—';
 
-    document.getElementById('singleResult').textContent='—';
-    document.getElementById('singleLocal').textContent='';
-    document.getElementById('singleTravel').textContent='';
+document.getElementById(
+'singleLocal'
+).textContent='';
 
-    return;
-  }
+document.getElementById(
+'singleTravel'
+).textContent='';
 
-  let d = dist(x1,y1,x2,y2);
-  let travel = d*units[u];
-
-  let launch =
-    new Date(a-travel*1000);
-
-  document.getElementById('singleResult').textContent =
-    serverValue(launch);
-
-  document.getElementById('singleLocal').textContent =
-    `Your local launch: ${dtValue(launch)}`;
-
-  document.getElementById('singleTravel').textContent =
-    `Distance ${d.toFixed(3)} tiles • Travel ${fmt(travel)}`;
-
-  document.getElementById('singleResult').dataset.launch =
-    launch.toISOString();
+return;
 }
+
+let d=dist(x1,y1,x2,y2);
+
+let travel=d*units[u];
+
+let launch=
+new Date(
+a-travel*1000
+);
+
+document.getElementById(
+'singleResult'
+).textContent=
+serverValue(launch);
+
+document.getElementById(
+'singleLocal'
+).textContent=
+`Your local launch: ${dtValue(launch)}`;
+
+document.getElementById(
+'singleTravel'
+).textContent=
+`Distance ${d.toFixed(3)} tiles • Travel ${fmt(travel)}`;
+
+document.getElementById(
+'singleResult'
+).dataset.launch=
+launch.toISOString();
+
+}
+
 
 function startSingleCountdown(){
 
-  calcSingle();
+calcSingle();
 
-  if(singleTimer)
-    clearInterval(singleTimer);
+if(singleTimer)
+clearInterval(singleTimer);
 
-  singleTimer =
-    setInterval(() => {
+singleTimer=setInterval(()=>{
 
-      let iso =
-        document.getElementById(
-          'singleResult'
-        ).dataset.launch;
+let iso=
+document.getElementById(
+'singleResult'
+).dataset.launch;
 
-      if(!iso) return;
+if(!iso)return;
 
-      let d = new Date(iso);
+let d=new Date(iso);
 
-      let s =
-        Math.ceil(
-          (d-Date.now())/1000
-        );
+let s=Math.ceil(
+(d-Date.now())/1000
+);
 
-      document.getElementById(
-        'singleCountdown'
-      ).textContent =
-        s>0
-          ? `Launch countdown: ${fmt(s)}`
-          : 'SEND NOW';
+document.getElementById(
+'singleCountdown'
+).textContent=
+s>0
+?`Launch countdown: ${fmt(s)}`
+:'SEND NOW';
 
-    },250);
+},250);
+
 }
+
 
 function copySingle(){
 
-  let v =
-    document.getElementById(
-      'singleResult'
-    ).textContent;
+let v=
+document.getElementById(
+'singleResult'
+).textContent;
 
-  if(v && v!=='—'){
-    navigator.clipboard?.writeText(v);
-  }
+if(v&&v!=='—'){
+navigator.clipboard?.writeText(v);
 }
+
+}
+
+
+/* CLOCKS */
 
 function updateClocks(){
 
-  let d = new Date();
+let d=new Date();
 
-  document.getElementById(
-    'serverClock'
-  ).textContent =
-    serverValue(d);
+document.getElementById(
+'serverClock'
+).textContent=
+serverValue(d);
 
-  document.getElementById(
-    'localClock'
-  ).textContent =
-    dtValue(d);
+document.getElementById(
+'localClock'
+).textContent=
+dtValue(d);
+
 }
 
 
@@ -1064,182 +1122,203 @@ function updateClocks(){
 
 function getCities(){
 
-  try{
-    return JSON.parse(
-      localStorage.getItem('valorCities') || '[]'
-    );
-  }catch(e){
-    return [];
-  }
+try{
+
+return JSON.parse(
+localStorage.getItem(
+'valorCities'
+)||'[]'
+);
+
+}catch(e){
+
+return[];
+
 }
+
+}
+
 
 function saveCities(a){
 
-  localStorage.setItem(
-    'valorCities',
-    JSON.stringify(a)
-  );
+localStorage.setItem(
+'valorCities',
+JSON.stringify(a)
+);
+
 }
+
 
 function renderCities(){
 
-  let a = getCities();
+let a=getCities();
 
-  document.getElementById(
-    'cityList'
-  ).innerHTML =
-    a.length
-      ? a.map((c,i)=>`
+document.getElementById(
+'cityList'
+).innerHTML=
+a.length
+?a.map((c,i)=>`
 
 <div class="managerrow">
 
-  <div class="row">
-    <strong>${c.name}</strong>
-    <span class="small">${c.x}|${c.y}</span>
-  </div>
+<div class="row">
+<strong>${c.name}</strong>
+<span class="small">${c.x}|${c.y}</span>
+</div>
 
-  <div class="actions">
+<div class="actions">
 
-    <button
-      type="button"
-      data-city-edit="${i}"
-    >
-      Edit
-    </button>
+<button
+type="button"
+data-city-edit="${i}"
+>
+Edit
+</button>
 
-    <button
-      type="button"
-      data-city-delete="${i}"
-    >
-      Delete
-    </button>
+<button
+type="button"
+data-city-delete="${i}"
+>
+Delete
+</button>
 
-  </div>
+</div>
 
 </div>
 
 `).join('')
+:'<div class="small" style="padding:10px 0">No saved cities yet.</div>';
 
-      : '<div class="small" style="padding:10px 0">No saved cities yet.</div>';
 }
+
 
 function openCityManager(){
 
-  renderCities();
+renderCities();
 
-  document
-    .getElementById('cityModal')
-    .classList
-    .remove('hidden');
+document.getElementById(
+'cityModal'
+).classList.remove('hidden');
+
 }
+
 
 function closeCityManager(){
 
-  document
-    .getElementById('cityModal')
-    .classList
-    .add('hidden');
+document.getElementById(
+'cityModal'
+).classList.add('hidden');
+
 }
+
 
 function addSavedCity(){
 
-  let name =
-    document.getElementById(
-      'newCityName'
-    ).value.trim();
+let name=
+document.getElementById(
+'newCityName'
+).value.trim();
 
-  let x =
-    +document.getElementById(
-      'newCityX'
-    ).value;
+let x=
++document.getElementById(
+'newCityX'
+).value;
 
-  let y =
-    +document.getElementById(
-      'newCityY'
-    ).value;
+let y=
++document.getElementById(
+'newCityY'
+).value;
 
-  if(
-    !name ||
-    Number.isNaN(x) ||
-    Number.isNaN(y)
-  ) return;
+if(!name||Number.isNaN(x)||Number.isNaN(y))
+return;
 
-  let a = getCities();
+let a=getCities();
 
-  a.push({
-    name,
-    x,
-    y
-  });
+a.push({
+name,
+x,
+y
+});
 
-  saveCities(a);
+saveCities(a);
 
-  document.getElementById(
-    'newCityName'
-  ).value='';
+document.getElementById(
+'newCityName'
+).value='';
 
-  document.getElementById(
-    'newCityX'
-  ).value='';
+document.getElementById(
+'newCityX'
+).value='';
 
-  document.getElementById(
-    'newCityY'
-  ).value='';
+document.getElementById(
+'newCityY'
+).value='';
 
-  renderCities();
-  refreshCitySelectors();
+renderCities();
+
+refreshCitySelectors();
+
 }
+
 
 function editSavedCity(i){
 
-  let a = getCities();
-  let c = a[i];
+let a=getCities();
+let c=a[i];
 
-  if(!c) return;
+if(!c)return;
 
-  let name =
-    prompt('City name',c.name);
+let name=
+prompt('City name',c.name);
 
-  if(name===null) return;
+if(name===null)return;
 
-  let x =
-    prompt('X coordinate',c.x);
+let x=
+prompt('X coordinate',c.x);
 
-  if(x===null) return;
+if(x===null)return;
 
-  let y =
-    prompt('Y coordinate',c.y);
+let y=
+prompt('Y coordinate',c.y);
 
-  if(y===null) return;
+if(y===null)return;
 
-  a[i]={
-    name:name.trim() || c.name,
-    x:+x,
-    y:+y
-  };
+a[i]={
+name:name.trim()||c.name,
+x:+x,
+y:+y
+};
 
-  saveCities(a);
-  renderCities();
-  refreshCitySelectors();
+saveCities(a);
+
+renderCities();
+
+refreshCitySelectors();
+
 }
+
 
 function deleteSavedCity(i){
 
-  let a = getCities();
-  let c = a[i];
+let a=getCities();
+let c=a[i];
 
-  if(!c) return;
+if(!c)return;
 
-  if(confirm(`Delete ${c.name}?`)){
+if(confirm(`Delete ${c.name}?`)){
 
-    a.splice(i,1);
+a.splice(i,1);
 
-    saveCities(a);
+saveCities(a);
 
-    renderCities();
-    refreshCitySelectors();
-  }
+renderCities();
+
+refreshCitySelectors();
+
 }
+
+}
+
 
 function refreshCitySelectors(){}
 
@@ -1248,286 +1327,317 @@ function refreshCitySelectors(){}
 
 function getPlans(){
 
-  try{
-    return JSON.parse(
-      localStorage.getItem('valorPlans') || '[]'
-    );
-  }catch(e){
-    return [];
-  }
+try{
+
+return JSON.parse(
+localStorage.getItem(
+'valorPlans'
+)||'[]'
+);
+
+}catch(e){
+
+return[];
+
 }
+
+}
+
 
 function savePlans(a){
 
-  localStorage.setItem(
-    'valorPlans',
-    JSON.stringify(a)
-  );
+localStorage.setItem(
+'valorPlans',
+JSON.stringify(a)
+);
+
 }
+
 
 function refreshPlans(){
 
-  let a = getPlans();
+let a=getPlans();
 
-  document.getElementById(
-    'planSelect'
-  ).innerHTML =
-    '<option value="">Load a saved plan…</option>' +
-    a.map((p,i)=>
-      `<option value="${i}">${p.name}</option>`
-    ).join('');
+document.getElementById(
+'planSelect'
+).innerHTML=
+'<option value="">Load a saved plan…</option>'+
+a.map((p,i)=>
+`<option value="${i}">${p.name}</option>`
+).join('');
+
 }
+
 
 function saveCurrentPlan(){
 
-  let name =
-    prompt('Battle plan name');
+let name=
+prompt('Battle plan name');
 
-  if(!name) return;
+if(!name)return;
 
-  let a = getPlans();
+let a=getPlans();
 
-  a.push({
+a.push({
 
-    name:name.trim(),
+name:name.trim(),
 
-    targetX:
-      +document.getElementById(
-        'stx'
-      ).value,
+targetX:
++document.getElementById(
+'stx'
+).value,
 
-    targetY:
-      +document.getElementById(
-        'sty'
-      ).value,
+targetY:
++document.getElementById(
+'sty'
+).value,
 
-    arrival:
-      document.getElementById(
-        'sarrival'
-      ).value,
+arrival:
+document.getElementById(
+'sarrival'
+).value,
 
-    offset:
-      +document.getElementById(
-        'offset'
-      ).value || 0,
+offset:
++document.getElementById(
+'offset'
+).value||0,
 
-    attacks:
-      Array.from(
-        document.querySelectorAll('.attack')
-      ).map(c=>({
+attacks:
+Array.from(
+document.querySelectorAll('.attack')
+).map(c=>({
 
-        x:+c.querySelector('.ax').value,
+x:+c.querySelector('.ax').value,
 
-        y:+c.querySelector('.ay').value,
+y:+c.querySelector('.ay').value,
 
-        unit:
-          c.querySelector('.au').value
+unit:
+c.querySelector('.au').value
 
-      }))
+}))
 
-  });
+});
 
-  savePlans(a);
-  refreshPlans();
+savePlans(a);
+
+refreshPlans();
+
 }
+
 
 function renderPlanManager(){
 
-  let a = getPlans();
+let a=getPlans();
 
-  document.getElementById(
-    'planList'
-  ).innerHTML =
-    a.length
-      ? a.map((p,i)=>`
+document.getElementById(
+'planList'
+).innerHTML=
+a.length
+?a.map((p,i)=>`
 
 <div class="managerrow">
 
-  <div class="row">
-    <strong>${p.name}</strong>
-    <span class="small">
-      ${p.targetX}|${p.targetY}
-    </span>
-  </div>
+<div class="row">
 
-  <div class="small">
-    Arrival ${p.arrival}
-  </div>
+<strong>${p.name}</strong>
 
-  <div class="actions">
+<span class="small">
+${p.targetX}|${p.targetY}
+</span>
 
-    <button
-      type="button"
-      data-plan-load="${i}"
-    >
-      Load
-    </button>
+</div>
 
-    <button
-      type="button"
-      data-plan-rename="${i}"
-    >
-      Rename
-    </button>
+<div class="small">
+Arrival ${p.arrival}
+</div>
 
-    <button
-      type="button"
-      data-plan-delete="${i}"
-    >
-      Delete
-    </button>
+<div class="actions">
 
-  </div>
+<button
+type="button"
+data-plan-load="${i}"
+>
+Load
+</button>
+
+<button
+type="button"
+data-plan-rename="${i}"
+>
+Rename
+</button>
+
+<button
+type="button"
+data-plan-delete="${i}"
+>
+Delete
+</button>
+
+</div>
 
 </div>
 
 `).join('')
+:'<div class="small" style="padding:10px 0">No saved plans yet.</div>';
 
-      : '<div class="small" style="padding:10px 0">No saved plans yet.</div>';
 }
+
 
 function openPlanManager(){
 
-  renderPlanManager();
+renderPlanManager();
 
-  document
-    .getElementById('planModal')
-    .classList
-    .remove('hidden');
+document.getElementById(
+'planModal'
+).classList.remove('hidden');
+
 }
+
 
 function closePlanManager(){
 
-  document
-    .getElementById('planModal')
-    .classList
-    .add('hidden');
+document.getElementById(
+'planModal'
+).classList.add('hidden');
+
 }
+
 
 function renamePlan(i){
 
-  let a = getPlans();
+let a=getPlans();
 
-  if(!a[i]) return;
+if(!a[i])return;
 
-  let n =
-    prompt(
-      'Plan name',
-      a[i].name
-    );
+let n=
+prompt(
+'Plan name',
+a[i].name
+);
 
-  if(n && n.trim()){
+if(n&&n.trim()){
 
-    a[i].name=n.trim();
+a[i].name=n.trim();
 
-    savePlans(a);
-    refreshPlans();
-    renderPlanManager();
-  }
+savePlans(a);
+
+refreshPlans();
+
+renderPlanManager();
+
 }
+
+}
+
 
 function deletePlan(i){
 
-  let a = getPlans();
+let a=getPlans();
 
-  if(!a[i]) return;
+if(!a[i])return;
 
-  if(confirm(`Delete ${a[i].name}?`)){
+if(confirm(`Delete ${a[i].name}?`)){
 
-    a.splice(i,1);
+a.splice(i,1);
 
-    savePlans(a);
-    refreshPlans();
-    renderPlanManager();
-  }
+savePlans(a);
+
+refreshPlans();
+
+renderPlanManager();
+
+}
+
 }
 
 
-/* SYNCHRONISED ATTACKS */
+/* ATTACK WAVES */
 
 function addAttack(data){
 
-  let box =
-    document.getElementById(
-      'attacks'
-    );
+let box=
+document.getElementById(
+'attacks'
+);
 
-  let card =
-    document.createElement('div');
+let card=
+document.createElement('div');
 
-  card.className =
-    'card attack';
+card.className='card attack';
 
-  card.innerHTML = `
+card.innerHTML=`
 
 <div class="row">
 
-  <strong>Attack</strong>
+<strong>Attack</strong>
 
-  <button
-    type="button"
-    class="remove"
-  >
-    ✕
-  </button>
+<button
+type="button"
+class="remove"
+>
+✕
+</button>
 
 </div>
 
 <div class="unitrow">
 
-  <div class="field">
+<div class="field">
 
-    <label>From X</label>
+<label>From X</label>
 
-    <input
-      class="ax"
-      type="number"
-      value="${data?.x??240}"
-    >
+<input
+class="ax"
+type="text"
+inputmode="numeric"
+value="${data?.x??240}"
+>
 
-  </div>
+</div>
 
-  <div class="field">
+<div class="field">
 
-    <label>From Y</label>
+<label>From Y</label>
 
-    <input
-      class="ay"
-      type="number"
-      value="${data?.y??261}"
-    >
+<input
+class="ay"
+type="text"
+inputmode="numeric"
+value="${data?.y??261}"
+>
 
-  </div>
+</div>
 
-  <div class="field">
+<div class="field">
 
-    <label>Troop</label>
+<label>Troop</label>
 
-    <select class="au">
+<select class="au">
 
-      ${Object.keys(units)
-        .map(u =>
-          `<option
-            value="${u}"
-            ${data?.unit===u?'selected':''}
-          >${u}</option>`
-        )
-        .join('')}
+${Object.keys(units)
+.map(u=>
+`<option
+value="${u}"
+${data?.unit===u?'selected':''}
+>${u}</option>`
+)
+.join('')}
 
-    </select>
+</select>
 
-  </div>
+</div>
 
-  <div class="actions">
+<div class="actions">
 
-    <button
-      type="button"
-      class="markBtn"
-    >
-      Mark launched
-    </button>
+<button
+type="button"
+class="markBtn"
+>
+Mark launched
+</button>
 
-  </div>
+</div>
 
 </div>
 
@@ -1539,762 +1649,809 @@ function addAttack(data){
 
 `;
 
-  card
-    .querySelector('.remove')
-    .addEventListener(
-      'click',
-      ()=>{
-        card.remove();
-        refreshDashboard();
-      }
-    );
 
-  card
-    .querySelector('.markBtn')
-    .addEventListener(
-      'click',
-      ()=>{
-        markLaunched(
-          card.querySelector('.markBtn')
-        );
-      }
-    );
-
-  card
-    .querySelectorAll(
-      'input,select'
-    )
-    .forEach(el=>{
-
-      el.addEventListener(
-        'input',
-        calculateSync
-      );
-
-    });
-
-  box.appendChild(card);
+card.querySelector(
+'.remove'
+).addEventListener(
+'click',
+()=>{
+card.remove();
+refreshDashboard();
 }
+);
+
+
+card.querySelector(
+'.markBtn'
+).addEventListener(
+'click',
+()=>{
+markLaunched(
+card.querySelector('.markBtn')
+);
+}
+);
+
+
+card.querySelectorAll(
+'input,select'
+).forEach(el=>{
+
+el.addEventListener(
+'input',
+calculateSync
+);
+
+});
+
+
+box.appendChild(card);
+
+}
+
 
 function markLaunched(btn){
 
-  let card =
-    btn.closest('.attack');
+let card=
+btn.closest('.attack');
 
-  if(!card) return;
+if(!card)return;
 
-  card.dataset.launched =
-    card.dataset.launched==='1'
-      ? '0'
-      : '1';
+card.dataset.launched=
+card.dataset.launched==='1'
+?'0'
+:'1';
 
-  btn.textContent =
-    card.dataset.launched==='1'
-      ? 'Unmark launched'
-      : 'Mark launched';
+btn.textContent=
+card.dataset.launched==='1'
+?'Unmark launched'
+:'Mark launched';
 
-  card.classList.toggle(
-    'launched',
-    card.dataset.launched==='1'
-  );
+card.classList.toggle(
+'launched',
+card.dataset.launched==='1'
+);
 
-  sortAttacks();
+sortAttacks();
+
 }
+
 
 function loadPlan(v){
 
-  let p =
-    getPlans()[+v];
+let p=getPlans()[+v];
 
-  if(!p) return;
+if(!p)return;
 
-  document.getElementById(
-    'stx'
-  ).value=p.targetX;
+document.getElementById(
+'stx'
+).value=p.targetX;
 
-  document.getElementById(
-    'sty'
-  ).value=p.targetY;
+document.getElementById(
+'sty'
+).value=p.targetY;
 
-  document.getElementById(
-    'sarrival'
-  ).value=p.arrival;
+document.getElementById(
+'sarrival'
+).value=p.arrival;
 
-  document.getElementById(
-    'offset'
-  ).value=p.offset||0;
+document.getElementById(
+'offset'
+).value=p.offset||0;
 
-  document.getElementById(
-    'attacks'
-  ).innerHTML='';
+document.getElementById(
+'attacks'
+).innerHTML='';
 
-  p.attacks.forEach(
-    a=>addAttack(a)
-  );
+p.attacks.forEach(
+a=>addAttack(a)
+);
 
-  calculateSync();
-  refreshCitySelectors();
+calculateSync();
+
+refreshCitySelectors();
+
 }
+
+
+/* SYNC CALCULATION */
 
 function calculateSync(){
 
-  let a =
-    parseServerInput(
-      document.getElementById(
-        'sarrival'
-      ).value
-    );
+let a=
+parseServerInput(
+document.getElementById(
+'sarrival'
+).value
+);
 
-  if(isNaN(a)) return;
+if(isNaN(a))return;
 
-  let targetX =
-    +document.getElementById(
-      'stx'
-    ).value;
+let targetX=
++document.getElementById(
+'stx'
+).value;
 
-  let targetY =
-    +document.getElementById(
-      'sty'
-    ).value;
+let targetY=
++document.getElementById(
+'sty'
+).value;
 
-  let offsetSec =
-    +(
-      document.getElementById(
-        'offset'
-      ).value || 0
-    );
+let offsetSec=
++(
+document.getElementById(
+'offset'
+).value||0
+);
 
-  document
-    .querySelectorAll('.attack')
-    .forEach(card=>{
+document.querySelectorAll(
+'.attack'
+).forEach(card=>{
 
-      let x =
-        +card.querySelector(
-          '.ax'
-        ).value;
+let x=
++card.querySelector(
+'.ax'
+).value;
 
-      let y =
-        +card.querySelector(
-          '.ay'
-        ).value;
+let y=
++card.querySelector(
+'.ay'
+).value;
 
-      let u =
-        card.querySelector(
-          '.au'
-        ).value;
+let u=
+card.querySelector(
+'.au'
+).value;
 
-      let d =
-        dist(
-          x,
-          y,
-          targetX,
-          targetY
-        );
+let d=
+dist(
+x,
+y,
+targetX,
+targetY
+);
 
-      let travel =
-        d*units[u];
+let travel=
+d*units[u];
 
-      let launch =
-        new Date(
-          a -
-          (travel+offsetSec)*1000
-        );
+let launch=
+new Date(
+a-(travel+offsetSec)*1000
+);
 
-      card.dataset.launch =
-        launch.toISOString();
+card.dataset.launch=
+launch.toISOString();
 
-      card.dataset.travel =
-        travel;
+card.dataset.travel=
+travel;
 
-      card.querySelector(
-        '.small'
-      ).textContent =
-        `${u} • Distance ${d.toFixed(3)} tiles • Travel ${fmt(travel)}`;
+card.querySelector(
+'.small'
+).textContent=
+`${u} • Distance ${d.toFixed(3)} tiles • Travel ${fmt(travel)}`;
 
-      card.querySelector(
-        '.launch'
-      ).textContent =
-        `SEND ${serverValue(launch)} SERVER`;
+card.querySelector(
+'.launch'
+).textContent=
+`SEND ${serverValue(launch)} SERVER`;
 
-      card.querySelector(
-        '.localLaunch'
-      ).textContent =
-        `Your local time: ${dtValue(launch)}`;
+card.querySelector(
+'.localLaunch'
+).textContent=
+`Your local time: ${dtValue(launch)}`;
 
-    });
+});
 
-  sortAttacks();
+sortAttacks();
+
 }
+
 
 function sortAttacks(){
 
-  let box =
-    document.getElementById(
-      'attacks'
-    );
+let box=
+document.getElementById(
+'attacks'
+);
 
-  Array.from(
-    box.querySelectorAll('.attack')
-  )
-  .sort((a,b)=>{
+Array.from(
+box.querySelectorAll('.attack')
+)
+.sort((a,b)=>{
 
-    let la =
-      new Date(
-        a.dataset.launch ||
-        '9999'
-      );
+let la=
+new Date(
+a.dataset.launch||'9999'
+);
 
-    let lb =
-      new Date(
-        b.dataset.launch ||
-        '9999'
-      );
+let lb=
+new Date(
+b.dataset.launch||'9999'
+);
 
-    if(
-      (a.dataset.launched==='1') !==
-      (b.dataset.launched==='1')
-    ){
-      return a.dataset.launched==='1'
-        ? 1
-        : -1;
-    }
+if(
+(a.dataset.launched==='1') !==
+(b.dataset.launched==='1')
+){
 
-    return la-lb;
+return a.dataset.launched==='1'
+?1
+:-1;
 
-  })
-  .forEach(
-    c=>box.appendChild(c)
-  );
-
-  refreshDashboard();
 }
+
+return la-lb;
+
+})
+.forEach(
+c=>box.appendChild(c)
+);
+
+refreshDashboard();
+
+}
+
 
 function refreshDashboard(){
 
-  let cards =
-    Array.from(
-      document.querySelectorAll(
-        '.attack'
-      )
-    )
-    .filter(
-      c =>
-        c.dataset.launched!=='1' &&
-        c.dataset.launch
-    );
+let cards=
+Array.from(
+document.querySelectorAll(
+'.attack'
+)
+)
+.filter(
+c=>
+c.dataset.launched!=='1' &&
+c.dataset.launch
+);
 
-  document
-    .querySelectorAll('.attack')
-    .forEach(
-      c =>
-        c.classList.remove(
-          'nextwave'
-        )
-    );
+document.querySelectorAll(
+'.attack'
+)
+.forEach(
+c=>
+c.classList.remove(
+'nextwave'
+)
+);
 
-  if(!cards.length){
+if(!cards.length){
 
-    document.getElementById(
-      'nextAttack'
-    ).textContent='—';
+document.getElementById(
+'nextAttack'
+).textContent='—';
 
-    document.getElementById(
-      'nextDetails'
-    ).textContent =
-      'No pending calculated attacks. Save this setup as a battle plan if you will use it again.';
+document.getElementById(
+'nextDetails'
+).textContent=
+'No pending calculated attacks. Save this setup as a battle plan if you will use it again.';
 
-    return;
-  }
+return;
 
-  cards.sort(
-    (a,b)=>
-      new Date(a.dataset.launch) -
-      new Date(b.dataset.launch)
-  );
-
-  let c=cards[0];
-
-  let d =
-    new Date(
-      c.dataset.launch
-    );
-
-  let s =
-    Math.ceil(
-      (d-Date.now())/1000
-    );
-
-  c.classList.add(
-    'nextwave'
-  );
-
-  document.getElementById(
-    'nextAttack'
-  ).textContent =
-    s>0
-      ? fmt(s)
-      : 'SEND NOW';
-
-  document.getElementById(
-    'nextDetails'
-  ).textContent =
-    `${c.querySelector('.au').value} • ${serverValue(d)} server time • ${dtValue(d)} local`;
 }
+
+cards.sort(
+(a,b)=>
+new Date(a.dataset.launch)-
+new Date(b.dataset.launch)
+);
+
+let c=cards[0];
+
+let d=
+new Date(
+c.dataset.launch
+);
+
+let s=
+Math.ceil(
+(d-Date.now())/1000
+);
+
+c.classList.add(
+'nextwave'
+);
+
+document.getElementById(
+'nextAttack'
+).textContent=
+s>0
+?fmt(s)
+:'SEND NOW';
+
+document.getElementById(
+'nextDetails'
+).textContent=
+`${c.querySelector('.au').value} • ${serverValue(d)} server time • ${dtValue(d)} local`;
+
+}
+
 
 function startSyncCountdown(){
 
-  calculateSync();
+calculateSync();
 
-  if(syncTimer)
-    clearInterval(syncTimer);
+if(syncTimer)
+clearInterval(syncTimer);
 
-  syncTimer =
-    setInterval(()=>{
+syncTimer=
+setInterval(()=>{
 
-      refreshDashboard();
+refreshDashboard();
 
-      alertPending();
+alertPending();
 
-      let cards =
-        Array.from(
-          document.querySelectorAll(
-            '.attack'
-          )
-        )
-        .filter(
-          c =>
-            c.dataset.launched!=='1' &&
-            c.dataset.launch
-        );
+let cards=
+Array.from(
+document.querySelectorAll(
+'.attack'
+)
+)
+.filter(
+c=>
+c.dataset.launched!=='1' &&
+c.dataset.launch
+);
 
-      cards.forEach(c=>{
+cards.forEach(c=>{
 
-        let d =
-          new Date(
-            c.dataset.launch
-          );
+let d=
+new Date(
+c.dataset.launch
+);
 
-        let s =
-          Math.ceil(
-            (d-Date.now())/1000
-          );
+let s=
+Math.ceil(
+(d-Date.now())/1000
+);
 
-        c.querySelector(
-          '.launch'
-        ).textContent =
-          s>0
-            ? `SEND ${serverValue(d)} SERVER • in ${fmt(s)}`
-            : 'SEND NOW';
+c.querySelector(
+'.launch'
+).textContent=
+s>0
+?`SEND ${serverValue(d)} SERVER • in ${fmt(s)}`
+:'SEND NOW';
 
-      });
+});
 
-      document.getElementById(
-        'syncStatus'
-      ).textContent =
-        cards.length
-          ? `${cards.length} pending attack${cards.length===1?'':'s'}.`
-          : 'All waves launched.';
+document.getElementById(
+'syncStatus'
+).textContent=
+cards.length
+?`${cards.length} pending attack${cards.length===1?'':'s'}.`
+:'All waves launched.';
 
-    },250);
+},250);
+
 }
+
 
 function sendNext(){
 
-  let cards =
-    Array.from(
-      document.querySelectorAll(
-        '.attack'
-      )
-    )
-    .filter(
-      c =>
-        c.dataset.launched!=='1' &&
-        c.dataset.launch
-    )
-    .sort(
-      (a,b)=>
-        new Date(a.dataset.launch) -
-        new Date(b.dataset.launch)
-    );
+let cards=
+Array.from(
+document.querySelectorAll(
+'.attack'
+)
+)
+.filter(
+c=>
+c.dataset.launched!=='1' &&
+c.dataset.launch
+)
+.sort(
+(a,b)=>
+new Date(a.dataset.launch)-
+new Date(b.dataset.launch)
+);
 
-  if(cards.length)
-    markLaunched(
-      cards[0].querySelector(
-        '.markBtn'
-      )
-    );
+if(cards.length)
+markLaunched(
+cards[0].querySelector(
+'.markBtn'
+)
+);
+
 }
 
 
-/* BATTLE START */
+/* BATTLE */
 
 function battleStart(){
 
-  calculateSync();
+calculateSync();
 
-  document
-    .getElementById(
-      'battleOverlay'
-    )
-    .classList
-    .remove('hidden');
+document.getElementById(
+'battleOverlay'
+).classList.remove('hidden');
 
-  updateBattle();
+updateBattle();
 
-  if(battleTimer)
-    clearInterval(battleTimer);
+if(battleTimer)
+clearInterval(battleTimer);
 
-  battleTimer =
-    setInterval(
-      updateBattle,
-      250
-    );
+battleTimer=
+setInterval(
+updateBattle,
+250
+);
+
 }
+
 
 function closeBattleStart(){
 
-  document
-    .getElementById(
-      'battleOverlay'
-    )
-    .classList
-    .add('hidden');
+document.getElementById(
+'battleOverlay'
+).classList.add('hidden');
 
-  if(battleTimer)
-    clearInterval(battleTimer);
+if(battleTimer)
+clearInterval(battleTimer);
+
 }
+
 
 function updateBattle(){
 
-  let cards =
-    Array.from(
-      document.querySelectorAll(
-        '.attack'
-      )
-    )
-    .filter(
-      c =>
-        c.dataset.launched!=='1' &&
-        c.dataset.launch
-    )
-    .sort(
-      (a,b)=>
-        new Date(a.dataset.launch) -
-        new Date(b.dataset.launch)
-    );
+let cards=
+Array.from(
+document.querySelectorAll(
+'.attack'
+)
+)
+.filter(
+c=>
+c.dataset.launched!=='1' &&
+c.dataset.launch
+)
+.sort(
+(a,b)=>
+new Date(a.dataset.launch)-
+new Date(b.dataset.launch)
+);
 
-  if(!cards.length){
+if(!cards.length){
 
-    document.getElementById(
-      'battleCountdown'
-    ).textContent='DONE';
+document.getElementById(
+'battleCountdown'
+).textContent='DONE';
 
-    document.getElementById(
-      'battleDetails'
-    ).textContent =
-      'All waves launched.';
+document.getElementById(
+'battleDetails'
+).textContent=
+'All waves launched.';
 
-    return;
-  }
+return;
 
-  let c=cards[0];
+}
 
-  let d =
-    new Date(
-      c.dataset.launch
-    );
+let c=cards[0];
 
-  let s =
-    Math.ceil(
-      (d-Date.now())/1000
-    );
+let d=
+new Date(
+c.dataset.launch
+);
 
-  document.getElementById(
-    'battleCountdown'
-  ).textContent =
-    s>0
-      ? fmt(s)
-      : 'SEND NOW';
+let s=
+Math.ceil(
+(d-Date.now())/1000
+);
 
-  document.getElementById(
-    'battleDetails'
-  ).textContent =
-    `${c.querySelector('.au').value} • ${serverValue(d)} server • ${dtValue(d)} local`;
+document.getElementById(
+'battleCountdown'
+).textContent=
+s>0
+?fmt(s)
+:'SEND NOW';
+
+document.getElementById(
+'battleDetails'
+).textContent=
+`${c.querySelector('.au').value} • ${serverValue(d)} server • ${dtValue(d)} local`;
+
 }
 
 
-/* SOUND / VIBRATION */
+/* ALERTS */
 
 function beep(
-  pattern=[0,160,0,160,0,320]
+pattern=[0,160,0,160,0,320]
 ){
 
-  if(!soundOn) return;
+if(!soundOn)return;
 
-  try{
+try{
 
-    audioCtx =
-      audioCtx ||
-      new(
-        window.AudioContext ||
-        window.webkitAudioContext
-      )();
+audioCtx=
+audioCtx||
+new(
+window.AudioContext||
+window.webkitAudioContext
+)();
 
-    let t =
-      audioCtx.currentTime;
+let t=
+audioCtx.currentTime;
 
-    for(
-      let i=0;
-      i<pattern.length;
-      i+=2
-    ){
+for(
+let i=0;
+i<pattern.length;
+i+=2
+){
 
-      t +=
-        pattern[i]/1000;
+t+=pattern[i]/1000;
 
-      let dur =
-        pattern[i+1]/1000;
+let dur=
+pattern[i+1]/1000;
 
-      let o =
-        audioCtx.createOscillator();
+let o=
+audioCtx.createOscillator();
 
-      let g =
-        audioCtx.createGain();
+let g=
+audioCtx.createGain();
 
-      o.frequency.value=880;
+o.frequency.value=880;
 
-      g.gain.setValueAtTime(
-        .0001,
-        t
-      );
+g.gain.setValueAtTime(
+.0001,
+t
+);
 
-      g.gain.exponentialRampToValueAtTime(
-        .25,
-        t+.01
-      );
+g.gain.exponentialRampToValueAtTime(
+.25,
+t+.01
+);
 
-      g.gain.exponentialRampToValueAtTime(
-        .0001,
-        t+dur
-      );
+g.gain.exponentialRampToValueAtTime(
+.0001,
+t+dur
+);
 
-      o.connect(g);
-      g.connect(
-        audioCtx.destination
-      );
+o.connect(g);
 
-      o.start(t);
-      o.stop(t+dur);
-    }
+g.connect(
+audioCtx.destination
+);
 
-  }catch(e){}
+o.start(t);
+
+o.stop(t+dur);
+
 }
+
+}catch(e){}
+
+}
+
 
 function buzz(
-  ms=[180,120,180,120,450]
+ms=[180,120,180,120,450]
 ){
 
-  if(
-    vibrationOn &&
-    navigator.vibrate
-  ){
-    navigator.vibrate(ms);
-  }
+if(
+vibrationOn &&
+navigator.vibrate
+){
+
+navigator.vibrate(ms);
+
 }
+
+}
+
 
 async function enableAlerts(){
 
-  if('Notification' in window){
+if('Notification' in window){
 
-    try{
+try{
 
-      let p =
-        await Notification.requestPermission();
+let p=
+await Notification.requestPermission();
 
-      document.getElementById(
-        'alertStatus'
-      ).textContent =
-        p==='granted'
-          ? 'Notifications enabled.'
-          : 'Browser notification permission was not granted.';
+document.getElementById(
+'alertStatus'
+).textContent=
+p==='granted'
+?'Notifications enabled.'
+:'Browser notification permission was not granted.';
 
-    }catch(e){
+}catch(e){
 
-      document.getElementById(
-        'alertStatus'
-      ).textContent =
-        'Notifications are unavailable in this browser.';
-    }
+document.getElementById(
+'alertStatus'
+).textContent=
+'Notifications are unavailable in this browser.';
 
-  }else{
-
-    document.getElementById(
-      'alertStatus'
-    ).textContent =
-      'Browser notifications are unavailable.';
-  }
 }
+
+}else{
+
+document.getElementById(
+'alertStatus'
+).textContent=
+'Browser notifications are unavailable.';
+
+}
+
+}
+
 
 function notifyLaunch(card){
 
-  let unit =
-    card.querySelector(
-      '.au'
-    ).value;
+let unit=
+card.querySelector(
+'.au'
+).value;
 
-  beep();
-  buzz();
+beep();
 
-  if(
-    'Notification' in window &&
-    Notification.permission==='granted'
-  ){
+buzz();
 
-    new Notification(
-      'Valor Tool — SEND NOW',
-      {
-        body:
-          `${unit} wave is ready to launch.`
-      }
-    );
-  }
+if(
+'Notification' in window &&
+Notification.permission==='granted'
+){
+
+new Notification(
+'Valor Tool — SEND NOW',
+{
+body:
+`${unit} wave is ready to launch.`
 }
+);
+
+}
+
+}
+
 
 function toggleSound(){
 
-  soundOn=!soundOn;
+soundOn=!soundOn;
 
-  localStorage.setItem(
-    'valorSound',
-    soundOn?'on':'off'
-  );
+localStorage.setItem(
+'valorSound',
+soundOn?'on':'off'
+);
 
-  document.getElementById(
-    'soundBtn'
-  ).textContent =
-    `🔊 Sound: ${soundOn?'On':'Off'}`;
+document.getElementById(
+'soundBtn'
+).textContent=
+`🔊 Sound: ${soundOn?'On':'Off'}`;
 
-  if(soundOn)
-    beep([0,100]);
+if(soundOn)
+beep([0,100]);
+
 }
+
 
 function toggleVibration(){
 
-  vibrationOn=!vibrationOn;
+vibrationOn=!vibrationOn;
 
-  localStorage.setItem(
-    'valorVibrate',
-    vibrationOn?'on':'off'
-  );
+localStorage.setItem(
+'valorVibrate',
+vibrationOn?'on':'off'
+);
 
-  document.getElementById(
-    'vibrateBtn'
-  ).textContent =
-    `📳 Vibration: ${vibrationOn?'On':'Off'}`;
+document.getElementById(
+'vibrateBtn'
+).textContent=
+`📳 Vibration: ${vibrationOn?'On':'Off'}`;
 
-  if(vibrationOn)
-    buzz([100]);
+if(vibrationOn)
+buzz([100]);
+
 }
+
 
 async function toggleWakeLock(){
 
-  try{
+try{
 
-    if(wakeLock){
+if(wakeLock){
 
-      await wakeLock.release();
+await wakeLock.release();
 
-      wakeLock=null;
+wakeLock=null;
 
-      document.getElementById(
-        'wakeBtn'
-      ).textContent =
-        '☀️ Keep awake';
+document.getElementById(
+'wakeBtn'
+).textContent=
+'☀️ Keep awake';
 
-      return;
-    }
+return;
 
-    if('wakeLock' in navigator){
-
-      wakeLock =
-        await navigator.wakeLock.request(
-          'screen'
-        );
-
-      document.getElementById(
-        'wakeBtn'
-      ).textContent =
-        '☀️ Awake: On';
-
-    }else{
-
-      alert(
-        'Screen Wake Lock is not supported by this browser.'
-      );
-    }
-
-  }catch(e){
-
-    alert(
-      'Could not keep the screen awake.'
-    );
-  }
 }
+
+if('wakeLock' in navigator){
+
+wakeLock=
+await navigator.wakeLock.request(
+'screen'
+);
+
+document.getElementById(
+'wakeBtn'
+).textContent=
+'☀️ Awake: On';
+
+}else{
+
+alert(
+'Screen Wake Lock is not supported by this browser.'
+);
+
+}
+
+}catch(e){
+
+alert(
+'Could not keep the screen awake.'
+);
+
+}
+
+}
+
 
 function alertPending(){
 
-  let cards =
-    Array.from(
-      document.querySelectorAll(
-        '.attack'
-      )
-    )
-    .filter(
-      c =>
-        c.dataset.launched!=='1' &&
-        c.dataset.launch
-    )
-    .sort(
-      (a,b)=>
-        new Date(a.dataset.launch) -
-        new Date(b.dataset.launch)
-    );
+let cards=
+Array.from(
+document.querySelectorAll(
+'.attack'
+)
+)
+.filter(
+c=>
+c.dataset.launched!=='1' &&
+c.dataset.launch
+)
+.sort(
+(a,b)=>
+new Date(a.dataset.launch)-
+new Date(b.dataset.launch)
+);
 
-  if(!cards.length) return;
+if(!cards.length)return;
 
-  let c=cards[0];
+let c=cards[0];
 
-  let d =
-    new Date(
-      c.dataset.launch
-    );
+let d=
+new Date(
+c.dataset.launch
+);
 
-  let s =
-    Math.ceil(
-      (d-Date.now())/1000
-    );
+let s=
+Math.ceil(
+(d-Date.now())/1000
+);
 
-  if(
-    s<=0 &&
-    lastAlertKey!==c.dataset.launch
-  ){
+if(
+s<=0 &&
+lastAlertKey!==c.dataset.launch
+){
 
-    lastAlertKey =
-      c.dataset.launch;
+lastAlertKey=
+c.dataset.launch;
 
-    notifyLaunch(c);
+notifyLaunch(c);
 
-    c.classList.add(
-      'alertnow'
-    );
+c.classList.add(
+'alertnow'
+);
 
-    setTimeout(
-      ()=>c.classList.remove(
-        'alertnow'
-      ),
-      5000
-    );
-  }
+setTimeout(
+()=>c.classList.remove(
+'alertnow'
+),
+5000
+);
+
+}
+
 }
 
 
@@ -2302,546 +2459,528 @@ function alertPending(){
 
 let pickerTarget=null;
 
+
 function openTimePicker(targetId){
 
-  pickerTarget=targetId;
+pickerTarget=targetId;
 
-  let input =
-    document.getElementById(
-      targetId
-    );
+let input=
+document.getElementById(
+targetId
+);
 
-  if(!input) return;
+if(!input)return;
 
-  let v=input.value;
+let v=input.value;
 
-  let m =
-    parseServerInput(v);
+let m=
+parseServerInput(v);
 
-  let d =
-    isNaN(m)
-      ? new Date(
-          Date.now()+3600000
-        )
-      : new Date(m);
+let d=
+isNaN(m)
+?new Date(
+Date.now()+3600000
+)
+:new Date(m);
 
-  document.getElementById(
-    'pickerDate'
-  ).value =
-    `${d.getUTCFullYear()}-`+
-    `${pad(d.getUTCMonth()+1)}-`+
-    `${pad(d.getUTCDate())}`;
 
-  document.getElementById(
-    'pickerHour'
-  ).innerHTML =
-    Array.from(
-      {length:24},
-      (_,i)=>
-        `<option value="${i}">${pad(i)}</option>`
-    ).join('');
+document.getElementById(
+'pickerDate'
+).value=
+`${d.getUTCFullYear()}-`+
+`${pad(d.getUTCMonth()+1)}-`+
+`${pad(d.getUTCDate())}`;
 
-  document.getElementById(
-    'pickerMinute'
-  ).innerHTML =
-    Array.from(
-      {length:60},
-      (_,i)=>
-        `<option value="${i}">${pad(i)}</option>`
-    ).join('');
 
-  document.getElementById(
-    'pickerSecond'
-  ).innerHTML =
-    Array.from(
-      {length:60},
-      (_,i)=>
-        `<option value="${i}">${pad(i)}</option>`
-    ).join('');
+document.getElementById(
+'pickerHour'
+).innerHTML=
+Array.from(
+{length:24},
+(_,i)=>
+`<option value="${i}">${pad(i)}</option>`
+).join('');
 
-  document.getElementById(
-    'pickerHour'
-  ).value =
-    d.getUTCHours();
 
-  document.getElementById(
-    'pickerMinute'
-  ).value =
-    d.getUTCMinutes();
+document.getElementById(
+'pickerMinute'
+).innerHTML=
+Array.from(
+{length:60},
+(_,i)=>
+`<option value="${i}">${pad(i)}</option>`
+).join('');
 
-  document.getElementById(
-    'pickerSecond'
-  ).value =
-    d.getUTCSeconds();
 
-  document
-    .getElementById(
-      'timePickerModal'
-    )
-    .classList
-    .remove('hidden');
+document.getElementById(
+'pickerSecond'
+).innerHTML=
+Array.from(
+{length:60},
+(_,i)=>
+`<option value="${i}">${pad(i)}</option>`
+).join('');
+
+
+document.getElementById(
+'pickerHour'
+).value=
+d.getUTCHours();
+
+document.getElementById(
+'pickerMinute'
+).value=
+d.getUTCMinutes();
+
+document.getElementById(
+'pickerSecond'
+).value=
+d.getUTCSeconds();
+
+
+document.getElementById(
+'timePickerModal'
+).classList.remove(
+'hidden'
+);
+
 }
+
 
 function closeTimePicker(){
 
-  document
-    .getElementById(
-      'timePickerModal'
-    )
-    .classList
-    .add('hidden');
+document.getElementById(
+'timePickerModal'
+).classList.add(
+'hidden'
+);
 
-  pickerTarget=null;
+pickerTarget=null;
+
 }
+
 
 function setPickedTime(){
 
-  if(
-    !pickerTarget ||
-    !document.getElementById(
-      'pickerDate'
-    ).value
-  ){
-    return;
-  }
+if(
+!pickerTarget||
+!document.getElementById(
+'pickerDate'
+).value
+)return;
 
-  let [
-    y,
-    mo,
-    da
-  ] =
-    document
-      .getElementById(
-        'pickerDate'
-      )
-      .value
-      .split('-')
-      .map(Number);
+let [
+y,
+mo,
+da
+]=
+document.getElementById(
+'pickerDate'
+).value
+.split('-')
+.map(Number);
 
-  let h =
-    +document.getElementById(
-      'pickerHour'
-    ).value;
+let h=
++document.getElementById(
+'pickerHour'
+).value;
 
-  let min =
-    +document.getElementById(
-      'pickerMinute'
-    ).value;
+let min=
++document.getElementById(
+'pickerMinute'
+).value;
 
-  let sec =
-    +document.getElementById(
-      'pickerSecond'
-    ).value;
+let sec=
++document.getElementById(
+'pickerSecond'
+).value;
 
-  document.getElementById(
-    pickerTarget
-  ).value =
-    `${y}-${pad(mo)}-${pad(da)} `+
-    `${pad(h)}:${pad(min)}:${pad(sec)}`;
 
-  document
-    .getElementById(
-      pickerTarget
-    )
-    .dispatchEvent(
-      new Event(
-        'input',
-        {bubbles:true}
-      )
-    );
+document.getElementById(
+pickerTarget
+).value=
+`${y}-${pad(mo)}-${pad(da)} `+
+`${pad(h)}:${pad(min)}:${pad(sec)}`;
 
-  closeTimePicker();
+
+document.getElementById(
+pickerTarget
+).dispatchEvent(
+new Event(
+'input',
+{bubbles:true}
+)
+);
+
+closeTimePicker();
+
 }
 
 
-/*
-====================================================
-NORMAL EVENT WIRING
-====================================================
-*/
+/* EVENT WIRING */
 
 function wire(){
 
-  document.getElementById(
-    'singleTab'
-  ).addEventListener(
-    'click',
-    ()=>showMode('single')
-  );
-
-  document.getElementById(
-    'syncTab'
-  ).addEventListener(
-    'click',
-    ()=>showMode('sync')
-  );
-
-
-  /*
-  Pick Time buttons.
-
-  These are still wired normally here,
-  in addition to the Samsung fallback
-  installed near the top of the script.
-  */
-
-  document.getElementById(
-    'arrivalPickBtn'
-  ).addEventListener(
-    'click',
-    ()=>{
-      openTimePicker('arrival');
-    }
-  );
-
-  document.getElementById(
-    'sarrivalPickBtn'
-  ).addEventListener(
-    'click',
-    ()=>{
-      openTimePicker('sarrival');
-    }
-  );
-
-
-  document.getElementById(
-    'arrival'
-  ).addEventListener(
-    'click',
-    ()=>{
-      openTimePicker('arrival');
-    }
-  );
-
-  document.getElementById(
-    'sarrival'
-  ).addEventListener(
-    'click',
-    ()=>{
-      openTimePicker('sarrival');
-    }
-  );
-
-
-  document.getElementById(
-    'timePickerClose'
-  ).addEventListener(
-    'click',
-    closeTimePicker
-  );
-
-  document.getElementById(
-    'timePickerCancel'
-  ).addEventListener(
-    'click',
-    closeTimePicker
-  );
-
-  document.getElementById(
-    'timePickerSet'
-  ).addEventListener(
-    'click',
-    setPickedTime
-  );
-
-
-  /* CITIES */
-
-  document.getElementById(
-    'cityManageBtn'
-  ).addEventListener(
-    'click',
-    openCityManager
-  );
-
-  document.getElementById(
-    'cityCloseBtn'
-  ).addEventListener(
-    'click',
-    closeCityManager
-  );
-
-  document.getElementById(
-    'saveCityBtn'
-  ).addEventListener(
-    'click',
-    addSavedCity
-  );
-
-  document.getElementById(
-    'cityList'
-  ).addEventListener(
-    'click',
-    e=>{
-
-      let t=e.target;
-
-      if(
-        t.dataset.cityEdit !==
-        undefined
-      ){
-        editSavedCity(
-          +t.dataset.cityEdit
-        );
-      }
-
-      if(
-        t.dataset.cityDelete !==
-        undefined
-      ){
-        deleteSavedCity(
-          +t.dataset.cityDelete
-        );
-      }
-
-    }
-  );
-
-
-  /* PLANS */
-
-  document.getElementById(
-    'savePlanBtn'
-  ).addEventListener(
-    'click',
-    saveCurrentPlan
-  );
-
-  document.getElementById(
-    'planManageBtn'
-  ).addEventListener(
-    'click',
-    openPlanManager
-  );
-
-  document.getElementById(
-    'planCloseBtn'
-  ).addEventListener(
-    'click',
-    closePlanManager
-  );
-
-  document.getElementById(
-    'planSelect'
-  ).addEventListener(
-    'change',
-    e=>{
-      loadPlan(e.target.value);
-    }
-  );
-
-  document.getElementById(
-    'planList'
-  ).addEventListener(
-    'click',
-    e=>{
-
-      let t=e.target;
-
-      if(
-        t.dataset.planLoad !==
-        undefined
-      ){
-
-        loadPlan(
-          t.dataset.planLoad
-        );
-
-        closePlanManager();
-      }
-
-      if(
-        t.dataset.planRename !==
-        undefined
-      ){
-        renamePlan(
-          +t.dataset.planRename
-        );
-      }
-
-      if(
-        t.dataset.planDelete !==
-        undefined
-      ){
-        deletePlan(
-          +t.dataset.planDelete
-        );
-      }
-
-    }
-  );
-
-
-  /* SINGLE ATTACK */
-
-  document.getElementById(
-    'copySingleBtn'
-  ).addEventListener(
-    'click',
-    copySingle
-  );
-
-  document.getElementById(
-    'singleCountdownBtn'
-  ).addEventListener(
-    'click',
-    startSingleCountdown
-  );
-
-
-  /* SYNCHRONISED */
-
-  document.getElementById(
-    'sendNextBtn'
-  ).addEventListener(
-    'click',
-    sendNext
-  );
-
-  document.getElementById(
-    'wakeBtn'
-  ).addEventListener(
-    'click',
-    toggleWakeLock
-  );
-
-  document.getElementById(
-    'sortBtn'
-  ).addEventListener(
-    'click',
-    sortAttacks
-  );
-
-  document.getElementById(
-    'addAttackBtn'
-  ).addEventListener(
-    'click',
-    ()=>addAttack()
-  );
-
-  document.getElementById(
-    'calculateSyncBtn'
-  ).addEventListener(
-    'click',
-    calculateSync
-  );
-
-  document.getElementById(
-    'startSyncBtn'
-  ).addEventListener(
-    'click',
-    startSyncCountdown
-  );
-
-  document.getElementById(
-    'battleStartBtn'
-  ).addEventListener(
-    'click',
-    battleStart
-  );
-
-
-  /* ALERTS */
-
-  document.getElementById(
-    'alertBtn'
-  ).addEventListener(
-    'click',
-    enableAlerts
-  );
-
-  document.getElementById(
-    'soundBtn'
-  ).addEventListener(
-    'click',
-    toggleSound
-  );
-
-  document.getElementById(
-    'vibrateBtn'
-  ).addEventListener(
-    'click',
-    toggleVibration
-  );
-
-
-  /* BATTLE OVERLAY */
-
-  document.getElementById(
-    'battleLaunchBtn'
-  ).addEventListener(
-    'click',
-    sendNext
-  );
-
-  document.getElementById(
-    'battleExitBtn'
-  ).addEventListener(
-    'click',
-    closeBattleStart
-  );
-
-
-  /* SYNC INPUTS */
-
-  [
-    'stx',
-    'sty',
-    'sarrival',
-    'offset'
-  ].forEach(id=>{
-
-    document.getElementById(
-      id
-    ).addEventListener(
-      'input',
-      calculateSync
-    );
-
-  });
-
-
-  /* SINGLE INPUTS */
-
-  [
-    'sx',
-    'sy',
-    'tx',
-    'ty',
-    'su',
-    'arrival'
-  ].forEach(id=>{
-
-    document.getElementById(
-      id
-    ).addEventListener(
-      'input',
-      calcSingle
-    );
-
-  });
+document.getElementById(
+'singleTab'
+).addEventListener(
+'click',
+()=>showMode('single')
+);
+
+document.getElementById(
+'syncTab'
+).addEventListener(
+'click',
+()=>showMode('sync')
+);
+
+
+/* PICK TIME */
+
+document.getElementById(
+'arrivalPickBtn'
+).addEventListener(
+'click',
+()=>{
+openTimePicker('arrival');
+}
+);
+
+document.getElementById(
+'sarrivalPickBtn'
+).addEventListener(
+'click',
+()=>{
+openTimePicker('sarrival');
+}
+);
+
+document.getElementById(
+'arrival'
+).addEventListener(
+'click',
+()=>{
+openTimePicker('arrival');
+}
+);
+
+document.getElementById(
+'sarrival'
+).addEventListener(
+'click',
+()=>{
+openTimePicker('sarrival');
+}
+);
+
+document.getElementById(
+'timePickerClose'
+).addEventListener(
+'click',
+closeTimePicker
+);
+
+document.getElementById(
+'timePickerCancel'
+).addEventListener(
+'click',
+closeTimePicker
+);
+
+document.getElementById(
+'timePickerSet'
+).addEventListener(
+'click',
+setPickedTime
+);
+
+
+/* CITIES */
+
+document.getElementById(
+'cityManageBtn'
+).addEventListener(
+'click',
+openCityManager
+);
+
+document.getElementById(
+'cityCloseBtn'
+).addEventListener(
+'click',
+closeCityManager
+);
+
+document.getElementById(
+'saveCityBtn'
+).addEventListener(
+'click',
+addSavedCity
+);
+
+document.getElementById(
+'cityList'
+).addEventListener(
+'click',
+e=>{
+
+let t=e.target;
+
+if(
+t.dataset.cityEdit!==undefined
+)
+editSavedCity(
++t.dataset.cityEdit
+);
+
+if(
+t.dataset.cityDelete!==undefined
+)
+deleteSavedCity(
++t.dataset.cityDelete
+);
+
+}
+);
+
+
+/* PLANS */
+
+document.getElementById(
+'savePlanBtn'
+).addEventListener(
+'click',
+saveCurrentPlan
+);
+
+document.getElementById(
+'planManageBtn'
+).addEventListener(
+'click',
+openPlanManager
+);
+
+document.getElementById(
+'planCloseBtn'
+).addEventListener(
+'click',
+closePlanManager
+);
+
+document.getElementById(
+'planSelect'
+).addEventListener(
+'change',
+e=>{
+loadPlan(e.target.value);
+}
+);
+
+document.getElementById(
+'planList'
+).addEventListener(
+'click',
+e=>{
+
+let t=e.target;
+
+if(
+t.dataset.planLoad!==undefined
+){
+
+loadPlan(
+t.dataset.planLoad
+);
+
+closePlanManager();
+
+}
+
+if(
+t.dataset.planRename!==undefined
+)
+renamePlan(
++t.dataset.planRename
+);
+
+if(
+t.dataset.planDelete!==undefined
+)
+deletePlan(
++t.dataset.planDelete
+);
+
+}
+);
+
+
+/* SINGLE */
+
+document.getElementById(
+'copySingleBtn'
+).addEventListener(
+'click',
+copySingle
+);
+
+document.getElementById(
+'singleCountdownBtn'
+).addEventListener(
+'click',
+startSingleCountdown
+);
+
+
+/* SYNC */
+
+document.getElementById(
+'sendNextBtn'
+).addEventListener(
+'click',
+sendNext
+);
+
+document.getElementById(
+'wakeBtn'
+).addEventListener(
+'click',
+toggleWakeLock
+);
+
+document.getElementById(
+'sortBtn'
+).addEventListener(
+'click',
+sortAttacks
+);
+
+document.getElementById(
+'addAttackBtn'
+).addEventListener(
+'click',
+()=>addAttack()
+);
+
+document.getElementById(
+'calculateSyncBtn'
+).addEventListener(
+'click',
+calculateSync
+);
+
+document.getElementById(
+'startSyncBtn'
+).addEventListener(
+'click',
+startSyncCountdown
+);
+
+document.getElementById(
+'battleStartBtn'
+).addEventListener(
+'click',
+battleStart
+);
+
+
+/* ALERTS */
+
+document.getElementById(
+'alertBtn'
+).addEventListener(
+'click',
+enableAlerts
+);
+
+document.getElementById(
+'soundBtn'
+).addEventListener(
+'click',
+toggleSound
+);
+
+document.getElementById(
+'vibrateBtn'
+).addEventListener(
+'click',
+toggleVibration
+);
+
+
+/* BATTLE */
+
+document.getElementById(
+'battleLaunchBtn'
+).addEventListener(
+'click',
+sendNext
+);
+
+document.getElementById(
+'battleExitBtn'
+).addEventListener(
+'click',
+closeBattleStart
+);
+
+
+/* SYNC INPUTS */
+
+[
+'stx',
+'sty',
+'sarrival',
+'offset'
+].forEach(id=>{
+
+document.getElementById(
+id
+).addEventListener(
+'input',
+calculateSync
+);
+
+});
+
+
+/* SINGLE INPUTS */
+
+[
+'sx',
+'sy',
+'tx',
+'ty',
+'su',
+'arrival'
+].forEach(id=>{
+
+document.getElementById(
+id
+).addEventListener(
+'input',
+calcSingle
+);
+
+});
 
 }
 
 
-/*
-====================================================
-START APP
-====================================================
-*/
+/* START */
 
 populate(
-  document.getElementById('su')
+document.getElementById('su')
 );
 
 localInputNow(
-  document.getElementById('arrival'),
-  60
+document.getElementById('arrival'),
+60
 );
 
 localInputNow(
-  document.getElementById('sarrival'),
-  60
+document.getElementById('sarrival'),
+60
 );
 
 refreshPlans();
@@ -2854,43 +2993,42 @@ wire();
 
 calcSingle();
 
-soundOn =
-  localStorage.getItem(
-    'valorSound'
-  ) !== 'off';
+soundOn=
+localStorage.getItem(
+'valorSound'
+)!=='off';
 
-vibrationOn =
-  localStorage.getItem(
-    'valorVibrate'
-  ) !== 'off';
-
-document.getElementById(
-  'soundBtn'
-).textContent =
-  `🔊 Sound: ${soundOn?'On':'Off'}`;
+vibrationOn=
+localStorage.getItem(
+'valorVibrate'
+)!=='off';
 
 document.getElementById(
-  'vibrateBtn'
-).textContent =
-  `📳 Vibration: ${vibrationOn?'On':'Off'}`;
+'soundBtn'
+).textContent=
+`🔊 Sound: ${soundOn?'On':'Off'}`;
+
+document.getElementById(
+'vibrateBtn'
+).textContent=
+`📳 Vibration: ${vibrationOn?'On':'Off'}`;
 
 updateClocks();
 
 setInterval(()=>{
 
-  updateClocks();
+updateClocks();
 
-  if(
-    !document
-      .getElementById('sync')
-      .classList
-      .contains('hidden')
-  ){
+if(
+!document.getElementById(
+'sync'
+).classList.contains('hidden')
+){
 
-    refreshDashboard();
-    alertPending();
+refreshDashboard();
+alertPending();
 
-  }
+}
 
 },250);
 
