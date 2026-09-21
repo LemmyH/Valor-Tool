@@ -1,4 +1,4 @@
-const CACHE = 'valor-tool-v7.8';
+const CACHE = 'valor-tool-v7.8-fixed';
 
 const ASSETS = [
   './',
