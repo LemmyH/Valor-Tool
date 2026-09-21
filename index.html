@@ -1,835 +1,604 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#111827">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="mobile-web-app-capable" content="yes">
-<title>Valor Tool</title>
-
 <link rel="manifest" href="manifest.json">
-
+<title>Valor Tool</title>
 <style>
+:root{--bg:#0b1020;--card:#141b2f;--muted:#9aa6bf;--text:#f7f8fb;--accent:#65d6a6;--danger:#ff7373;--line:#27314a}
 *{box-sizing:border-box}
-
-html,body{
-  margin:0;
-  padding:0;
-  background:#0b1020;
-  color:#e5e7eb;
-  font-family:Arial,sans-serif;
-}
-
-body{
-  min-height:100vh;
-}
-
-header{
-  background:#111827;
-  padding:16px;
-  text-align:center;
-  border-bottom:1px solid #374151;
-}
-
-header h1{
-  margin:0;
-  font-size:25px;
-  color:#fbbf24;
-}
-
-header p{
-  margin:6px 0 0;
-  color:#9ca3af;
-  font-size:13px;
-}
-
-.container{
-  max-width:760px;
-  margin:auto;
-  padding:14px;
-}
-
-.card{
-  background:#111827;
-  border:1px solid #374151;
-  border-radius:14px;
-  padding:14px;
-  margin-bottom:14px;
-}
-
-h2{
-  margin:0 0 12px;
-  font-size:18px;
-}
-
-h3{
-  margin:12px 0 8px;
-  font-size:15px;
-}
-
-label{
-  display:block;
-  margin:8px 0 5px;
-  color:#d1d5db;
-  font-size:13px;
-}
-
-input,
-select,
-button{
-  font-size:16px;
-}
-
-input,
-select{
-  width:100%;
-  padding:12px;
-  border-radius:9px;
-  border:1px solid #4b5563;
-  background:#0f172a;
-  color:#fff;
-  -webkit-user-select:text;
-  user-select:text;
-}
-
-input:focus,
-select:focus{
-  outline:2px solid #f59e0b;
-  border-color:#f59e0b;
-}
-
-button{
-  border:0;
-  border-radius:10px;
-  padding:12px 14px;
-  background:#f59e0b;
-  color:#111827;
-  font-weight:bold;
-  cursor:pointer;
-  touch-action:manipulation;
-}
-
-button.secondary{
-  background:#374151;
-  color:#fff;
-}
-
-button.danger{
-  background:#991b1b;
-  color:#fff;
-}
-
-button.green{
-  background:#15803d;
-  color:#fff;
-}
-
-button.small{
-  padding:8px 10px;
-  font-size:14px;
-}
-
-.row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
-
-.row3{
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr;
-  gap:10px;
-}
-
-.actions{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  margin-top:12px;
-}
-
-.actions button{
-  flex:1;
-  min-width:120px;
-}
-
-.tabs{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-  margin-bottom:14px;
-}
-
-.tab{
-  background:#1f2937;
-  color:#d1d5db;
-}
-
-.tab.active{
-  background:#f59e0b;
-  color:#111827;
-}
-
-.hidden{
-  display:none!important;
-}
-
-.result{
-  background:#0b1222;
-  border:1px solid #374151;
-  border-radius:12px;
-  padding:12px;
-  margin-top:12px;
-}
-
-.result strong{
-  color:#fbbf24;
-}
-
-.launch{
-  font-size:23px;
-  font-weight:bold;
-  color:#fbbf24;
-}
-
-.local{
-  color:#9ca3af;
-  font-size:13px;
-  margin-top:3px;
-}
-
-.countdown{
-  font-size:30px;
-  font-weight:bold;
-  margin-top:8px;
-  color:#22c55e;
-}
-
-.wave{
-  border:1px solid #374151;
-  border-radius:12px;
-  padding:12px;
-  margin-top:10px;
-}
-
-.wave.launched{
-  opacity:.45;
-}
-
-.modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.75);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:15px;
-  z-index:1000;
-}
-
-.modal-box{
-  width:min(500px,100%);
-  max-height:90vh;
-  overflow:auto;
-  background:#111827;
-  border:1px solid #4b5563;
-  border-radius:15px;
-  padding:16px;
-}
-
-.modal-box h2{
-  color:#fbbf24;
-}
-
-.time-grid{
-  display:grid;
-  grid-template-columns:1.4fr 1fr 1fr 1fr;
-  gap:8px;
-}
-
-.time-grid select{
-  text-align:center;
-}
-
-.city-item,
-.plan-item{
-  background:#0f172a;
-  border:1px solid #374151;
-  border-radius:10px;
-  padding:10px;
-  margin-top:8px;
-}
-
-.city-item strong,
-.plan-item strong{
-  color:#fbbf24;
-}
-
-.notice{
-  background:#172554;
-  border:1px solid #1d4ed8;
-  color:#bfdbfe;
-  border-radius:10px;
-  padding:10px;
-  font-size:13px;
-  margin-bottom:12px;
-}
-
-.server-clock{
-  text-align:center;
-  font-size:13px;
-  color:#9ca3af;
-  margin-bottom:12px;
-}
-
-.server-clock strong{
-  color:#fbbf24;
-}
-
-.overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.9);
-  z-index:2000;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:20px;
-}
-
-.overlay-box{
-  width:min(500px,100%);
-  background:#111827;
-  border:1px solid #4b5563;
-  border-radius:18px;
-  padding:24px;
-}
-
-.overlay-box h2{
-  color:#fbbf24;
-  font-size:25px;
-}
-
-.big-time{
-  font-size:42px;
-  font-weight:bold;
-  color:#22c55e;
-  margin:15px 0;
-}
-
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+main{max-width:720px;margin:auto;padding:18px 14px 42px}
+h1{font-size:26px;margin:6px 0 4px}
+.sub{color:var(--muted);margin:0 0 18px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+button,.btn{border:0;border-radius:12px;padding:13px 14px;font-weight:700;font-size:15px;background:#202a43;color:var(--text);touch-action:manipulation}
+button:active{transform:scale(.98)}
+button.active{background:var(--accent);color:#08130e}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px;margin:12px 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.field{margin:9px 0}
+.field label{display:block;color:var(--muted);font-size:12px;margin-bottom:5px}
+input,select{width:100%;padding:12px;-webkit-user-select:text;user-select:text;border-radius:10px;border:1px solid var(--line);background:#0f1629;color:var(--text);font-size:16px}
+.result{text-align:center;padding:18px}
+.result .big{font-size:32px;font-weight:800;color:var(--accent);letter-spacing:.5px}
+.small{font-size:12px;color:var(--muted)}
+.row{display:flex;gap:8px;align-items:center;justify-content:space-between}
+.attack{border-top:1px solid var(--line);padding:12px 0}
+.launch{font-size:20px;font-weight:800;color:var(--accent)}
+.danger{color:var(--danger)}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.hidden{display:none!important}
+.unitrow{display:grid;grid-template-columns:1.2fr 1fr 1fr auto;gap:7px;align-items:end}
 @media(max-width:520px){
-  .row3{
-    grid-template-columns:1fr;
-  }
-
-  .time-grid{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .launch{
-    font-size:20px;
-  }
+  .unitrow{grid-template-columns:1fr 1fr}
+  .unitrow .remove{grid-column:2}
+  .grid{grid-template-columns:1fr 1fr}
 }
+.nextwave{border:2px solid var(--accent);box-shadow:0 0 0 2px #65d6a622}
+.nextbadge{display:inline-block;background:var(--accent);color:#08130e;border-radius:999px;padding:4px 8px;font-size:11px;font-weight:800}
+.countbig{font-size:38px;font-weight:900;color:var(--accent);text-align:center}
+.launched{opacity:.42;order:99}
+.cityselect{margin-top:8px}
+@media(max-width:520px){.countbig{font-size:32px}}
+.modal{position:fixed;inset:0;background:#000b;display:flex;align-items:flex-end;justify-content:center;z-index:20;padding:12px}
+.modalbox{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:15px;width:min(720px,100%);max-height:90vh;overflow:auto}
+.managerrow{border:1px solid var(--line);border-radius:12px;padding:11px;margin:8px 0}
+.managerrow .actions{margin-top:8px}
+.alertnow{animation:pulse .7s infinite alternate}
+.timefield{display:flex;gap:8px}
+.timefield input{flex:1}
+.timepick{min-width:92px}
+@keyframes pulse{from{transform:scale(1)}to{transform:scale(1.03)}}
 </style>
 </head>
 
 <body>
 
-<header>
-  <h1>⚔️ Valor Tool</h1>
-  <p>Coordinate and launch synchronised attacks using server time</p>
-</header>
+<main>
 
-<div class="container">
+<h1>⚔️ Valor Tool</h1>
+<p class="sub">Launch-time calculator • World Speed 3 / Unit Speed 2</p>
 
-  <div class="server-clock">
-    Server Time:
-    <strong id="serverClock">--</strong>
-    &nbsp; | &nbsp;
-    Your Time:
-    <strong id="localClock">--</strong>
-  </div>
+<div class="card" style="padding:10px 12px">
+<div class="row">
+<span>
+<strong>🕐 Server Time</strong><br>
+<span id="serverClock" class="small">—</span>
+</span>
 
-  <div class="tabs">
-    <button class="tab active" id="singleTab">Single Attack</button>
-    <button class="tab" id="syncTab">Synchronised Attack</button>
-  </div>
+<span style="text-align:right">
+<strong>📱 Your Time</strong><br>
+<span id="localClock" class="small">—</span>
+</span>
+</div>
+</div>
 
-  <!-- SINGLE ATTACK -->
 
-  <section id="singleSection">
+<div class="tabs">
+<button id="singleTab" class="active" type="button">Single Attack</button>
+<button id="syncTab" type="button">Synchronised</button>
+</div>
 
-    <div class="card">
 
-      <h2>🎯 Single Attack</h2>
+<div class="card" style="padding:11px">
 
-      <div class="notice">
-        Enter your city and target coordinates, then choose the exact
-        arrival time in <strong>Server Time</strong>.
-      </div>
+<div class="row">
 
-      <h3>Your City</h3>
+<span>
+<strong>Saved cities</strong><br>
+<span class="small">
+Store your common launch cities on this device.
+</span>
+</span>
 
-      <div class="row">
+<button id="cityManageBtn" type="button">
+Manage
+</button>
 
-        <div>
-          <label>From X</label>
-          <input
-            id="sx"
-            type="text"
-            inputmode="numeric"
-            value="240"
-            autocomplete="off">
-        </div>
-
-        <div>
-          <label>From Y</label>
-          <input
-            id="sy"
-            type="text"
-            inputmode="numeric"
-            value="261"
-            autocomplete="off">
-        </div>
-
-      </div>
-
-      <h3>Target</h3>
-
-      <div class="row">
-
-        <div>
-          <label>Target X</label>
-          <input
-            id="tx"
-            type="text"
-            inputmode="numeric"
-            value="252"
-            autocomplete="off">
-        </div>
-
-        <div>
-          <label>Target Y</label>
-          <input
-            id="ty"
-            type="text"
-            inputmode="numeric"
-            value="262"
-            autocomplete="off">
-        </div>
-
-      </div>
-
-      <label>Troop Type</label>
-
-      <select id="unit">
-        <option value="40">Scouts — 40 sec/tile</option>
-        <option value="60">Knights — 60 sec/tile</option>
-        <option value="70">Guardians — 70 sec/tile</option>
-        <option value="110">Berserkers — 110 sec/tile</option>
-        <option value="120">Lancers — 120 sec/tile</option>
-        <option value="130">Sentries — 130 sec/tile</option>
-        <option value="200">Rams — 200 sec/tile</option>
-        <option value="200">Ballistas — 200 sec/tile</option>
-        <option value="250">Scholars — 250 sec/tile</option>
-      </select>
-
-      <label>Desired Arrival — Server Time</label>
-
-      <div class="row">
-
-        <input
-          id="arrival"
-          type="text"
-          readonly
-          placeholder="Choose arrival time">
-
-        <button
-          type="button"
-          class="secondary"
-          id="arrivalPickBtn">
-          Pick time
-        </button>
-
-      </div>
-
-      <div class="actions">
-        <button id="calculateSingle">
-          Calculate Launch
-        </button>
-
-        <button
-          class="secondary"
-          id="saveSingleCity">
-          Save City
-        </button>
-      </div>
-
-      <div id="singleResult"></div>
-
-    </div>
-
-    <div class="card">
-
-      <h2>🏙️ Saved Cities</h2>
-
-      <div class="actions">
-
-        <button
-          class="secondary"
-          id="openCities">
-          Manage Cities
-        </button>
-
-      </div>
-
-      <div id="cityQuickList"></div>
-
-    </div>
-
-    <div class="card">
-
-      <h2>📋 Battle Plans</h2>
-
-      <div class="actions">
-
-        <button
-          class="secondary"
-          id="openPlans">
-          Manage Battle Plans
-        </button>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- SYNCHRONISED ATTACK -->
-
-  <section id="syncSection" class="hidden">
-
-    <div class="card">
-
-      <h2>⚔️ Synchronised Attack</h2>
-
-      <div class="notice">
-        Multiple attacks can be launched so they arrive together or at
-        precisely different landing times.
-      </div>
-
-      <h3>Target</h3>
-
-      <div class="row">
-
-        <div>
-          <label>Target X</label>
-          <input
-            id="stx"
-            type="text"
-            inputmode="numeric"
-            value="300"
-            autocomplete="off">
-        </div>
-
-        <div>
-          <label>Target Y</label>
-          <input
-            id="sty"
-            type="text"
-            inputmode="numeric"
-            value="400"
-            autocomplete="off">
-        </div>
-
-      </div>
-
-      <label>Landing Time 1 — Server Time</label>
-
-      <div class="row">
-
-        <input
-          id="sarrival"
-          type="text"
-          readonly
-          placeholder="Choose arrival time">
-
-        <button
-          type="button"
-          class="secondary"
-          id="sarrivalPickBtn">
-          Pick time
-        </button>
-
-      </div>
-
-      <label>Safety Offset — seconds</label>
-
-      <input
-        id="offset"
-        type="text"
-        inputmode="numeric"
-        value="0">
-
-      <div id="waves"></div>
-
-      <div class="actions">
-
-        <button id="addWave">
-          + Add Wave
-        </button>
-
-        <button id="calculateSync">
-          Calculate Launches
-        </button>
-
-      </div>
-
-      <div id="syncResult"></div>
-
-    </div>
-
-  </section>
+</div>
 
 </div>
 
 
-<!-- TIME PICKER -->
+<div id="cityModal" class="modal hidden">
+
+<div class="modalbox">
+
+<div class="row">
+<h2 style="margin:0">Saved Cities</h2>
+<button id="cityCloseBtn" type="button">✕</button>
+</div>
+
+<div id="cityList"></div>
+
+<div class="card" style="margin:12px 0 0">
+
+<div class="field">
+<label>City name</label>
+<input id="newCityName" placeholder="Main City">
+</div>
+
+<div class="grid">
+
+<div class="field">
+<label>X</label>
+<input id="newCityX" type="text" inputmode="numeric" placeholder="240">
+</div>
+
+<div class="field">
+<label>Y</label>
+<input id="newCityY" type="text" inputmode="numeric" placeholder="261">
+</div>
+
+</div>
+
+<button id="saveCityBtn" type="button" style="width:100%">
++ Save city
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card" id="planTools">
+
+<div class="row">
+
+<span>
+<strong>Battle Plans</strong><br>
+<span class="small">
+Save a target, arrival time and wave setup for reuse.
+</span>
+</span>
+
+<div class="actions">
+<button id="savePlanBtn" type="button">Save plan</button>
+<button id="planManageBtn" type="button">Manage</button>
+</div>
+
+</div>
+
+<select id="planSelect" class="cityselect">
+<option value="">Load a saved plan…</option>
+</select>
+
+</div>
+
+
+<div id="planModal" class="modal hidden">
+
+<div class="modalbox">
+
+<div class="row">
+<h2 style="margin:0">Battle Plans</h2>
+<button id="planCloseBtn" type="button">✕</button>
+</div>
+
+<div id="planList"></div>
+
+</div>
+
+</div>
+
+
+<section id="single">
+
+<div class="card">
+
+<div class="grid">
+
+<div class="field">
+<label>From X</label>
+<input id="sx" type="text" inputmode="numeric" value="240">
+</div>
+
+<div class="field">
+<label>From Y</label>
+<input id="sy" type="text" inputmode="numeric" value="261">
+</div>
+
+<div class="field">
+<label>Target X</label>
+<input id="tx" type="text" inputmode="numeric" value="252">
+</div>
+
+<div class="field">
+<label>Target Y</label>
+<input id="ty" type="text" inputmode="numeric" value="262">
+</div>
+
+</div>
+
+<div class="field">
+<label>Troop</label>
+<select id="su"></select>
+</div>
+
+<div class="field">
+
+<label>Desired arrival (Server Time)</label>
+
+<div class="timefield">
+
+<input
+id="arrival"
+type="text"
+readonly
+placeholder="YYYY-MM-DD HH:mm:ss">
+
+<button
+id="arrivalPickBtn"
+class="timepick"
+type="button">
+🕐 Pick time
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card result">
+
+<div class="small">
+LAUNCH AT • SERVER TIME
+</div>
+
+<div id="singleResult" class="big">—</div>
+
+<div id="singleLocal" class="small"></div>
+
+<div id="singleTravel" class="small"></div>
 
 <div
-  id="timePickerModal"
-  class="modal hidden">
+class="actions"
+style="justify-content:center;margin-top:12px">
 
-  <div class="modal-box">
+<button id="copySingleBtn" type="button">
+Copy launch time
+</button>
 
-    <h2>🕒 Choose Server Time</h2>
-
-    <div class="notice">
-      This uses the game's Server Time (UTC).
-    </div>
-
-    <div class="time-grid">
-
-      <div>
-        <label>Date</label>
-        <select id="pickDate"></select>
-      </div>
-
-      <div>
-        <label>Hour</label>
-        <select id="pickHour"></select>
-      </div>
-
-      <div>
-        <label>Minute</label>
-        <select id="pickMinute"></select>
-      </div>
-
-      <div>
-        <label>Second</label>
-        <select id="pickSecond"></select>
-      </div>
-
-    </div>
-
-    <div class="actions">
-
-      <button id="setPickedTime">
-        Set arrival
-      </button>
-
-      <button
-        class="secondary"
-        id="closeTimePicker">
-        Cancel
-      </button>
-
-    </div>
-
-  </div>
+<button id="singleCountdownBtn" type="button">
+Start countdown
+</button>
 
 </div>
-
-
-<!-- SAVED CITIES -->
 
 <div
-  id="citiesModal"
-  class="modal hidden">
+id="singleCountdown"
+class="small"
+style="margin-top:10px">
+</div>
 
-  <div class="modal-box">
+</div>
 
-    <h2>🏙️ Saved Cities</h2>
+</section>
 
-    <label>City Name</label>
-    <input id="newCityName" placeholder="My main city">
 
-    <div class="row">
+<section id="sync" class="hidden">
 
-      <div>
-        <label>X</label>
-        <input
-          id="newCityX"
-          type="text"
-          inputmode="numeric"
-          placeholder="240">
-      </div>
+<div class="card">
 
-      <div>
-        <label>Y</label>
-        <input
-          id="newCityY"
-          type="text"
-          inputmode="numeric"
-          placeholder="261">
-      </div>
+<div class="grid">
 
-    </div>
+<div class="field">
+<label>Target X</label>
+<input id="stx" type="text" inputmode="numeric" value="300">
+</div>
 
-    <div class="actions">
+<div class="field">
+<label>Target Y</label>
+<input id="sty" type="text" inputmode="numeric" value="400">
+</div>
 
-      <button id="addCity">
-        Add City
-      </button>
+<div class="field">
 
-      <button
-        class="secondary"
-        id="closeCities">
-        Close
-      </button>
+<label>Arrival (Server Time)</label>
 
-    </div>
+<div class="timefield">
 
-    <div id="citiesList"></div>
+<input
+id="sarrival"
+type="text"
+readonly
+placeholder="YYYY-MM-DD HH:mm:ss">
 
-  </div>
+<button
+id="sarrivalPickBtn"
+class="timepick"
+type="button">
+🕐 Pick time
+</button>
+
+</div>
+
+</div>
+
+<div class="field">
+<label>Safety offset (seconds)</label>
+<input id="offset" type="text" inputmode="numeric" value="0">
+</div>
+
+</div>
 
 </div>
 
 
-<!-- BATTLE PLANS -->
+<div class="card" id="syncDashboard">
+
+<div class="small">
+NEXT ATTACK TO SEND
+</div>
+
+<div id="nextAttack" class="countbig">—</div>
 
 <div
-  id="plansModal"
-  class="modal hidden">
-
-  <div class="modal-box">
-
-    <h2>📋 Battle Plans</h2>
-
-    <label>Plan Name</label>
-
-    <input
-      id="planName"
-      placeholder="Evening attack">
-
-    <div class="actions">
-
-      <button id="savePlan">
-        Save Current Plan
-      </button>
-
-      <button
-        class="secondary"
-        id="closePlans">
-        Close
-      </button>
-
-    </div>
-
-    <div id="plansList"></div>
-
-  </div>
-
+id="nextDetails"
+class="small"
+style="text-align:center">
+Calculate your waves to begin.
 </div>
-
-
-<!-- BATTLE START -->
 
 <div
-  id="battleOverlay"
-  class="overlay hidden">
+class="actions"
+style="justify-content:center;margin-top:10px">
 
-  <div class="overlay-box">
+<button id="sendNextBtn" type="button">
+✓ Mark next launched
+</button>
 
-    <h2>⚔️ Battle Start</h2>
+<button id="wakeBtn" type="button">
+☀️ Keep awake
+</button>
 
-    <div id="battleMessage">
-      Get ready...
-    </div>
-
-    <div
-      id="battleCountdown"
-      class="big-time">
-      --
-    </div>
-
-    <div class="actions">
-
-      <button
-        class="green"
-        id="enableAlerts">
-        Enable Alerts
-      </button>
-
-      <button
-        class="secondary"
-        id="closeBattle">
-        Close
-      </button>
-
-    </div>
-
-  </div>
+<button id="sortBtn" type="button">
+↕ Sort by launch
+</button>
 
 </div>
+
+</div>
+
+
+<div id="attacks"></div>
+
+
+<div class="actions">
+
+<button id="addAttackBtn" type="button">
++ Add attack
+</button>
+
+<button id="calculateSyncBtn" type="button">
+Calculate all
+</button>
+
+<button id="startSyncBtn" type="button">
+Start countdowns
+</button>
+
+<button id="battleStartBtn" type="button">
+🔥 Battle Start
+</button>
+
+</div>
+
+
+<div
+class="card"
+style="margin-top:12px">
+
+<div class="row">
+
+<span>
+<strong>Launch alerts</strong><br>
+<span class="small">
+Alerts work while this page/app is open.
+Keep the screen awake for best reliability.
+</span>
+</span>
+
+<button id="alertBtn" type="button">
+Enable
+</button>
+
+</div>
+
+<div
+class="actions"
+style="margin-top:9px">
+
+<button id="soundBtn" type="button">
+🔊 Sound: On
+</button>
+
+<button id="vibrateBtn" type="button">
+📳 Vibration: On
+</button>
+
+</div>
+
+<div
+id="alertStatus"
+class="small"
+style="margin-top:8px">
+</div>
+
+</div>
+
+<div
+id="syncStatus"
+class="small"
+style="margin-top:10px">
+</div>
+
+</section>
+
+
+<div class="card small">
+
+<strong>Movement data</strong><br>
+
+Scouts 0:40/tile •
+Knights 1:00 •
+Guardians 1:10 •
+Berserkers 1:50 •
+Lancers 2:00 •
+Sentries 2:10 •
+Rams 3:20 •
+Ballistas 3:20 •
+Scholars 4:10
+
+<br><br>
+
+Distance uses straight-line coordinates:
+√(ΔX² + ΔY²).
+
+Times are based on measurements supplied in-game.
+
+</div>
+
+
+<div
+id="timePickerModal"
+class="modal hidden"
+style="align-items:center">
+
+<div class="modalbox">
+
+<div class="row">
+
+<h2 style="margin:0">
+Choose Arrival Time
+</h2>
+
+<button id="timePickerClose" type="button">
+✕
+</button>
+
+</div>
+
+<p
+class="small"
+style="margin:8px 0 12px">
+Select the date and server time for the arrival.
+</p>
+
+<div class="field">
+
+<label>Date (Server Time)</label>
+
+<input
+id="pickerDate"
+type="date">
+
+</div>
+
+<div class="grid">
+
+<div class="field">
+<label>Hour</label>
+<select id="pickerHour"></select>
+</div>
+
+<div class="field">
+<label>Minute</label>
+<select id="pickerMinute"></select>
+</div>
+
+<div class="field">
+<label>Second</label>
+<select id="pickerSecond"></select>
+</div>
+
+</div>
+
+<div
+class="actions"
+style="justify-content:flex-end;margin-top:10px">
+
+<button id="timePickerCancel" type="button">
+Cancel
+</button>
+
+<button
+id="timePickerSet"
+type="button"
+class="active">
+✓ Set arrival
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div
+id="battleOverlay"
+class="modal hidden"
+style="align-items:center">
+
+<div
+class="modalbox"
+style="text-align:center">
+
+<div class="small">
+BATTLE CONTROL
+</div>
+
+<h2 style="margin:6px 0">
+Next wave
+</h2>
+
+<div id="battleCountdown" class="countbig">
+—
+</div>
+
+<div
+id="battleDetails"
+style="font-size:18px;font-weight:700;margin:6px 0">
+</div>
+
+<div
+class="actions"
+style="justify-content:center;margin-top:14px">
+
+<button id="battleLaunchBtn" type="button">
+✓ LAUNCHED
+</button>
+
+<button id="battleExitBtn" type="button">
+Exit
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+</main>
 
 
 <script>
 
+(function(){
+
 'use strict';
 
 
-/* =========================================================
-   HELPERS
-========================================================= */
-
-const q = (s,r=document) => r.querySelector(s);
-
-const qa = (s,r=document) =>
-  [...r.querySelectorAll(s)];
-
-
-/* =========================================================
-   IMPORTANT SAMSUNG PICK-TIME FIX
-========================================================= */
-
-document.addEventListener('click',function(e){
-
-  const button =
-    e.target.closest('#arrivalPickBtn,#sarrivalPickBtn');
-
-  if(!button)return;
-
-  if(button.id==='arrivalPickBtn'){
-    openTimePicker('arrival');
-  }
-
-  if(button.id==='sarrivalPickBtn'){
-    openTimePicker('sarrival');
-  }
-
-});
-
-
-/* =========================================================
-   TROOP SPEEDS
-========================================================= */
-
-const units = {
+const units={
   Scouts:40,
   Knights:60,
   Guardians:70,
@@ -842,1086 +611,425 @@ const units = {
 };
 
 
-/* =========================================================
-   STATE
-========================================================= */
+const $=id=>document.getElementById(id);
 
-let pickerTarget = 'arrival';
+const q=(s,r=document)=>r.querySelector(s);
 
-let waves = [];
-
-let launchedWaves = new Set();
-
-let editingCityIndex = -1;
+const qa=(s,r=document)=>[...r.querySelectorAll(s)];
 
 
-/* =========================================================
-   DATE / SERVER TIME
-========================================================= */
+/* Samsung Pick Time fix */
 
-function pad(n){
-  return String(n).padStart(2,'0');
+document.addEventListener(
+  'click',
+  function(e){
+
+    const button =
+      e.target.closest(
+        '#arrivalPickBtn,#sarrivalPickBtn'
+      );
+
+    if(!button)return;
+
+    if(
+      button.id==='arrivalPickBtn'
+    ){
+      openTimePicker('arrival');
+    }
+
+    if(
+      button.id==='sarrivalPickBtn'
+    ){
+      openTimePicker('sarrival');
+    }
+
+  }
+);
+
+
+let lastSingleDate=null;
+
+let singleTimer=null;
+
+let syncTimer=null;
+
+let battleTimer=null;
+
+let wakeLock=null;
+
+let soundOn=true;
+
+let vibrationOn=true;
+
+let lastAlertKey=null;
+
+let audioCtx=null;
+
+
+function showMode(m){
+
+  $('single')
+    .classList
+    .toggle(
+      'hidden',
+      m!=='single'
+    );
+
+  $('sync')
+    .classList
+    .toggle(
+      'hidden',
+      m!=='sync'
+    );
+
+  $('singleTab')
+    .classList
+    .toggle(
+      'active',
+      m==='single'
+    );
+
+  $('syncTab')
+    .classList
+    .toggle(
+      'active',
+      m==='sync'
+    );
+
 }
 
 
-function serverNow(){
-  return Date.now();
+function fmt(sec){
+
+  sec=Math.max(
+    0,
+    Math.round(sec)
+  );
+
+  let h=
+    Math.floor(
+      sec/3600
+    );
+
+  let m=
+    Math.floor(
+      sec%3600/60
+    );
+
+  let s=
+    sec%60;
+
+  return [
+    h,
+    m,
+    s
+  ]
+  .map(
+    x=>String(x).padStart(2,'0')
+  )
+  .join(':');
+
 }
 
 
-function serverValue(ms){
+function dist(
+  x1,
+  y1,
+  x2,
+  y2
+){
 
-  const d = new Date(ms);
-
-  return (
-    d.getUTCFullYear() + '-' +
-    pad(d.getUTCMonth()+1) + '-' +
-    pad(d.getUTCDate()) + ' ' +
-    pad(d.getUTCHours()) + ':' +
-    pad(d.getUTCMinutes()) + ':' +
-    pad(d.getUTCSeconds())
+  return Math.hypot(
+    x2-x1,
+    y2-y1
   );
 
 }
 
 
-function localValue(ms){
+function dtValue(d){
 
-  return new Date(ms).toLocaleString();
+  return new Intl.DateTimeFormat(
+    [],
+    {
+      year:'numeric',
+      month:'2-digit',
+      day:'2-digit',
+      hour:'2-digit',
+      minute:'2-digit',
+      second:'2-digit'
+    }
+  ).format(d);
+
+}
+
+
+function serverValue(d){
+
+  return new Intl.DateTimeFormat(
+    'en-GB',
+    {
+      timeZone:'UTC',
+      year:'numeric',
+      month:'2-digit',
+      day:'2-digit',
+      hour:'2-digit',
+      minute:'2-digit',
+      second:'2-digit',
+      hour12:false
+    }
+  ).format(d);
+
+}
+
+
+function localInputNow(
+  el,
+  mins=60
+){
+
+  let d=
+    new Date(
+      Date.now()+
+      mins*60000
+    );
+
+  d.setMilliseconds(0);
+
+  let pad=
+    n=>String(n).padStart(
+      2,
+      '0'
+    );
+
+  el.value=
+    `${d.getUTCFullYear()}-`+
+    `${pad(d.getUTCMonth()+1)}-`+
+    `${pad(d.getUTCDate())} `+
+    `${pad(d.getUTCHours())}:`+
+    `${pad(d.getUTCMinutes())}:`+
+    `${pad(d.getUTCSeconds())}`;
 
 }
 
 
 function parseServerInput(v){
 
-  if(!v)return NaN;
+  if(!v)
+    return new Date(NaN);
 
-  let m =
+  let m=
     v.match(
       /^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})(?::(\d{2}))?/
     );
 
-  if(!m)return NaN;
-
-  return Date.UTC(
-    +m[1],
-    +m[2]-1,
-    +m[3],
-    +m[4],
-    +m[5],
-    +(m[6]||0)
-  );
-
-}
-
-
-function localInputNow(el,mins=60){
-
-  let d =
-    new Date(
-      Date.now() + mins*60000
-    );
-
-  d.setSeconds(0,0);
-
-  el.value =
-    `${d.getUTCFullYear()}-` +
-    `${pad(d.getUTCMonth()+1)}-` +
-    `${pad(d.getUTCDate())} ` +
-    `${pad(d.getUTCHours())}:` +
-    `${pad(d.getUTCMinutes())}:00`;
+  return m
+    ? new Date(
+        Date.UTC(
+          +m[1],
+          +m[2]-1,
+          +m[3],
+          +m[4],
+          +m[5],
+          m[6]===undefined
+            ? 0
+            : +m[6]
+        )
+      )
+    : new Date(NaN);
 
 }
 
-
-/* =========================================================
-   LIVE CLOCKS
-========================================================= */
 
 function updateClocks(){
 
-  const now = Date.now();
+  let d=new Date();
 
-  q('#serverClock').textContent =
-    serverValue(now) + ' UTC';
+  $('serverClock').textContent=
+    serverValue(d)+
+    ' UTC';
 
-  q('#localClock').textContent =
-    new Date(now).toLocaleString();
-
-}
-
-
-setInterval(updateClocks,1000);
-
-updateClocks();
-
-
-/* =========================================================
-   DISTANCE / TRAVEL
-========================================================= */
-
-function distance(x1,y1,x2,y2){
-
-  return Math.sqrt(
-    Math.pow(x2-x1,2) +
-    Math.pow(y2-y1,2)
-  );
+  $('localClock').textContent=
+    dtValue(d);
 
 }
 
 
-function travelSeconds(
-  x1,
-  y1,
-  x2,
-  y2,
-  speed
-){
+function populate(sel){
 
-  return distance(
-    x1,y1,x2,y2
-  ) * speed;
+  sel.innerHTML=
+    Object.keys(units)
+      .map(
+        u=>`<option>${u}</option>`
+      )
+      .join('');
 
 }
 
 
-/* =========================================================
-   TIME PICKER
-========================================================= */
-
-function populateTimePicker(){
-
-  const date =
-    q('#pickDate');
-
-  const hour =
-    q('#pickHour');
-
-  const minute =
-    q('#pickMinute');
-
-  const second =
-    q('#pickSecond');
-
-
-  date.innerHTML = '';
-  hour.innerHTML = '';
-  minute.innerHTML = '';
-  second.innerHTML = '';
-
-
-  const now =
-    new Date(
-      Date.now()+3600000
-    );
-
-
-  for(
-    let i=0;
-    i<7;
-    i++
-  ){
-
-    const d =
-      new Date(
-        now.getTime()+
-        i*86400000
-      );
-
-    const value =
-      `${d.getUTCFullYear()}-` +
-      `${pad(d.getUTCMonth()+1)}-` +
-      `${pad(d.getUTCDate())}`;
-
-    const text =
-      `${pad(d.getUTCDate())}/` +
-      `${pad(d.getUTCMonth()+1)}/` +
-      `${d.getUTCFullYear()}`;
-
-    const option =
-      document.createElement('option');
-
-    option.value = value;
-    option.textContent = text;
-
-    date.appendChild(option);
-
-  }
-
-
-  for(let i=0;i<24;i++){
-
-    const option =
-      document.createElement('option');
-
-    option.value = pad(i);
-    option.textContent = pad(i);
-
-    hour.appendChild(option);
-
-  }
-
-
-  for(let i=0;i<60;i++){
-
-    const option =
-      document.createElement('option');
-
-    option.value = pad(i);
-    option.textContent = pad(i);
-
-    minute.appendChild(option);
-    second.appendChild(option.cloneNode(true));
-
-  }
-
-}
-
-
-function openTimePicker(target){
-
-  pickerTarget = target;
-
-  populateTimePicker();
-
-
-  let current =
-    parseServerInput(
-      q('#'+target).value
-    );
-
-
-  if(Number.isNaN(current)){
-    current =
-      Date.now()+3600000;
-  }
-
-
-  const d =
-    new Date(current);
-
-
-  q('#pickDate').value =
-    `${d.getUTCFullYear()}-` +
-    `${pad(d.getUTCMonth()+1)}-` +
-    `${pad(d.getUTCDate())}`;
-
-  q('#pickHour').value =
-    pad(d.getUTCHours());
-
-  q('#pickMinute').value =
-    pad(d.getUTCMinutes());
-
-  q('#pickSecond').value =
-    pad(d.getUTCSeconds());
-
-
-  q('#timePickerModal')
-    .classList
-    .remove('hidden');
-
-}
-
-
-function closeTimePicker(){
-
-  q('#timePickerModal')
-    .classList
-    .add('hidden');
-
-}
-
-
-function setPickedTime(){
-
-  const date =
-    q('#pickDate').value;
-
-  const hour =
-    q('#pickHour').value;
-
-  const minute =
-    q('#pickMinute').value;
-
-  const second =
-    q('#pickSecond').value;
-
-
-  q('#'+pickerTarget).value =
-    `${date} ${hour}:${minute}:${second}`;
-
-
-  closeTimePicker();
-
-}
-
-
-/* =========================================================
+/* =====================================================
    SINGLE ATTACK
-========================================================= */
+   TIMING FIX
+===================================================== */
 
-function calculateSingle(){
+function calcSingle(){
 
-  const sx =
-    +q('#sx').value;
+  let d=
+    dist(
+      +$('sx').value,
+      +$('sy').value,
+      +$('tx').value,
+      +$('ty').value
+    );
 
-  const sy =
-    +q('#sy').value;
+  let sec=
+    d*
+    units[
+      $('su').value
+    ];
 
-  const tx =
-    +q('#tx').value;
-
-  const ty =
-    +q('#ty').value;
-
-  const speed =
-    +q('#unit').value;
-
-  const arrival =
+  let a=
     parseServerInput(
-      q('#arrival').value
+      $('arrival').value
+    );
+
+  if(isNaN(a))
+    return;
+
+
+  /*
+    IMPORTANT:
+
+    Travel time can contain a fraction of a second.
+
+    Example:
+    3.16227766 tiles × 200 sec
+    = 632.4555 seconds
+
+    The game works on whole server seconds,
+    so we round the calculated launch time
+    UP to the next whole second.
+  */
+
+  lastSingleDate=
+    new Date(
+      Math.ceil(
+        (
+          a.getTime()-
+          sec*1000
+        )/1000
+      )*1000
     );
 
 
-  if(
-    !Number.isFinite(sx) ||
-    !Number.isFinite(sy) ||
-    !Number.isFinite(tx) ||
-    !Number.isFinite(ty)
-  ){
+  $('singleResult').textContent=
+    serverValue(
+      lastSingleDate
+    );
 
-    q('#singleResult').innerHTML =
-      `<div class="notice">
-        Please enter valid coordinates.
-      </div>`;
+
+  $('singleLocal').textContent=
+    `Your local launch time: ${
+      dtValue(lastSingleDate)
+    }`;
+
+
+  $('singleTravel').textContent=
+    `Distance ${
+      d.toFixed(3)
+    } tiles • Travel ${
+      fmt(sec)
+    }`;
+
+
+  updateSingleCountdown();
+
+}
+
+
+function updateSingleCountdown(){
+
+  if(!lastSingleDate){
+
+    $('singleCountdown')
+      .textContent='';
 
     return;
 
   }
 
+  let s=
+    Math.ceil(
+      (
+        lastSingleDate-
+        Date.now()
+      )/1000
+    );
 
-  if(Number.isNaN(arrival)){
+  $('singleCountdown')
+    .textContent=
+      s>0
+        ?`Countdown: ${fmt(s)}`
+        :'Launch time reached.';
 
-    q('#singleResult').innerHTML =
-      `<div class="notice">
-        Please choose an arrival time.
-      </div>`;
+}
 
+
+function startSingleCountdown(){
+
+  if(singleTimer)
+    clearInterval(
+      singleTimer
+    );
+
+  updateSingleCountdown();
+
+  singleTimer=
+    setInterval(
+      ()=>{
+        updateSingleCountdown();
+
+        if(
+          lastSingleDate &&
+          Date.now()>=lastSingleDate
+        ){
+          clearInterval(
+            singleTimer
+          );
+        }
+
+      },
+      250
+    );
+
+}
+
+
+async function copySingle(){
+
+  if(!lastSingleDate)
     return;
 
-  }
+  try{
 
-
-  const dist =
-    distance(
-      sx,
-      sy,
-      tx,
-      ty
+    await navigator.clipboard.writeText(
+      serverValue(
+        lastSingleDate
+      )
     );
 
+    $('singleCountdown')
+      .textContent=
+      'Launch time copied.';
 
-  const travel =
-    travelSeconds(
-      sx,
-      sy,
-      tx,
-      ty,
-      speed
-    );
-
-
-  const launch =
-    arrival -
-    travel*1000;
-
-
-  q('#singleResult').innerHTML = `
-
-    <div class="result">
-
-      <div>
-        Distance:
-        <strong>${dist.toFixed(3)} tiles</strong>
-      </div>
-
-      <div>
-        Travel:
-        <strong>${formatDuration(travel)}</strong>
-      </div>
-
-      <hr>
-
-      <div>
-        Launch Server Time:
-      </div>
-
-      <div class="launch">
-        ${serverValue(launch)}
-      </div>
-
-      <div class="local">
-        Your local time:
-        ${localValue(launch)}
-      </div>
-
-      <div
-        class="countdown"
-        data-countdown="${launch}">
-        ${formatCountdown(
-          launch-Date.now()
-        )}
-      </div>
-
-    </div>
-  `;
+  }catch(e){}
 
 }
 
 
-/* =========================================================
-   FORMATTERS
-========================================================= */
-
-function formatDuration(sec){
-
-  sec =
-    Math.max(0,sec);
-
-  const h =
-    Math.floor(sec/3600);
-
-  const m =
-    Math.floor(
-      (sec%3600)/60
-    );
-
-  const s =
-    Math.floor(sec%60);
-
-  return (
-    pad(h)+':' +
-    pad(m)+':' +
-    pad(s)
-  );
-
-}
-
-
-function formatCountdown(ms){
-
-  if(ms<=0){
-    return 'LAUNCH NOW';
-  }
-
-  return formatDuration(
-    Math.floor(ms/1000)
-  );
-
-}
-
-
-/* =========================================================
-   COUNTDOWN REFRESH
-========================================================= */
-
-setInterval(()=>{
-
-  qa('[data-countdown]')
-    .forEach(el=>{
-
-      const launch =
-        +el.dataset.countdown;
-
-      el.textContent =
-        formatCountdown(
-          launch-Date.now()
-        );
-
-    });
-
-},500);
-
-
-/* =========================================================
-   TABS
-========================================================= */
-
-function showSingle(){
-
-  q('#singleSection')
-    .classList
-    .remove('hidden');
-
-  q('#syncSection')
-    .classList
-    .add('hidden');
-
-  q('#singleTab')
-    .classList
-    .add('active');
-
-  q('#syncTab')
-    .classList
-    .remove('active');
-
-}
-
-
-function showSync(){
-
-  q('#singleSection')
-    .classList
-    .add('hidden');
-
-  q('#syncSection')
-    .classList
-    .remove('hidden');
-
-  q('#singleTab')
-    .classList
-    .remove('active');
-
-  q('#syncTab')
-    .classList
-    .add('active');
-
-}
-
-
-/* =========================================================
-   WAVES
-========================================================= */
-
-function createWave(data={}){
-
-  const index =
-    waves.length;
-
-  const wave = {
-    id:Date.now()+Math.random(),
-    x:data.x ?? 240,
-    y:data.y ?? 261,
-    unit:data.unit ?? '200',
-    arrival:data.arrival ?? ''
-  };
-
-
-  waves.push(wave);
-
-  renderWaves();
-
-}
-
-
-function renderWaves(){
-
-  const container =
-    q('#waves');
-
-  container.innerHTML = '';
-
-
-  waves.forEach((wave,index)=>{
-
-    const div =
-      document.createElement('div');
-
-    div.className = 'wave';
-
-    if(launchedWaves.has(wave.id)){
-      div.classList.add('launched');
-    }
-
-
-    div.innerHTML = `
-
-      <h3>
-        Wave ${index+1}
-      </h3>
-
-      <div class="row">
-
-        <div>
-
-          <label>From X</label>
-
-          <input
-            class="ax"
-            data-id="${wave.id}"
-            type="text"
-            inputmode="numeric"
-            value="${wave.x}">
-
-        </div>
-
-        <div>
-
-          <label>From Y</label>
-
-          <input
-            class="ay"
-            data-id="${wave.id}"
-            type="text"
-            inputmode="numeric"
-            value="${wave.y}">
-
-        </div>
-
-      </div>
-
-      <label>Troop Type</label>
-
-      <select
-        class="au"
-        data-id="${wave.id}">
-
-        ${unitOptions(wave.unit)}
-
-      </select>
-
-      <label>Landing Time — Server Time</label>
-
-      <div class="row">
-
-        <input
-          class="aa"
-          data-id="${wave.id}"
-          type="text"
-          readonly
-          value="${wave.arrival}">
-
-        <button
-          type="button"
-          class="secondary wavePick"
-          data-id="${wave.id}">
-          Pick time
-        </button>
-
-      </div>
-
-      <div class="actions">
-
-        <button
-          class="secondary small markWave"
-          data-id="${wave.id}">
-          ${
-            launchedWaves.has(wave.id)
-            ? 'Unmark'
-            : 'Mark launched'
-          }
-        </button>
-
-        <button
-          class="danger small deleteWave"
-          data-id="${wave.id}">
-          Delete
-        </button>
-
-      </div>
-    `;
-
-
-    container.appendChild(div);
-
-  });
-
-
-  qa('.ax').forEach(el=>{
-
-    el.addEventListener(
-      'input',
-      ()=>{
-        const w =
-          waves.find(
-            x=>String(x.id)===el.dataset.id
-          );
-
-        if(w)w.x=el.value;
-      }
-    );
-
-  });
-
-
-  qa('.ay').forEach(el=>{
-
-    el.addEventListener(
-      'input',
-      ()=>{
-        const w =
-          waves.find(
-            x=>String(x.id)===el.dataset.id
-          );
-
-        if(w)w.y=el.value;
-      }
-    );
-
-  });
-
-
-  qa('.au').forEach(el=>{
-
-    el.addEventListener(
-      'change',
-      ()=>{
-        const w =
-          waves.find(
-            x=>String(x.id)===el.dataset.id
-          );
-
-        if(w)w.unit=el.value;
-      }
-    );
-
-  });
-
-
-  qa('.aa').forEach(el=>{
-
-    el.addEventListener(
-      'click',
-      ()=>{
-        openWavePicker(
-          el.dataset.id
-        );
-      }
-    );
-
-  });
-
-
-  qa('.wavePick').forEach(el=>{
-
-    el.addEventListener(
-      'click',
-      ()=>{
-        openWavePicker(
-          el.dataset.id
-        );
-      }
-    );
-
-  });
-
-
-  qa('.markWave').forEach(el=>{
-
-    el.addEventListener(
-      'click',
-      ()=>{
-        markLaunched(
-          el.dataset.id
-        );
-      }
-    );
-
-  });
-
-
-  qa('.deleteWave').forEach(el=>{
-
-    el.addEventListener(
-      'click',
-      ()=>{
-        waves =
-          waves.filter(
-            x=>String(x.id)!==el.dataset.id
-          );
-
-        renderWaves();
-      }
-    );
-
-  });
-
-}
-
-
-function unitOptions(selected){
-
-  return Object.entries(units)
-    .map(([name,speed])=>{
-
-      return `
-        <option
-          value="${speed}"
-          ${String(speed)===String(selected)?'selected':''}>
-          ${name} — ${speed} sec/tile
-        </option>
-      `;
-
-    })
-    .join('');
-
-}
-
-
-/* =========================================================
-   WAVE TIME PICKER
-========================================================= */
-
-let wavePickerId = null;
-
-function openWavePicker(id){
-
-  wavePickerId = id;
-
-  const wave =
-    waves.find(
-      x=>String(x.id)===String(id)
-    );
-
-  if(!wave)return;
-
-
-  pickerTarget = '__wave__';
-
-  populateTimePicker();
-
-
-  let current =
-    parseServerInput(
-      wave.arrival
-    );
-
-
-  if(Number.isNaN(current)){
-    current =
-      Date.now()+3600000;
-  }
-
-
-  const d =
-    new Date(current);
-
-
-  q('#pickDate').value =
-    `${d.getUTCFullYear()}-` +
-    `${pad(d.getUTCMonth()+1)}-` +
-    `${pad(d.getUTCDate())}`;
-
-  q('#pickHour').value =
-    pad(d.getUTCHours());
-
-  q('#pickMinute').value =
-    pad(d.getUTCMinutes());
-
-  q('#pickSecond').value =
-    pad(d.getUTCSeconds());
-
-
-  q('#timePickerModal')
-    .classList
-    .remove('hidden');
-
-}
-
-
-function setWavePickedTime(){
-
-  const wave =
-    waves.find(
-      x=>String(x.id)===String(wavePickerId)
-    );
-
-  if(!wave)return;
-
-
-  const value =
-    `${q('#pickDate').value} ` +
-    `${q('#pickHour').value}:` +
-    `${q('#pickMinute').value}:` +
-    `${q('#pickSecond').value}`;
-
-
-  wave.arrival = value;
-
-  closeTimePicker();
-
-  renderWaves();
-
-}
-
-
-/* =========================================================
-   MARK LAUNCHED
-========================================================= */
-
-function markLaunched(id){
-
-  if(launchedWaves.has(id)){
-    launchedWaves.delete(id);
-  }else{
-    launchedWaves.add(id);
-  }
-
-  renderWaves();
-
-}
-
-
-/* =========================================================
-   SYNC CALCULATION
-========================================================= */
-
-function calculateSync(){
-
-  const tx =
-    +q('#stx').value;
-
-  const ty =
-    +q('#sty').value;
-
-  const offset =
-    +q('#offset').value || 0;
-
-
-  if(
-    !Number.isFinite(tx) ||
-    !Number.isFinite(ty)
-  ){
-
-    q('#syncResult').innerHTML =
-      `<div class="notice">
-        Please enter valid target coordinates.
-      </div>`;
-
-    return;
-
-  }
-
-
-  const results = [];
-
-
-  waves.forEach((wave,index)=>{
-
-    const x =
-      +wave.x;
-
-    const y =
-      +wave.y;
-
-    const speed =
-      +wave.unit;
-
-    const arrival =
-      parseServerInput(
-        wave.arrival
-      );
-
-
-    if(
-      !Number.isFinite(x) ||
-      !Number.isFinite(y) ||
-      Number.isNaN(arrival)
-    ){
-      return;
-    }
-
-
-    const travel =
-      travelSeconds(
-        x,
-        y,
-        tx,
-        ty,
-        speed
-      );
-
-
-    const launch =
-      arrival -
-      travel*1000 -
-      offset*1000;
-
-
-    results.push({
-      index,
-      launch,
-      arrival,
-      travel
-    });
-
-  });
-
-
-  results.sort(
-    (a,b)=>a.launch-b.launch
-  );
-
-
-  if(!results.length){
-
-    q('#syncResult').innerHTML =
-      `<div class="notice">
-        Please complete your waves and landing times.
-      </div>`;
-
-    return;
-
-  }
-
-
-  q('#syncResult').innerHTML = `
-
-    <div class="result">
-
-      <h3>
-        🚀 Launch Schedule
-      </h3>
-
-      ${results.map(r=>`
-
-        <div class="wave">
-
-          <strong>
-            Wave ${r.index+1}
-          </strong>
-
-          <div>
-            Launch:
-          </div>
-
-          <div class="launch">
-            ${serverValue(r.launch)}
-          </div>
-
-          <div class="local">
-            Local:
-            ${localValue(r.launch)}
-          </div>
-
-          <div>
-            Travel:
-            <strong>
-              ${formatDuration(r.travel)}
-            </strong>
-          </div>
-
-          <div
-            class="countdown"
-            data-countdown="${r.launch}">
-            ${formatCountdown(
-              r.launch-Date.now()
-            )}
-          </div>
-
-        </div>
-
-      `).join('')}
-
-    </div>
-  `;
-
-}
-
-
-/* =========================================================
+/* =====================================================
    SAVED CITIES
-========================================================= */
+===================================================== */
 
 function getCities(){
 
@@ -1930,238 +1038,561 @@ function getCities(){
     return JSON.parse(
       localStorage.getItem(
         'valorCities'
-      ) || '[]'
+      )||'[]'
     );
 
   }catch(e){
 
-    return [];
+    return[];
 
   }
 
 }
 
 
-function saveCities(cities){
+function saveCities(a){
 
   localStorage.setItem(
     'valorCities',
-    JSON.stringify(cities)
+    JSON.stringify(a)
   );
+
+}
+
+
+function esc(s){
+
+  return String(s)
+    .replace(
+      /[&<>"]/g,
+      m=>({
+        '&':'&amp;',
+        '<':'&lt;',
+        '>':'&gt;',
+        '"':'&quot;'
+      }[m])
+    );
+
+}
+
+
+function cityOptions(){
+
+  return `
+    <option value="">
+      Choose saved city…
+    </option>
+  `+
+  getCities()
+    .map(
+      (c,i)=>
+        `<option value="${i}">
+          ${esc(c.name)}
+          (${c.x},${c.y})
+        </option>`
+    )
+    .join('');
+
+}
+
+
+function applyCity(sel){
+
+  let card=
+    sel.closest(
+      '.attack'
+    );
+
+  let c=
+    getCities()[
+      +sel.value
+    ];
+
+  if(!c)
+    return;
+
+  card.querySelector(
+    '.ax'
+  ).value=c.x;
+
+  card.querySelector(
+    '.ay'
+  ).value=c.y;
 
 }
 
 
 function refreshCitySelectors(){
 
-  renderCities();
+  qa(
+    '.attack .cityselect'
+  )
+  .forEach(
+    sel=>{
+
+      let old=
+        sel.value;
+
+      sel.innerHTML=
+        cityOptions();
+
+      if(
+        [...sel.options]
+          .some(
+            o=>o.value===old
+          )
+      ){
+        sel.value=old;
+      }
+
+    }
+  );
 
 }
 
 
-function renderCities(){
+function openCityManager(){
 
-  const cities =
-    getCities();
+  renderCityManager();
 
-  const list =
-    q('#citiesList');
-
-  const quick =
-    q('#cityQuickList');
-
-
-  if(!cities.length){
-
-    list.innerHTML =
-      `<div class="notice">
-        No saved cities yet.
-      </div>`;
-
-    quick.innerHTML =
-      `<div class="notice">
-        No saved cities yet.
-      </div>`;
-
-    return;
-
-  }
-
-
-  list.innerHTML =
-    cities.map((city,i)=>`
-
-      <div class="city-item">
-
-        <strong>
-          ${escapeHtml(city.name)}
-        </strong>
-
-        <div>
-          (${city.x}|${city.y})
-        </div>
-
-        <div class="actions">
-
-          <button
-            class="small useCity"
-            data-index="${i}">
-            Use
-          </button>
-
-          <button
-            class="secondary small editCity"
-            data-index="${i}">
-            Edit
-          </button>
-
-          <button
-            class="danger small deleteCity"
-            data-index="${i}">
-            Delete
-          </button>
-
-        </div>
-
-      </div>
-    `).join('');
-
-
-  quick.innerHTML =
-    cities.map((city,i)=>`
-
-      <button
-        class="secondary small quickCity"
-        data-index="${i}">
-        ${escapeHtml(city.name)}
-        (${city.x}|${city.y})
-      </button>
-
-    `).join('');
-
-
-  qa('.useCity').forEach(btn=>{
-
-    btn.addEventListener(
-      'click',
-      ()=>{
-        useCity(
-          +btn.dataset.index
-        );
-      }
-    );
-
-  });
-
-
-  qa('.quickCity').forEach(btn=>{
-
-    btn.addEventListener(
-      'click',
-      ()=>{
-        useCity(
-          +btn.dataset.index
-        );
-      }
-    );
-
-  });
-
-
-  qa('.deleteCity').forEach(btn=>{
-
-    btn.addEventListener(
-      'click',
-      ()=>{
-        const cities =
-          getCities();
-
-        cities.splice(
-          +btn.dataset.index,
-          1
-        );
-
-        saveCities(cities);
-
-        renderCities();
-
-      }
-    );
-
-  });
-
-
-  qa('.editCity').forEach(btn=>{
-
-    btn.addEventListener(
-      'click',
-      ()=>{
-        const cities =
-          getCities();
-
-        const city =
-          cities[+btn.dataset.index];
-
-        if(!city)return;
-
-        q('#newCityName').value =
-          city.name;
-
-        q('#newCityX').value =
-          city.x;
-
-        q('#newCityY').value =
-          city.y;
-
-        editingCityIndex =
-          +btn.dataset.index;
-
-      }
-    );
-
-  });
+  $('cityModal')
+    .classList
+    .remove('hidden');
 
 }
 
 
-function useCity(index){
+function closeCityManager(){
 
-  const cities =
-    getCities();
-
-  const city =
-    cities[index];
-
-  if(!city)return;
-
-  q('#sx').value =
-    city.x;
-
-  q('#sy').value =
-    city.y;
-
-  q('#citiesModal')
+  $('cityModal')
     .classList
     .add('hidden');
 
 }
 
 
-function escapeHtml(value){
+function renderCityManager(){
 
-  return String(value)
-    .replaceAll('&','&amp;')
-    .replaceAll('<','&lt;')
-    .replaceAll('>','&gt;')
-    .replaceAll('"','&quot;')
-    .replaceAll("'","&#039;");
+  let box=
+    $('cityList');
+
+  let cities=
+    getCities();
+
+  box.innerHTML=
+    cities.length
+      ?cities.map(
+        (c,i)=>
+          `<div class="managerrow">
+
+            <div class="row">
+
+              <span>
+                <strong>
+                  ${esc(c.name)}
+                </strong>
+
+                <br>
+
+                <span class="small">
+                  ${c.x}, ${c.y}
+                </span>
+
+              </span>
+
+              <span class="actions">
+
+                <button
+                  type="button"
+                  data-city-edit="${i}">
+                  Edit
+                </button>
+
+                <button
+                  type="button"
+                  data-city-delete="${i}">
+                  Delete
+                </button>
+
+              </span>
+
+            </div>
+
+          </div>`
+      ).join('')
+      :
+      `<div
+        class="small"
+        style="padding:10px 0">
+        No saved cities yet.
+      </div>`;
 
 }
 
 
-/* =========================================================
+function addSavedCity(){
+
+  let name=
+    $('newCityName')
+      .value
+      .trim();
+
+  let x=
+    +$('newCityX').value;
+
+  let y=
+    +$('newCityY').value;
+
+
+  if(
+    !name||
+    isNaN(x)||
+    isNaN(y)
+  ){
+
+    alert(
+      'Enter a name and both coordinates.'
+    );
+
+    return;
+
+  }
+
+
+  let a=
+    getCities();
+
+  a.push({
+    name,
+    x,
+    y
+  });
+
+  saveCities(a);
+
+  $('newCityName').value='';
+  $('newCityX').value='';
+  $('newCityY').value='';
+
+  renderCityManager();
+  refreshCitySelectors();
+
+}
+
+
+function editSavedCity(i){
+
+  let a=
+    getCities();
+
+  let c=a[i];
+
+  if(!c)
+    return;
+
+  let name=
+    prompt(
+      'City name',
+      c.name
+    );
+
+  if(name===null)
+    return;
+
+  let x=
+    prompt(
+      'X coordinate',
+      c.x
+    );
+
+  if(x===null)
+    return;
+
+  let y=
+    prompt(
+      'Y coordinate',
+      c.y
+    );
+
+  if(y===null)
+    return;
+
+
+  if(
+    !name.trim()||
+    isNaN(+x)||
+    isNaN(+y)
+  ){
+
+    return alert(
+      'Invalid city.'
+    );
+
+  }
+
+
+  a[i]={
+    name:name.trim(),
+    x:+x,
+    y:+y
+  };
+
+  saveCities(a);
+
+  renderCityManager();
+  refreshCitySelectors();
+
+}
+
+
+function deleteSavedCity(i){
+
+  let a=
+    getCities();
+
+  if(!a[i])
+    return;
+
+  if(
+    confirm(
+      `Delete ${a[i].name}?`
+    )
+  ){
+
+    a.splice(i,1);
+
+    saveCities(a);
+
+    renderCityManager();
+    refreshCitySelectors();
+
+  }
+
+}
+
+
+/* =====================================================
+   SYNCHRONISED ATTACKS
+===================================================== */
+
+function addAttack(city){
+
+  const wrap=
+    document.createElement(
+      'div'
+    );
+
+  wrap.className=
+    'card attack';
+
+  const c=
+    city||
+    {
+      x:240,
+      y:261
+    };
+
+
+  wrap.innerHTML=`
+
+    <div class="row">
+
+      <strong>
+        Attack wave
+      </strong>
+
+      <span class="nextbadge">
+        PENDING
+      </span>
+
+    </div>
+
+
+    <select class="cityselect">
+      <option value="">
+        Choose saved city…
+      </option>
+    </select>
+
+
+    <div class="unitrow">
+
+      <div class="field">
+
+        <label>
+          From X
+        </label>
+
+        <input
+          class="ax"
+          type="text"
+          inputmode="numeric"
+          value="${c.x}">
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          From Y
+        </label>
+
+        <input
+          class="ay"
+          type="text"
+          inputmode="numeric"
+          value="${c.y}">
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          Unit
+        </label>
+
+        <select class="au">
+
+          ${Object.keys(units)
+            .map(
+              u=>
+                `<option>${u}</option>`
+            )
+            .join('')}
+
+        </select>
+
+      </div>
+
+
+      <button
+        class="remove"
+        type="button">
+        Remove
+      </button>
+
+    </div>
+
+
+    <div class="small">
+      Launch time will appear after calculation.
+    </div>
+
+
+    <div class="launch"></div>
+
+
+    <div class="small localLaunch"></div>
+
+
+    <div
+      class="actions"
+      style="margin-top:8px">
+
+      <button
+        class="markBtn"
+        type="button">
+        ✓ Mark launched
+      </button>
+
+    </div>
+
+  `;
+
+
+  const sel=
+    q(
+      '.cityselect',
+      wrap
+    );
+
+  const remove=
+    q(
+      '.remove',
+      wrap
+    );
+
+  const mark=
+    q(
+      '.markBtn',
+      wrap
+    );
+
+
+  sel.addEventListener(
+    'change',
+    ()=>{
+      applyCity(sel);
+    }
+  );
+
+
+  remove.addEventListener(
+    'click',
+    ()=>{
+      wrap.remove();
+      refreshDashboard();
+    }
+  );
+
+
+  mark.addEventListener(
+    'click',
+    ()=>{
+      markLaunched(mark);
+    }
+  );
+
+
+  $('attacks')
+    .appendChild(
+      wrap
+    );
+
+  refreshCitySelectors();
+
+}
+
+
+function markLaunched(btn){
+
+  let card=
+    btn.closest(
+      '.attack'
+    );
+
+  if(!card)
+    return;
+
+  card.dataset.launched='1';
+
+  card.classList.add(
+    'launched'
+  );
+
+  let badge=
+    q(
+      '.nextbadge',
+      card
+    );
+
+  if(badge)
+    badge.textContent=
+      'LAUNCHED';
+
+  refreshDashboard();
+
+  if(battleTimer)
+    updateBattle();
+
+}
+
+
+/* =====================================================
    BATTLE PLANS
-========================================================= */
+===================================================== */
 
 function getPlans(){
 
@@ -2170,277 +1601,880 @@ function getPlans(){
     return JSON.parse(
       localStorage.getItem(
         'valorPlans'
-      ) || '[]'
+      )||'[]'
     );
 
   }catch(e){
 
-    return [];
+    return[];
 
   }
 
 }
 
 
-function savePlans(plans){
+function savePlans(a){
 
   localStorage.setItem(
     'valorPlans',
-    JSON.stringify(plans)
+    JSON.stringify(a)
   );
 
 }
 
 
-function renderPlans(){
+function refreshPlans(){
 
-  const plans =
-    getPlans();
+  let sel=
+    $('planSelect');
 
-  const list =
-    q('#plansList');
-
-
-  if(!plans.length){
-
-    list.innerHTML =
-      `<div class="notice">
-        No battle plans saved yet.
-      </div>`;
-
-    return;
-
-  }
-
-
-  list.innerHTML =
-    plans.map((plan,i)=>`
-
-      <div class="plan-item">
-
-        <strong>
-          ${escapeHtml(plan.name)}
-        </strong>
-
-        <div>
-          Target:
-          (${plan.targetX}|${plan.targetY})
-        </div>
-
-        <div class="actions">
-
-          <button
-            class="small loadPlan"
-            data-index="${i}">
-            Load
-          </button>
-
-          <button
-            class="danger small deletePlan"
-            data-index="${i}">
-            Delete
-          </button>
-
-        </div>
-
-      </div>
-
-    `).join('');
-
-
-  qa('.loadPlan').forEach(btn=>{
-
-    btn.addEventListener(
-      'click',
-      ()=>{
-        loadPlan(
-          +btn.dataset.index
-        );
-      }
-    );
-
-  });
-
-
-  qa('.deletePlan').forEach(btn=>{
-
-    btn.addEventListener(
-      'click',
-      ()=>{
-
-        const plans =
-          getPlans();
-
-        plans.splice(
-          +btn.dataset.index,
-          1
-        );
-
-        savePlans(plans);
-
-        renderPlans();
-
-      }
-    );
-
-  });
+  sel.innerHTML=
+    '<option value="">Load a saved plan…</option>'+
+    getPlans()
+      .map(
+        (p,i)=>
+          `<option value="${i}">
+            ${esc(p.name)}
+          </option>`
+      )
+      .join('');
 
 }
 
 
 function saveCurrentPlan(){
 
-  const name =
-    q('#planName').value.trim() ||
-    'Battle Plan';
+  let name=
+    prompt(
+      'Plan name:'
+    );
+
+  if(!name)
+    return;
+
+  calculateSync();
 
 
-  const plan = {
+  let attacks=
+    qa('.attack')
+      .map(
+        c=>({
+
+          x:+q(
+            '.ax',
+            c
+          ).value,
+
+          y:+q(
+            '.ay',
+            c
+          ).value,
+
+          unit:q(
+            '.au',
+            c
+          ).value
+
+        })
+      );
+
+
+  let p={
 
     name,
 
     targetX:
-      q('#stx').value,
+      +$('stx').value,
 
     targetY:
-      q('#sty').value,
+      +$('sty').value,
 
-    waves:
-      waves.map(w=>({
-        x:w.x,
-        y:w.y,
-        unit:w.unit,
-        arrival:w.arrival
-      }))
+    arrival:
+      $('sarrival').value,
+
+    offset:
+      +($('offset').value||0),
+
+    attacks
 
   };
 
 
-  const plans =
+  let plans=
     getPlans();
 
-  plans.push(plan);
+  plans.push(p);
 
   savePlans(plans);
 
-  q('#planName').value = '';
+  refreshPlans();
 
-  renderPlans();
+  renderPlanManager();
 
-}
-
-
-function loadPlan(index){
-
-  const plans =
-    getPlans();
-
-  const plan =
-    plans[index];
-
-  if(!plan)return;
-
-
-  q('#stx').value =
-    plan.targetX;
-
-  q('#sty').value =
-    plan.targetY;
-
-
-  waves =
-    (plan.waves || [])
-      .map(w=>({
-
-        id:
-          Date.now()+
-          Math.random(),
-
-        x:w.x,
-
-        y:w.y,
-
-        unit:w.unit,
-
-        arrival:w.arrival
-
-      }));
-
-
-  launchedWaves.clear();
-
-  renderWaves();
-
-  q('#plansModal')
-    .classList
-    .add('hidden');
-
-  showSync();
+  alert(
+    'Plan saved.'
+  );
 
 }
 
 
-/* =========================================================
-   BATTLE START / ALERTS
-========================================================= */
+function openPlanManager(){
 
-function openBattle(){
+  renderPlanManager();
 
-  q('#battleOverlay')
+  $('planModal')
     .classList
     .remove('hidden');
 
 }
 
 
-function closeBattle(){
+function closePlanManager(){
 
-  q('#battleOverlay')
+  $('planModal')
     .classList
     .add('hidden');
 
 }
 
 
-async function enableAlerts(){
+function renderPlanManager(){
 
-  try{
+  let box=
+    $('planList');
 
-    if(
-      'Notification' in window &&
-      Notification.permission !== 'granted'
-    ){
+  let plans=
+    getPlans();
 
-      await Notification.requestPermission();
+
+  box.innerHTML=
+    plans.length
+
+      ?plans.map(
+        (p,i)=>
+          `<div class="managerrow">
+
+            <div>
+
+              <strong>
+                ${esc(p.name)}
+              </strong>
+
+              <br>
+
+              <span class="small">
+                Target
+                ${p.targetX},${p.targetY}
+                •
+                ${p.attacks.length}
+                wave${p.attacks.length===1?'':'s'}
+              </span>
+
+            </div>
+
+            <div class="actions">
+
+              <button
+                type="button"
+                data-plan-load="${i}">
+                Load
+              </button>
+
+              <button
+                type="button"
+                data-plan-rename="${i}">
+                Rename
+              </button>
+
+              <button
+                type="button"
+                data-plan-delete="${i}">
+                Delete
+              </button>
+
+            </div>
+
+          </div>`
+      ).join('')
+
+      :
+
+      `<div
+        class="small"
+        style="padding:10px 0">
+        No saved plans yet.
+      </div>`;
+
+}
+
+
+function renamePlan(i){
+
+  let a=
+    getPlans();
+
+  if(!a[i])
+    return;
+
+  let n=
+    prompt(
+      'Plan name',
+      a[i].name
+    );
+
+  if(
+    n &&
+    n.trim()
+  ){
+
+    a[i].name=
+      n.trim();
+
+    savePlans(a);
+
+    refreshPlans();
+
+    renderPlanManager();
+
+  }
+
+}
+
+
+function deletePlan(i){
+
+  let a=
+    getPlans();
+
+  if(!a[i])
+    return;
+
+  if(
+    confirm(
+      `Delete ${a[i].name}?`
+    )
+  ){
+
+    a.splice(i,1);
+
+    savePlans(a);
+
+    refreshPlans();
+
+    renderPlanManager();
+
+  }
+
+}
+
+
+function loadPlan(v){
+
+  let p=
+    getPlans()[+v];
+
+  if(!p)
+    return;
+
+
+  $('stx').value=
+    p.targetX;
+
+  $('sty').value=
+    p.targetY;
+
+  $('sarrival').value=
+    p.arrival;
+
+  $('offset').value=
+    p.offset||0;
+
+
+  $('attacks')
+    .innerHTML='';
+
+
+  p.attacks.forEach(
+    a=>{
+      addAttack(a);
+    }
+  );
+
+
+  calculateSync();
+
+  refreshCitySelectors();
+
+}
+
+
+/* =====================================================
+   SYNCHRONISED CALCULATION
+===================================================== */
+
+function calculateSync(){
+
+  let a=
+    parseServerInput(
+      $('sarrival').value
+    );
+
+  if(isNaN(a))
+    return;
+
+
+  let targetX=
+    +$('stx').value;
+
+  let targetY=
+    +$('sty').value;
+
+  let offsetSec=
+    +(
+      $('offset').value||0
+    );
+
+
+  qa('.attack')
+    .forEach(
+      card=>{
+
+        let x=
+          +q(
+            '.ax',
+            card
+          ).value;
+
+        let y=
+          +q(
+            '.ay',
+            card
+          ).value;
+
+        let u=
+          q(
+            '.au',
+            card
+          ).value;
+
+        let d=
+          dist(
+            x,
+            y,
+            targetX,
+            targetY
+          );
+
+        let travel=
+          d*
+          units[u];
+
+
+        /*
+          IMPORTANT TIMING FIX:
+
+          Round the launch moment UP
+          to the next whole server second.
+        */
+
+        let launch=
+          new Date(
+            Math.ceil(
+              (
+                a.getTime()-
+                (
+                  travel+
+                  offsetSec
+                )*1000
+              )/1000
+            )*1000
+          );
+
+
+        card.dataset.launch=
+          launch.toISOString();
+
+        card.dataset.travel=
+          travel;
+
+
+        q(
+          '.small',
+          card
+        ).textContent=
+          `${u} • Distance ${
+            d.toFixed(3)
+          } tiles • Travel ${
+            fmt(travel)
+          }`;
+
+
+        q(
+          '.launch',
+          card
+        ).textContent=
+          `SEND ${
+            serverValue(launch)
+          } SERVER`;
+
+
+        q(
+          '.localLaunch',
+          card
+        ).textContent=
+          `Your local time: ${
+            dtValue(launch)
+          }`;
+
+      }
+    );
+
+
+  sortAttacks();
+
+}
+
+
+/* =====================================================
+   SORT / DASHBOARD
+===================================================== */
+
+function sortAttacks(){
+
+  let box=
+    $('attacks');
+
+
+  qa(
+    '.attack',
+    box
+  )
+  .sort(
+    (a,b)=>{
+
+      let la=
+        new Date(
+          a.dataset.launch||
+          '9999'
+        );
+
+      let lb=
+        new Date(
+          b.dataset.launch||
+          '9999'
+        );
+
+
+      if(
+        (
+          a.dataset.launched==='1'
+        )!==(
+          b.dataset.launched==='1'
+        )
+      ){
+
+        return
+          a.dataset.launched==='1'
+            ?1
+            :-1;
+
+      }
+
+
+      return la-lb;
 
     }
+  )
+  .forEach(
+    c=>{
+      box.appendChild(c);
+    }
+  );
 
-  }catch(e){}
+
+  refreshDashboard();
+
+}
 
 
-  try{
+function refreshDashboard(){
 
-    if(
-      'vibrate' in navigator
-    ){
-
-      navigator.vibrate(
-        [200,100,200]
+  let cards=
+    qa('.attack')
+      .filter(
+        c=>
+          c.dataset.launched!=='1' &&
+          c.dataset.launch
       );
 
-    }
 
-  }catch(e){}
+  qa('.attack')
+    .forEach(
+      c=>{
+        c.classList.remove(
+          'nextwave'
+        );
+      }
+    );
+
+
+  if(!cards.length){
+
+    $('nextAttack')
+      .textContent='—';
+
+    $('nextDetails')
+      .textContent=
+      'No pending calculated attacks. Save this setup as a battle plan if you will use it again.';
+
+    return;
+
+  }
+
+
+  cards.sort(
+    (a,b)=>
+      new Date(
+        a.dataset.launch
+      )-
+      new Date(
+        b.dataset.launch
+      )
+  );
+
+
+  let c=cards[0];
+
+  let d=
+    new Date(
+      c.dataset.launch
+    );
+
+  let s=
+    Math.ceil(
+      (
+        d-Date.now()
+      )/1000
+    );
+
+
+  c.classList.add(
+    'nextwave'
+  );
+
+
+  $('nextAttack')
+    .textContent=
+      s>0
+        ?fmt(s)
+        :'SEND NOW';
+
+
+  $('nextDetails')
+    .textContent=
+      `${
+        q('.au',c).value
+      } • ${
+        serverValue(d)
+      } server time • ${
+        dtValue(d)
+      } local`;
+
+}
+
+
+/* =====================================================
+   COUNTDOWNS
+===================================================== */
+
+function startSyncCountdown(){
+
+  calculateSync();
+
+  if(syncTimer)
+    clearInterval(
+      syncTimer
+    );
+
+
+  syncTimer=
+    setInterval(
+      ()=>{
+
+        refreshDashboard();
+
+        alertPending();
+
+
+        let cards=
+          qa('.attack')
+            .filter(
+              c=>
+                c.dataset.launched!=='1' &&
+                c.dataset.launch
+            );
+
+
+        cards.forEach(
+          c=>{
+
+            let d=
+              new Date(
+                c.dataset.launch
+              );
+
+            let s=
+              Math.ceil(
+                (
+                  d-Date.now()
+                )/1000
+              );
+
+
+            q(
+              '.launch',
+              c
+            ).textContent=
+              s>0
+                ?`SEND ${
+                    serverValue(d)
+                  } SERVER • in ${
+                    fmt(s)
+                  }`
+                :'SEND NOW';
+
+          }
+        );
+
+
+        $('syncStatus')
+          .textContent=
+            cards.length
+              ?`${cards.length} pending attack${
+                  cards.length===1?'':'s'
+                }.`
+              :'All waves launched.';
+
+      },
+      250
+    );
+
+}
+
+
+function sendNext(){
+
+  let cards=
+    qa('.attack')
+      .filter(
+        c=>
+          c.dataset.launched!=='1' &&
+          c.dataset.launch
+      )
+      .sort(
+        (a,b)=>
+          new Date(
+            a.dataset.launch
+          )-
+          new Date(
+            b.dataset.launch
+          )
+      );
+
+
+  if(cards.length)
+    markLaunched(
+      q(
+        '.markBtn',
+        cards[0]
+      )
+    );
+
+}
+
+
+/* =====================================================
+   BATTLE START
+===================================================== */
+
+function battleStart(){
+
+  calculateSync();
+
+  $('battleOverlay')
+    .classList
+    .remove('hidden');
+
+  updateBattle();
+
+  if(battleTimer)
+    clearInterval(
+      battleTimer
+    );
+
+  battleTimer=
+    setInterval(
+      updateBattle,
+      250
+    );
+
+}
+
+
+function closeBattleStart(){
+
+  $('battleOverlay')
+    .classList
+    .add('hidden');
+
+  if(battleTimer)
+    clearInterval(
+      battleTimer
+    );
+
+}
+
+
+function updateBattle(){
+
+  let cards=
+    qa('.attack')
+      .filter(
+        c=>
+          c.dataset.launched!=='1' &&
+          c.dataset.launch
+      )
+      .sort(
+        (a,b)=>
+          new Date(
+            a.dataset.launch
+          )-
+          new Date(
+            b.dataset.launch
+          )
+      );
+
+
+  if(!cards.length){
+
+    $('battleCountdown')
+      .textContent='DONE';
+
+    $('battleDetails')
+      .textContent=
+      'All waves launched.';
+
+    return;
+
+  }
+
+
+  let c=cards[0];
+
+  let d=
+    new Date(
+      c.dataset.launch
+    );
+
+  let s=
+    Math.ceil(
+      (
+        d-Date.now()
+      )/1000
+    );
+
+
+  $('battleCountdown')
+    .textContent=
+      s>0
+        ?fmt(s)
+        :'SEND NOW';
+
+
+  $('battleDetails')
+    .textContent=
+      `${
+        q('.au',c).value
+      } • ${
+        serverValue(d)
+      } server • ${
+        dtValue(d)
+      } local`;
+
+}
+
+
+/* =====================================================
+   SOUND / VIBRATION / ALERTS
+===================================================== */
+
+function beep(
+  pattern=[0,160,0,160,0,320]
+){
+
+  if(!soundOn)
+    return;
 
 
   try{
 
-    if(
-      'wakeLock' in navigator
+    audioCtx=
+      audioCtx||
+      new(
+        window.AudioContext||
+        window.webkitAudioContext
+      );
+
+
+    let t=
+      audioCtx.currentTime;
+
+
+    for(
+      let i=0;
+      i<pattern.length;
+      i+=2
     ){
 
-      await navigator.wakeLock.request(
-        'screen'
+      t+=
+        pattern[i]/1000;
+
+      let dur=
+        pattern[i+1]/1000;
+
+      let o=
+        audioCtx.createOscillator();
+
+      let g=
+        audioCtx.createGain();
+
+      o.frequency.value=880;
+
+      g.gain.setValueAtTime(
+        .0001,
+        t
+      );
+
+      g.gain.exponentialRampToValueAtTime(
+        .25,
+        t+.01
+      );
+
+      g.gain.exponentialRampToValueAtTime(
+        .0001,
+        t+dur
+      );
+
+      o.connect(g);
+
+      g.connect(
+        audioCtx.destination
+      );
+
+      o.start(t);
+
+      o.stop(
+        t+dur
       );
 
     }
@@ -2450,384 +2484,870 @@ async function enableAlerts(){
 }
 
 
-/* =========================================================
-   WIRE EVENTS
-========================================================= */
+function buzz(
+  ms=[180,120,180,120,450]
+){
+
+  if(
+    vibrationOn &&
+    navigator.vibrate
+  ){
+
+    navigator.vibrate(ms);
+
+  }
+
+}
+
+
+async function enableAlerts(){
+
+  if(
+    'Notification' in window
+  ){
+
+    try{
+
+      let p=
+        await Notification.requestPermission();
+
+      $('alertStatus')
+        .textContent=
+          p==='granted'
+            ?'Notifications enabled.'
+            :'Browser notification permission was not granted.';
+
+    }catch(e){
+
+      $('alertStatus')
+        .textContent=
+        'Notifications are unavailable in this browser.';
+
+    }
+
+  }else{
+
+    $('alertStatus')
+      .textContent=
+      'Browser notifications are unavailable.';
+
+  }
+
+}
+
+
+function notifyLaunch(card){
+
+  let unit=
+    q(
+      '.au',
+      card
+    ).value;
+
+  beep();
+
+  buzz();
+
+
+  if(
+    'Notification'in window &&
+    Notification.permission==='granted'
+  ){
+
+    new Notification(
+      'Valor Tool — SEND NOW',
+      {
+        body:
+          `${unit} wave is ready to launch.`
+      }
+    );
+
+  }
+
+}
+
+
+function toggleSound(){
+
+  soundOn=
+    !soundOn;
+
+  localStorage.setItem(
+    'valorSound',
+    soundOn
+      ?'on'
+      :'off'
+  );
+
+  $('soundBtn')
+    .textContent=
+      `🔊 Sound: ${
+        soundOn?'On':'Off'
+      }`;
+
+
+  if(soundOn)
+    beep(
+      [0,100]
+    );
+
+}
+
+
+function toggleVibration(){
+
+  vibrationOn=
+    !vibrationOn;
+
+  localStorage.setItem(
+    'valorVibrate',
+    vibrationOn
+      ?'on'
+      :'off'
+  );
+
+  $('vibrateBtn')
+    .textContent=
+      `📳 Vibration: ${
+        vibrationOn?'On':'Off'
+      }`;
+
+
+  if(vibrationOn)
+    buzz(
+      [100]
+    );
+
+}
+
+
+async function toggleWakeLock(){
+
+  try{
+
+    if(wakeLock){
+
+      await wakeLock.release();
+
+      wakeLock=null;
+
+      $('wakeBtn')
+        .textContent=
+        '☀️ Keep awake';
+
+      return;
+
+    }
+
+
+    if(
+      'wakeLock'in navigator
+    ){
+
+      wakeLock=
+        await navigator.wakeLock.request(
+          'screen'
+        );
+
+      $('wakeBtn')
+        .textContent=
+        '☀️ Awake: On';
+
+    }else{
+
+      alert(
+        'Screen Wake Lock is not supported by this browser.'
+      );
+
+    }
+
+  }catch(e){
+
+    alert(
+      'Could not keep the screen awake.'
+    );
+
+  }
+
+}
+
+
+function alertPending(){
+
+  let cards=
+    qa('.attack')
+      .filter(
+        c=>
+          c.dataset.launched!=='1' &&
+          c.dataset.launch
+      )
+      .sort(
+        (a,b)=>
+          new Date(
+            a.dataset.launch
+          )-
+          new Date(
+            b.dataset.launch
+          )
+      );
+
+
+  if(!cards.length)
+    return;
+
+
+  let c=cards[0];
+
+  let d=
+    new Date(
+      c.dataset.launch
+    );
+
+  let s=
+    Math.ceil(
+      (
+        d-Date.now()
+      )/1000
+    );
+
+
+  if(
+    s<=0 &&
+    lastAlertKey!==c.dataset.launch
+  ){
+
+    lastAlertKey=
+      c.dataset.launch;
+
+    notifyLaunch(c);
+
+    c.classList.add(
+      'alertnow'
+    );
+
+    setTimeout(
+      ()=>{
+        c.classList.remove(
+          'alertnow'
+        );
+      },
+      5000
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   TIME PICKER
+===================================================== */
+
+let pickerTarget=null;
+
+
+function openTimePicker(
+  targetId
+){
+
+  pickerTarget=
+    targetId;
+
+
+  let v=
+    $(targetId).value;
+
+  let m=
+    parseServerInput(v);
+
+  let d=
+    isNaN(m)
+      ?new Date(
+        Date.now()+3600000
+      )
+      :m;
+
+
+  let pad=
+    n=>
+      String(n).padStart(
+        2,
+        '0'
+      );
+
+
+  $('pickerDate').value=
+    `${d.getUTCFullYear()}-${
+      pad(d.getUTCMonth()+1)
+    }-${
+      pad(d.getUTCDate())
+    }`;
+
+
+  $('pickerHour').innerHTML=
+    Array
+      .from(
+        {length:24},
+        (_,i)=>
+          `<option value="${i}">
+            ${pad(i)}
+          </option>`
+      )
+      .join('');
+
+
+  $('pickerMinute').innerHTML=
+    Array
+      .from(
+        {length:60},
+        (_,i)=>
+          `<option value="${i}">
+            ${pad(i)}
+          </option>`
+      )
+      .join('');
+
+
+  $('pickerSecond').innerHTML=
+    Array
+      .from(
+        {length:60},
+        (_,i)=>
+          `<option value="${i}">
+            ${pad(i)}
+          </option>`
+      )
+      .join('');
+
+
+  $('pickerHour').value=
+    d.getUTCHours();
+
+  $('pickerMinute').value=
+    d.getUTCMinutes();
+
+  $('pickerSecond').value=
+    d.getUTCSeconds();
+
+
+  $('timePickerModal')
+    .classList
+    .remove('hidden');
+
+}
+
+
+function closeTimePicker(){
+
+  $('timePickerModal')
+    .classList
+    .add('hidden');
+
+  pickerTarget=null;
+
+}
+
+
+function setPickedTime(){
+
+  if(
+    !pickerTarget||
+    !$('pickerDate').value
+  )
+    return;
+
+
+  let [
+    y,
+    mo,
+    da
+  ]=
+    $('pickerDate')
+      .value
+      .split('-')
+      .map(Number);
+
+
+  let h=
+    +$('pickerHour').value;
+
+  let min=
+    +$('pickerMinute').value;
+
+  let sec=
+    +$('pickerSecond').value;
+
+
+  let pad=
+    n=>
+      String(n).padStart(
+        2,
+        '0'
+      );
+
+
+  $(pickerTarget).value=
+    `${y}-${pad(mo)}-${pad(da)} ${
+      pad(h)
+    }:${
+      pad(min)
+    }:${
+      pad(sec)
+    }`;
+
+
+  $(pickerTarget)
+    .dispatchEvent(
+      new Event(
+        'input',
+        {
+          bubbles:true
+        }
+      )
+    );
+
+
+  closeTimePicker();
+
+}
+
+
+/* =====================================================
+   EVENT WIRING
+===================================================== */
 
 function wire(){
 
-  q('#singleTab')
-    .addEventListener(
-      'click',
-      showSingle
-    );
-
-
-  q('#syncTab')
-    .addEventListener(
-      'click',
-      showSync
-    );
-
-
-  q('#calculateSingle')
-    .addEventListener(
-      'click',
-      calculateSingle
-    );
-
-
-  q('#arrival')
+  $('singleTab')
     .addEventListener(
       'click',
       ()=>{
-        openTimePicker('arrival');
+        showMode('single');
       }
     );
 
 
-  q('#sarrival')
+  $('arrivalPickBtn')
     .addEventListener(
       'click',
       ()=>{
-        openTimePicker('sarrival');
+        openTimePicker(
+          'arrival'
+        );
       }
     );
 
 
-  q('#closeTimePicker')
+  $('sarrivalPickBtn')
+    .addEventListener(
+      'click',
+      ()=>{
+        openTimePicker(
+          'sarrival'
+        );
+      }
+    );
+
+
+  $('arrival')
+    .addEventListener(
+      'click',
+      ()=>{
+        openTimePicker(
+          'arrival'
+        );
+      }
+    );
+
+
+  $('sarrival')
+    .addEventListener(
+      'click',
+      ()=>{
+        openTimePicker(
+          'sarrival'
+        );
+      }
+    );
+
+
+  $('timePickerClose')
     .addEventListener(
       'click',
       closeTimePicker
     );
 
 
-  q('#setPickedTime')
+  $('timePickerCancel')
+    .addEventListener(
+      'click',
+      closeTimePicker
+    );
+
+
+  $('timePickerSet')
+    .addEventListener(
+      'click',
+      setPickedTime
+    );
+
+
+  $('syncTab')
     .addEventListener(
       'click',
       ()=>{
-        setPickedTime();
+        showMode('sync');
       }
     );
 
 
-  q('#addWave')
+  $('cityManageBtn')
     .addEventListener(
       'click',
-      ()=>{
-        createWave();
-      }
+      openCityManager
     );
 
 
-  q('#calculateSync')
+  $('cityCloseBtn')
     .addEventListener(
       'click',
-      calculateSync
+      closeCityManager
     );
 
 
-  q('#openCities')
+  $('saveCityBtn')
     .addEventListener(
       'click',
-      ()=>{
-        renderCities();
-
-        q('#citiesModal')
-          .classList
-          .remove('hidden');
-      }
+      addSavedCity
     );
 
 
-  q('#closeCities')
+  $('cityList')
     .addEventListener(
       'click',
-      ()=>{
-        q('#citiesModal')
-          .classList
-          .add('hidden');
-      }
-    );
+      e=>{
 
-
-  q('#addCity')
-    .addEventListener(
-      'click',
-      ()=>{
-
-        const name =
-          q('#newCityName')
-            .value
-            .trim();
-
-        const x =
-          q('#newCityX')
-            .value
-            .trim();
-
-        const y =
-          q('#newCityY')
-            .value
-            .trim();
-
-
-        if(!name){
-
-          alert(
-            'Please enter a city name.'
-          );
-
-          return;
-
-        }
-
+        let t=e.target;
 
         if(
-          x==='' ||
-          y==='' ||
-          !Number.isFinite(+x) ||
-          !Number.isFinite(+y)
+          t.dataset.cityEdit!==undefined
         ){
 
-          alert(
-            'Please enter valid coordinates.'
+          editSavedCity(
+            +t.dataset.cityEdit
           );
 
-          return;
-
         }
-
-
-        const cities =
-          getCities();
-
-
-        const city = {
-          name,
-          x:+x,
-          y:+y
-        };
-
 
         if(
-          editingCityIndex>=0
+          t.dataset.cityDelete!==undefined
         ){
 
-          cities[
-            editingCityIndex
-          ] = city;
-
-          editingCityIndex = -1;
-
-        }else{
-
-          cities.push(city);
+          deleteSavedCity(
+            +t.dataset.cityDelete
+          );
 
         }
 
-
-        saveCities(cities);
-
-        q('#newCityName').value = '';
-        q('#newCityX').value = '';
-        q('#newCityY').value = '';
-
-        renderCities();
-
       }
     );
 
 
-  q('#saveSingleCity')
-    .addEventListener(
-      'click',
-      ()=>{
-
-        q('#newCityName').value =
-          'My City';
-
-        q('#newCityX').value =
-          q('#sx').value;
-
-        q('#newCityY').value =
-          q('#sy').value;
-
-
-        q('#citiesModal')
-          .classList
-          .remove('hidden');
-
-      }
-    );
-
-
-  q('#openPlans')
-    .addEventListener(
-      'click',
-      ()=>{
-        renderPlans();
-
-        q('#plansModal')
-          .classList
-          .remove('hidden');
-      }
-    );
-
-
-  q('#closePlans')
-    .addEventListener(
-      'click',
-      ()=>{
-        q('#plansModal')
-          .classList
-          .add('hidden');
-      }
-    );
-
-
-  q('#savePlan')
+  $('savePlanBtn')
     .addEventListener(
       'click',
       saveCurrentPlan
     );
 
 
-  q('#enableAlerts')
+  $('planManageBtn')
     .addEventListener(
       'click',
-      enableAlerts
+      openPlanManager
     );
 
 
-  q('#closeBattle')
+  $('planCloseBtn')
     .addEventListener(
       'click',
-      closeBattle
+      closePlanManager
     );
 
 
-  /* Wave picker delegation */
-
-  document.addEventListener(
-    'click',
-    function(e){
-
-      const button =
-        e.target.closest('.wavePick');
-
-      if(!button)return;
-
-      openWavePicker(
-        button.dataset.id
-      );
-
-    }
-  );
+  $('planSelect')
+    .addEventListener(
+      'change',
+      e=>{
+        loadPlan(
+          e.target.value
+        );
+      }
+    );
 
 
-  /* Override Set Arrival for wave picker */
-
-  q('#setPickedTime')
+  $('planList')
     .addEventListener(
       'click',
-      ()=>{
+      e=>{
 
-        if(wavePickerId!==null){
+        let t=e.target;
 
-          setWavePickedTime();
 
-          wavePickerId = null;
+        if(
+          t.dataset.planLoad!==undefined
+        ){
+
+          loadPlan(
+            t.dataset.planLoad
+          );
+
+          closePlanManager();
+
+        }
+
+
+        if(
+          t.dataset.planRename!==undefined
+        ){
+
+          renamePlan(
+            +t.dataset.planRename
+          );
+
+        }
+
+
+        if(
+          t.dataset.planDelete!==undefined
+        ){
+
+          deletePlan(
+            +t.dataset.planDelete
+          );
 
         }
 
       }
     );
 
-}
 
-
-/* =========================================================
-   INITIALISE
-========================================================= */
-
-function init(){
-
-  if(!q('#arrival').value){
-
-    localInputNow(
-      q('#arrival'),
-      60
+  $('copySingleBtn')
+    .addEventListener(
+      'click',
+      copySingle
     );
 
-  }
 
-
-  if(!q('#sarrival').value){
-
-    localInputNow(
-      q('#sarrival'),
-      60
+  $('singleCountdownBtn')
+    .addEventListener(
+      'click',
+      startSingleCountdown
     );
 
-  }
+
+  $('sendNextBtn')
+    .addEventListener(
+      'click',
+      sendNext
+    );
 
 
-  createWave({
-    x:240,
-    y:261,
-    unit:'200'
-  });
+  $('wakeBtn')
+    .addEventListener(
+      'click',
+      toggleWakeLock
+    );
 
 
-  createWave({
-    x:240,
-    y:261,
-    unit:'250'
-  });
+  $('sortBtn')
+    .addEventListener(
+      'click',
+      sortAttacks
+    );
 
 
-  createWave({
-    x:240,
-    y:261,
-    unit:'200'
-  });
+  $('addAttackBtn')
+    .addEventListener(
+      'click',
+      ()=>{
+        addAttack();
+      }
+    );
 
 
-  renderCities();
-
-  renderPlans();
-
-  wire();
-
-}
+  $('calculateSyncBtn')
+    .addEventListener(
+      'click',
+      calculateSync
+    );
 
 
-init();
+  $('startSyncBtn')
+    .addEventListener(
+      'click',
+      startSyncCountdown
+    );
 
 
-/* =========================================================
-   SERVICE WORKER
-========================================================= */
+  $('battleStartBtn')
+    .addEventListener(
+      'click',
+      battleStart
+    );
 
-if(
-  'serviceWorker' in navigator
-){
 
-  window.addEventListener(
-    'load',
-    ()=>{
-      navigator.serviceWorker
-        .register(
-          './service-worker.js'
-        )
-        .catch(
-          ()=>{}
+  $('alertBtn')
+    .addEventListener(
+      'click',
+      enableAlerts
+    );
+
+
+  $('soundBtn')
+    .addEventListener(
+      'click',
+      toggleSound
+    );
+
+
+  $('vibrateBtn')
+    .addEventListener(
+      'click',
+      toggleVibration
+    );
+
+
+  $('battleLaunchBtn')
+    .addEventListener(
+      'click',
+      sendNext
+    );
+
+
+  $('battleExitBtn')
+    .addEventListener(
+      'click',
+      closeBattleStart
+    );
+
+
+  [
+    'stx',
+    'sty',
+    'sarrival',
+    'offset'
+  ]
+  .forEach(
+    id=>{
+      $(id)
+        .addEventListener(
+          'input',
+          calculateSync
+        );
+    }
+  );
+
+
+  [
+    'sx',
+    'sy',
+    'tx',
+    'ty',
+    'su',
+    'arrival'
+  ]
+  .forEach(
+    id=>{
+      $(id)
+        .addEventListener(
+          'input',
+          calcSingle
         );
     }
   );
 
 }
+
+
+/* =====================================================
+   START APP
+===================================================== */
+
+populate(
+  $('su')
+);
+
+localInputNow(
+  $('arrival'),
+  60
+);
+
+localInputNow(
+  $('sarrival'),
+  60
+);
+
+refreshPlans();
+
+addAttack();
+addAttack();
+addAttack();
+
+wire();
+
+calcSingle();
+
+
+soundOn=
+  localStorage.getItem(
+    'valorSound'
+  )!=='off';
+
+vibrationOn=
+  localStorage.getItem(
+    'valorVibrate'
+  )!=='off';
+
+
+$('soundBtn')
+  .textContent=
+    `🔊 Sound: ${
+      soundOn?'On':'Off'
+    }`;
+
+
+$('vibrateBtn')
+  .textContent=
+    `📳 Vibration: ${
+      vibrationOn?'On':'Off'
+    }`;
+
+
+updateClocks();
+
+
+setInterval(
+  ()=>{
+    updateClocks();
+
+    if(
+      !$('sync')
+        .classList
+        .contains('hidden')
+    ){
+
+      refreshDashboard();
+
+      alertPending();
+
+    }
+
+  },
+  250
+);
+
+
+})();
 
 </script>
 
