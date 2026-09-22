@@ -205,8 +205,57 @@ function getCities(){try{return JSON.parse(localStorage.getItem('valorCities')||
 function saveCities(a){localStorage.setItem('valorCities',JSON.stringify(a))}
 function esc(s){return String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}
 function cityOptions(){return `<option value="">Choose saved city…</option>`+getCities().map((c,i)=>`<option value="${i}">${esc(c.name)} (${c.x},${c.y})</option>`).join('')}
-function applyCity(sel){let card=sel.closest('.attack'),c=getCities()[+sel.value];if(!c)return;card.querySelector('.ax').value=c.x;card.querySelector('.ay').value=c.y}
-function refreshCitySelectors(){qa('.attack .cityselect').forEach(sel=>{let old=sel.value;sel.innerHTML=cityOptions();if([...sel.options].some(o=>o.value===old))sel.value=old})}
+function applyCity(sel){
+ let card=sel.closest('.attack');
+ let c=getCities()[+sel.value];
+ if(!card||!c)return;
+
+ card.querySelector('.ax').value=c.x;
+ card.querySelector('.ay').value=c.y;
+
+ card.dataset.cityName=String(c.name);
+ card.dataset.cityX=String(c.x);
+ card.dataset.cityY=String(c.y);
+ card.dataset.cityIndex=String(sel.value);
+}
+
+function refreshCitySelectors(){
+ qa('.attack .cityselect').forEach(sel=>{
+   const card=sel.closest('.attack');
+   const old=sel.value;
+
+   sel.innerHTML=cityOptions();
+
+   let wanted=old;
+
+   if(card?.dataset.cityIndex!==undefined){
+     wanted=card.dataset.cityIndex;
+   }
+
+   if(
+     wanted!=='' &&
+     [...sel.options].some(o=>o.value===wanted)
+   ){
+     sel.value=wanted;
+     return;
+   }
+
+   if(card?.dataset.cityName){
+     const cities=getCities();
+     const i=cities.findIndex(c=>
+       String(c.name)===String(card.dataset.cityName) &&
+       +c.x===+(card.dataset.cityX||0) &&
+       +c.y===+(card.dataset.cityY||0)
+     );
+
+     if(i>=0){
+       sel.value=String(i);
+       card.dataset.cityIndex=String(i);
+     }
+   }
+}
+}
+
 function openCityManager(){renderCityManager();$('cityModal').classList.remove('hidden')}
 function closeCityManager(){$('cityModal').classList.add('hidden')}
 function renderCityManager(){let box=$('cityList'),cities=getCities();box.innerHTML=cities.length?cities.map((c,i)=>`<div class="managerrow"><div class="row"><span><strong>${esc(c.name)}</strong><br><span class="small">${c.x}, ${c.y}</span></span><span class="actions"><button type="button" data-city-edit="${i}">Edit</button><button type="button" data-city-delete="${i}">Delete</button></span></div></div>`).join(''):'<div class="small" style="padding:10px 0">No saved cities yet.</div>'}
@@ -215,7 +264,24 @@ function editSavedCity(i){let a=getCities(),c=a[i];if(!c)return;let name=prompt(
 function deleteSavedCity(i){let a=getCities();if(!a[i])return;if(confirm(`Delete ${a[i].name}?`)){a.splice(i,1);saveCities(a);renderCityManager();refreshCitySelectors()}}
 
 function addAttack(city){
- const wrap=document.createElement('div');wrap.className='card attack';const c=city||{x:240,y:261};
+ const wrap=document.createElement('div');
+ wrap.className='card attack';
+
+ const c=city||{
+   x:240,
+   y:261,
+   unit:'Scouts',
+   cityName:'',
+   cityIndex:'',
+   cityX:'',
+   cityY:''
+ };
+
+ wrap.dataset.cityName=c.cityName||'';
+ wrap.dataset.cityX=c.cityX??'';
+ wrap.dataset.cityY=c.cityY??'';
+ wrap.dataset.cityIndex=c.cityIndex??'';
+
  wrap.innerHTML=`<div class="row"><strong>Attack wave</strong><span class="nextbadge">PENDING</span></div>
  <select class="cityselect"><option value="">Choose saved city…</option></select>
  <div class="field landingselect"><label>Landing time</label><select class="landing"><option value="0">Landing 1 — base time</option><option value="1">Landing 2 — 1 second later</option></select></div>
@@ -225,20 +291,150 @@ function addAttack(city){
  <button class="remove" type="button">Remove</button></div>
  <div class="small">Launch time will appear after calculation.</div><div class="launch"></div><div class="small localLaunch"></div>
  <div class="actions" style="margin-top:8px"><button class="markBtn" type="button">✓ Mark launched</button></div>`;
- const sel=q('.cityselect',wrap),remove=q('.remove',wrap),mark=q('.markBtn',wrap),landing=q('.landing',wrap);
- sel.addEventListener('change',()=>applyCity(sel));landing.addEventListener('change',calculateSync);remove.addEventListener('click',()=>{wrap.remove();refreshDashboard()});mark.addEventListener('click',()=>markLaunched(mark));
- $('attacks').appendChild(wrap);refreshCitySelectors();
+
+ const sel=q('.cityselect',wrap),
+       remove=q('.remove',wrap),
+       mark=q('.markBtn',wrap),
+       landing=q('.landing',wrap),
+       unit=q('.au',wrap);
+
+ unit.value=Object.keys(units).includes(c.unit)
+   ?c.unit
+   :'Scouts';
+
+ wrap.dataset.unit=unit.value;
+
+ sel.addEventListener('change',()=>{
+   applyCity(sel);
+   calculateSync();
+ });
+
+ unit.addEventListener('change',()=>{
+   wrap.dataset.unit=unit.value;
+   calculateSync();
+ });
+
+ landing.addEventListener('change',calculateSync);
+ remove.addEventListener('click',()=>{wrap.remove();refreshDashboard()});
+ mark.addEventListener('click',()=>markLaunched(mark));
+
+ $('attacks').appendChild(wrap);
+ refreshCitySelectors();
+
+ // Restore the saved city after the options are rebuilt.
+ if(c.cityName){
+   const cities=getCities();
+   let i=-1;
+
+   if(c.cityIndex!==undefined && c.cityIndex!==''){
+     const n=+c.cityIndex;
+     if(
+       cities[n] &&
+       String(cities[n].name)===String(c.cityName) &&
+       +cities[n].x===+(c.cityX??c.x) &&
+       +cities[n].y===+(c.cityY??c.y)
+     ){
+       i=n;
+     }
+   }
+
+   if(i<0){
+     i=cities.findIndex(city=>
+       String(city.name)===String(c.cityName) &&
+       +city.x===+(c.cityX??c.x) &&
+       +city.y===+(c.cityY??c.y)
+     );
+   }
+
+   if(i>=0){
+     sel.value=String(i);
+     wrap.dataset.cityIndex=String(i);
+     wrap.dataset.cityName=String(cities[i].name);
+     wrap.dataset.cityX=String(cities[i].x);
+     wrap.dataset.cityY=String(cities[i].y);
+   }
+ }
 }
 function markLaunched(btn){let card=btn.closest('.attack');if(!card)return;card.dataset.launched='1';card.classList.add('launched');let badge=q('.nextbadge',card);if(badge)badge.textContent='LAUNCHED';refreshDashboard();if(battleTimer)updateBattle()}
 function getPlans(){try{return JSON.parse(localStorage.getItem('valorPlans')||'[]')}catch(e){return[]}}
 function savePlans(a){localStorage.setItem('valorPlans',JSON.stringify(a))}
 function refreshPlans(){let sel=$('planSelect');sel.innerHTML='<option value="">Load a saved plan…</option>'+getPlans().map((p,i)=>`<option value="${i}">${esc(p.name)}</option>`).join('')}
-function saveCurrentPlan(){let name=prompt('Plan name:');if(!name)return;calculateSync();let attacks=qa('.attack').map(c=>({x:+q('.ax',c).value,y:+q('.ay',c).value,unit:q('.au',c).value,landing:+(q('.landing',c)?.value||0)}));let p={name,targetX:+$('stx').value,targetY:+$('sty').value,arrival:$('sarrival').value,offset:+($('offset').value||0),attacks};let plans=getPlans();plans.push(p);savePlans(plans);refreshPlans();renderPlanManager();alert('Plan saved.')}
+function saveCurrentPlan(){
+ let name=prompt('Plan name:');
+ if(!name)return;
+
+ // Do not alter the wave selections before taking the snapshot.
+ const cities=getCities();
+
+ let attacks=qa('.attack').map(c=>{
+   const x=+q('.ax',c).value;
+   const y=+q('.ay',c).value;
+   const unit=q('.au',c).value;
+   const sel=q('.cityselect',c);
+
+   let cityName=c.dataset.cityName||'';
+   let cityX=c.dataset.cityX!==undefined && c.dataset.cityX!==''
+     ?+c.dataset.cityX:x;
+   let cityY=c.dataset.cityY!==undefined && c.dataset.cityY!==''
+     ?+c.dataset.cityY:y;
+   let cityIndex=c.dataset.cityIndex??'';
+
+   // Final fallback: current dropdown selection.
+   if(!cityName && sel && sel.value!=='' && cities[+sel.value]){
+     const city=cities[+sel.value];
+     cityName=String(city.name);
+     cityX=+city.x;
+     cityY=+city.y;
+     cityIndex=+sel.value;
+   }
+
+   // Final coordinate match.
+   if(!cityName){
+     const i=cities.findIndex(city=>
+       +city.x===x && +city.y===y
+     );
+     if(i>=0){
+       cityName=String(cities[i].name);
+       cityX=+cities[i].x;
+       cityY=+cities[i].y;
+       cityIndex=i;
+     }
+   }
+
+   return {
+     x,y,unit,
+     landing:+(q('.landing',c)?.value||0),
+     cityName,
+     cityIndex,
+     cityX,
+     cityY
+   };
+ });
+
+ // Calculate only after the snapshot is taken.
+ calculateSync();
+
+ let p={
+   name,
+   targetX:+$('stx').value,
+   targetY:+$('sty').value,
+   arrival:$('sarrival').value,
+   offset:+($('offset').value||0),
+   attacks
+ };
+
+ let plans=getPlans();
+ plans.push(p);
+ savePlans(plans);
+ refreshPlans();
+ renderPlanManager();
+ alert('Plan saved.');
+}
 function openPlanManager(){renderPlanManager();$('planModal').classList.remove('hidden')}
 function closePlanManager(){$('planModal').classList.add('hidden')}
 function renderPlanManager(){let box=$('planList'),plans=getPlans();box.innerHTML=plans.length?plans.map((p,i)=>`<div class="managerrow"><div><strong>${esc(p.name)}</strong><br><span class="small">Target ${p.targetX},${p.targetY} • ${p.attacks.length} wave${p.attacks.length===1?'':'s'}</span></div><div class="actions"><button type="button" data-plan-load="${i}">Load</button><button type="button" data-plan-share="${i}">🔗 Share</button><button type="button" data-plan-rename="${i}">Rename</button><button type="button" data-plan-delete="${i}">Delete</button></div></div>`).join(''):'<div class="small" style="padding:10px 0">No saved plans yet.</div>'}
 function makeShareCode(plan){
-  const payload={v:8,name:plan.name,targetX:plan.targetX,targetY:plan.targetY,arrival:plan.arrival,offset:plan.offset||0,attacks:(plan.attacks||[]).map(a=>({x:a.x,y:a.y,unit:a.unit,landing:+(a.landing||0)}))};
+  const payload={v:8,name:plan.name,targetX:plan.targetX,targetY:plan.targetY,arrival:plan.arrival,offset:plan.offset||0,attacks:(plan.attacks||[]).map(a=>({x:a.x,y:a.y,unit:a.unit,landing:+(a.landing||0),cityName:a.cityName||'',cityX:a.cityX??a.x,cityY:a.cityY??a.y}))};
   const bytes=new TextEncoder().encode(JSON.stringify(payload));
   let binary=''; bytes.forEach(b=>binary+=String.fromCharCode(b));
   return 'VT8:'+btoa(binary).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
@@ -314,7 +510,10 @@ function decodeShareCode(code){
       x:+a.x,
       y:+a.y,
       unit:String(a.unit),
-      landing
+      landing,
+      cityName:String(a.cityName||''),
+      cityX:Number.isFinite(+a.cityX)?+a.cityX:+a.x,
+      cityY:Number.isFinite(+a.cityY)?+a.cityY:+a.y
     };
   });
 
@@ -363,8 +562,46 @@ function importPlan(){
 
 function renamePlan(i){let a=getPlans();if(!a[i])return;let n=prompt('Plan name',a[i].name);if(n&&n.trim()){a[i].name=n.trim();savePlans(a);refreshPlans();renderPlanManager()}}
 function deletePlan(i){let a=getPlans();if(!a[i])return;if(confirm(`Delete ${a[i].name}?`)){a.splice(i,1);savePlans(a);refreshPlans();renderPlanManager()}}
-function loadPlan(v){let p=getPlans()[+v];if(!p)return;$('stx').value=p.targetX;$('sty').value=p.targetY;$('sarrival').value=p.arrival;$('offset').value=p.offset||0;$('attacks').innerHTML='';p.attacks.forEach(a=>addAttack(a));qa('.attack').forEach((c,i)=>{if(p.attacks[i]&&p.attacks[i].landing!==undefined){q('.landing',c).value=p.attacks[i].landing}});calculateSync();refreshCitySelectors()}
+function loadPlan(v){
+ let p=getPlans()[+v];
+ if(!p)return;
 
+ $('stx').value=p.targetX;
+ $('sty').value=p.targetY;
+ $('sarrival').value=p.arrival;
+ $('offset').value=p.offset||0;
+ $('attacks').innerHTML='';
+
+ p.attacks.forEach(a=>addAttack({
+   x:a.x,
+   y:a.y,
+   unit:a.unit,
+   landing:+(a.landing||0),
+   cityName:a.cityName||'',
+   cityIndex:a.cityIndex??'',
+   cityX:a.cityX,
+   cityY:a.cityY
+ }));
+
+ qa('.attack').forEach((c,i)=>{
+   const a=p.attacks[i];
+   if(!a)return;
+
+   const unit=q('.au',c);
+   if(unit && [...unit.options].some(o=>o.value===a.unit)){
+     unit.value=a.unit;
+     c.dataset.unit=a.unit;
+   }
+
+   const landing=q('.landing',c);
+   if(landing){
+     landing.value=+(a.landing||0);
+   }
+ });
+
+ calculateSync();
+ refreshCitySelectors();
+}
 function calculateSync(){let a=parseServerInput($('sarrival').value);if(isNaN(a))return;let targetX=+$('stx').value,targetY=+$('sty').value,offsetSec=+($('offset').value||0);qa('.attack').forEach(card=>{let x=+q('.ax',card).value,y=+q('.ay',card).value,u=q('.au',card).value,landing=+(q('.landing',card)?.value||0),landingTime=new Date(a.getTime()+landing*1000),d=dist(x,y,targetX,targetY),travel=Math.round(d*units[u]),launch=new Date(landingTime.getTime()-(travel+offsetSec)*1000);card.dataset.launch=launch.toISOString();card.dataset.travel=travel;card.dataset.landing=landing;card.dataset.arrival=landingTime.toISOString();q('.small',card).textContent=`${u} • Landing ${landing+1} • Distance ${d.toFixed(3)} tiles • Travel ${fmt(travel)}`;q('.launch',card).textContent=`SEND ${serverValue(launch)} SERVER • LAND ${serverValue(landingTime)}` ;q('.localLaunch',card).textContent=`Your local launch: ${dtValue(launch)} • Local landing: ${dtValue(landingTime)}`});sortAttacks()}
 function sortAttacks(){let box=$('attacks');qa('.attack',box).sort((a,b)=>{let la=new Date(a.dataset.launch||'9999'),lb=new Date(b.dataset.launch||'9999');if((a.dataset.launched==='1')!==(b.dataset.launched==='1'))return a.dataset.launched==='1'?1:-1;return la-lb}).forEach(c=>box.appendChild(c));refreshDashboard()}
 function refreshDashboard(){let cards=qa('.attack').filter(c=>c.dataset.launched!=='1'&&c.dataset.launch);qa('.attack').forEach(c=>c.classList.remove('nextwave'));if(!cards.length){$('nextAttack').textContent='—';$('nextDetails').textContent='No pending calculated attacks. Save this setup as a battle plan if you will use it again.';return}cards.sort((a,b)=>new Date(a.dataset.launch)-new Date(b.dataset.launch));let c=cards[0],d=new Date(c.dataset.launch),s=Math.ceil((d-Date.now())/1000);c.classList.add('nextwave');$('nextAttack').textContent=s>0?fmt(s):'SEND NOW';$('nextDetails').textContent=`${q('.au',c).value} • Landing ${(+q('.landing',c)?.value||0)+1} • ${serverValue(d)} server launch time • ${dtValue(d)} local`}
