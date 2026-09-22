@@ -66,9 +66,19 @@ input,select{width:100%;padding:12px;-webkit-user-select:text;user-select:text;b
 <div class="card" id="planTools">
 <div class="row">
 <span><strong>Battle Plans</strong><br><span class="small">Save a target, arrival time and wave setup for reuse.</span></span>
-<div class="actions"><button id="savePlanBtn" type="button">Save plan</button><button id="planManageBtn" type="button">Manage</button></div>
+<div class="actions"><button id="savePlanBtn" type="button">Save plan</button><button id="importPlanBtn" type="button">📥 Import</button><button id="planManageBtn" type="button">Manage</button></div>
 </div>
 <select id="planSelect" class="cityselect"><option value="">Load a saved plan…</option></select>
+</div>
+
+<div id="importPlanModal" class="modal hidden">
+<div class="modalbox">
+<div class="row"><h2 style="margin:0">Import Battle Plan</h2><button id="importCloseBtn" type="button">✕</button></div>
+<p class="small" style="margin:8px 0 12px">Paste a Valor Tool VT8 share code below.</p>
+<div class="field"><label>Share code</label><textarea id="importPlanCode" rows="7" style="width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:#0f1629;color:var(--text);font-size:14px;resize:vertical" placeholder="VT8:eyJ2Ijo4..."></textarea></div>
+<div id="importPlanStatus" class="small"></div>
+<div class="actions" style="justify-content:flex-end;margin-top:10px"><button id="importCancelBtn" type="button">Cancel</button><button id="importConfirmBtn" type="button" class="active">📥 Import plan</button></div>
+</div>
 </div>
 
 <div id="planModal" class="modal hidden">
@@ -242,6 +252,115 @@ async function sharePlan(i){
   catch(e){prompt('Copy this Valor Tool share code:',code);}
 }
 
+function openImportPlan(){
+  $('importPlanCode').value='';
+  $('importPlanStatus').textContent='';
+  $('importPlanModal').classList.remove('hidden');
+}
+
+function closeImportPlan(){
+  $('importPlanModal').classList.add('hidden');
+}
+
+function decodeShareCode(code){
+  code=String(code||'').trim();
+
+  if(!code.startsWith('VT8:')){
+    throw new Error('Invalid Valor Tool share code.');
+  }
+
+  let b64=code.slice(4)
+    .replace(/-/g,'+')
+    .replace(/_/g,'/');
+
+  while(b64.length%4)b64+='=';
+
+  const binary=atob(b64);
+  const bytes=Uint8Array.from(
+    binary,
+    c=>c.charCodeAt(0)
+  );
+
+  const data=JSON.parse(
+    new TextDecoder().decode(bytes)
+  );
+
+  if(
+    data.v!==8 ||
+    !data.name ||
+    !Number.isFinite(+data.targetX) ||
+    !Number.isFinite(+data.targetY) ||
+    !data.arrival ||
+    !Array.isArray(data.attacks)
+  ){
+    throw new Error('The Battle Plan data is incomplete.');
+  }
+
+  const validUnits=Object.keys(units);
+
+  const attacks=data.attacks.map(a=>{
+    const landing=+(a.landing||0);
+
+    if(
+      !Number.isFinite(+a.x) ||
+      !Number.isFinite(+a.y) ||
+      !validUnits.includes(String(a.unit)) ||
+      (landing!==0 && landing!==1)
+    ){
+      throw new Error('One of the waves contains invalid data.');
+    }
+
+    return {
+      x:+a.x,
+      y:+a.y,
+      unit:String(a.unit),
+      landing
+    };
+  });
+
+  return {
+    name:String(data.name),
+    targetX:+data.targetX,
+    targetY:+data.targetY,
+    arrival:String(data.arrival),
+    offset:+data.offset||0,
+    attacks
+  };
+}
+
+function importPlan(){
+  try{
+    const plan=decodeShareCode(
+      $('importPlanCode').value
+    );
+
+    let plans=getPlans();
+    let name=plan.name;
+
+    if(
+      plans.some(
+        p=>String(p.name).toLowerCase()===name.toLowerCase()
+      )
+    ){
+      name=name+' (Imported)';
+    }
+
+    plan.name=name;
+    plans.push(plan);
+    savePlans(plans);
+    refreshPlans();
+    renderPlanManager();
+    closeImportPlan();
+
+    alert(
+      `Battle Plan "${name}" imported successfully.`
+    );
+  }catch(e){
+    $('importPlanStatus').textContent=
+      e.message||'Could not import the Battle Plan.';
+  }
+}
+
 function renamePlan(i){let a=getPlans();if(!a[i])return;let n=prompt('Plan name',a[i].name);if(n&&n.trim()){a[i].name=n.trim();savePlans(a);refreshPlans();renderPlanManager()}}
 function deletePlan(i){let a=getPlans();if(!a[i])return;if(confirm(`Delete ${a[i].name}?`)){a.splice(i,1);savePlans(a);refreshPlans();renderPlanManager()}}
 function loadPlan(v){let p=getPlans()[+v];if(!p)return;$('stx').value=p.targetX;$('sty').value=p.targetY;$('sarrival').value=p.arrival;$('offset').value=p.offset||0;$('attacks').innerHTML='';p.attacks.forEach(a=>addAttack(a));qa('.attack').forEach((c,i)=>{if(p.attacks[i]&&p.attacks[i].landing!==undefined){q('.landing',c).value=p.attacks[i].landing}});calculateSync();refreshCitySelectors()}
@@ -274,7 +393,7 @@ function wire(){
  $('singleTab').addEventListener('click',()=>showMode('single')); $('arrivalPickBtn').addEventListener('click',()=>openTimePicker('arrival'));$('sarrivalPickBtn').addEventListener('click',()=>openTimePicker('sarrival'));$('arrival').addEventListener('click',()=>openTimePicker('arrival'));$('sarrival').addEventListener('click',()=>openTimePicker('sarrival'));$('timePickerClose').addEventListener('click',closeTimePicker);$('timePickerCancel').addEventListener('click',closeTimePicker);$('timePickerSet').addEventListener('click',setPickedTime);$('syncTab').addEventListener('click',()=>showMode('sync'));
  $('cityManageBtn').addEventListener('click',openCityManager);$('cityCloseBtn').addEventListener('click',closeCityManager);$('saveCityBtn').addEventListener('click',addSavedCity);
  $('cityList').addEventListener('click',e=>{let t=e.target;if(t.dataset.cityEdit!==undefined)editSavedCity(+t.dataset.cityEdit);if(t.dataset.cityDelete!==undefined)deleteSavedCity(+t.dataset.cityDelete)});
- $('savePlanBtn').addEventListener('click',saveCurrentPlan);$('planManageBtn').addEventListener('click',openPlanManager);$('planCloseBtn').addEventListener('click',closePlanManager);
+ $('savePlanBtn').addEventListener('click',saveCurrentPlan);$('importPlanBtn').addEventListener('click',openImportPlan);$('importCloseBtn').addEventListener('click',closeImportPlan);$('importCancelBtn').addEventListener('click',closeImportPlan);$('importConfirmBtn').addEventListener('click',importPlan);$('planManageBtn').addEventListener('click',openPlanManager);$('planCloseBtn').addEventListener('click',closePlanManager);
  $('planSelect').addEventListener('change',e=>loadPlan(e.target.value));
  $('planList').addEventListener('click',e=>{let t=e.target;if(t.dataset.planLoad!==undefined){loadPlan(t.dataset.planLoad);closePlanManager()}if(t.dataset.planShare!==undefined)sharePlan(+t.dataset.planShare);if(t.dataset.planRename!==undefined)renamePlan(+t.dataset.planRename);if(t.dataset.planDelete!==undefined)deletePlan(+t.dataset.planDelete)});
  $('copySingleBtn').addEventListener('click',copySingle);$('singleCountdownBtn').addEventListener('click',startSingleCountdown);
